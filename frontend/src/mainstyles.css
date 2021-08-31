@@ -1,0 +1,73 @@
+body{
+    margin:0px; 
+    height:100vh;
+   
+}
+
+.page{
+    height: 100%;
+}
+
+.page section{
+    float: left;
+    height:100%;
+}
+
+#page-section-1{
+    width:20%;
+    float: left;
+    background-color:#fcaf03;
+}
+
+#page-section-2{
+    width:80%; 
+    float: left;
+    background-color:#fefafa;
+}
+
+#nav-icon{
+    margin-left: 38%;
+    margin-top:20%;
+}
+
+#nav-buttons{
+    width: 100%; 
+    height:70px;
+    margin-top: 70%;
+}
+
+.custom{
+    background-color:#fcaf03;
+    color:white;
+    border: 0px;
+    font-weight: bold;
+}
+
+#section-bar{
+    width: 100%;
+    height: 40px;
+    margin-top: 2%;
+    padding-left: 0%;
+}
+
+#welcome-msg{
+    float:left ;
+    margin-left: 89%;
+    margin-top: 30px;
+}
+
+#page-content{
+    margin-top:10%;
+    margin-left: 10%;
+}
+
+#page-content-box{
+    margin-left: 3%;
+    width: 30%;
+    float: left;
+    background-color: #eff9fd;
+}
+
+.topic{
+    width:100%;
+}
