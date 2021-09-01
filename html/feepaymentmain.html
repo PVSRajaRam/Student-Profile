@@ -11,21 +11,23 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="../js/feenavbar.js"></script>
     <link rel="stylesheet" href="../css/mainstyles.css">
+    <link rel="stylesheet" href="../css/feestyles.css">
 
 </head>
 <body>
-    <div class="btn btn-warning custom" id="section-bar">DASHBOARD</div>
-    <div id="page-content">
-        <div id="page-content-box">
-            <button type="button" class="btn btn-danger topic">REMINDERS</button>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores voluptas quasi, explicabo dolorem voluptate quia iure asperiores autem qui accusamus, culpa ipsum alias aut natus nulla ullam, nisi consequatur voluptatem?</p>
+    <div class="btn btn-warning custom" id="section-bar" style="height: 10%;">
+        <div>
+            <button type="button" class="btn btn-warning sectionbuttons" id="1" onclick="changeNav(this)"><strong>PAYMENT HISTORY</strong></button>
+            <button type="button" class="btn btn-warning sectionbuttons" id="2" style="width: 15.5%;" onclick="changeNav(this)"><strong>GENERATE RECEIPTS</strong></button>
+            <button type="button" class="btn btn-warning sectionbuttons" id="3" onclick="changeNav(this)"><strong>UPLOAD RECEIPTS</strong></button>
         </div>
-        <div id="page-content-box" style="margin-left: 20%;">
-            <button type="button" class="btn btn-success topic">CIRCULARS</button>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores voluptas quasi, explicabo dolorem voluptate quia iure asperiores autem qui accusamus, culpa ipsum alias aut natus nulla ullam, nisi consequatur voluptatem?</p>
+        <div id="navscroller">
+
         </div>
     </div>
+    <iframe src="paymenthistory.html" style="height: 84%; width:100%;overflow:hidden"></iframe>
+   
 </body>
 </html>

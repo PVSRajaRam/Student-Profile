@@ -1,7 +1,7 @@
 body{
     margin:0px; 
     height:100vh;
-   
+    background-color: #fefafa;
 }
 
 .page{
@@ -46,8 +46,15 @@ body{
 #section-bar{
     width: 100%;
     height: 40px;
-    margin-top: 2%;
-    padding-left: 0%;
+    margin-top: 0%;
+    padding-left: 2%;
+    text-align: left;
+}
+
+#section-bar:hover{
+    background-color:#fcaf03;
+    color:white;
+    cursor: default;
 }
 
 #welcome-msg{
@@ -70,4 +77,11 @@ body{
 
 .topic{
     width:100%;
+}
+
+iframe{
+    height: 80%; 
+    width:100%; 
+    border:0px;
+    margin-top: 3%;
 }
