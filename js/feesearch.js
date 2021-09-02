@@ -1,7 +1,8 @@
+
 var sort=0;
 function searchTable(obj){
     var query=obj.value;
-    tabrows=document.getElementsByTagName('tr');
+    tabrows=document.getElementById('histTable').rows;
     document.getElementById('no-result').style.display="none";
     if(query.length>0){
         var f=0;
@@ -43,7 +44,7 @@ function sortTable() {
     while (swap) {
      console.log("inside loop");
       swap = false;
-      rows = document.getElementsByTagName("tr");
+      rows = document.getElementsById('histTable').rows;;
      
       for (i = 2; i < (rows.length - 1); i++) {
         
@@ -86,3 +87,41 @@ function sortTable() {
     }
     
 }
+
+function checkFilter(){
+    year="";
+    purp="";
+    filttable=document.getElementById("filterTable");
+    row=filttable.rows;
+    f=0;
+    for(i=0;i<row.length;i++)
+    {
+        chktr=row[i].getElementsByClassName("filtersel")[0];
+        //console.log(chktr);
+        chk=chktr.childNodes[0];
+        console.log(chk.checked);
+        if(chk.checked==true){
+            f=1;
+            fname=row[i].getElementsByClassName("filtername")[0].innerHTML;
+            filterval=row[i].getElementsByClassName("filterval")[0];
+            ip=filterval.childNodes[0];
+            console.log(fname);
+            if(fname.localeCompare("Year")==0){
+                if(ip.value.length==0)
+                alert("Year not specified");
+
+                else
+                alert("Year Filter Applied");
+            }
+            else{
+                if(ip.value.localeCompare("noopt")==0)
+                alert("Purpose not specified");
+
+                else
+                alert("Purpose Filter Applied");
+            }
+        }
+    }
+
+}
+
