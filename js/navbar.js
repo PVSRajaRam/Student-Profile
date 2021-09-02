@@ -8,7 +8,6 @@ function changeFrame(i){
     else if(i==5){
         document.getElementById("main-frame").src="achievements.html"
     }
-
     else if(i==6){
         document.getElementById("main-frame").src="courses.html"
     }
