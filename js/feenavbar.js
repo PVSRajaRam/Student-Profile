@@ -1,3 +1,7 @@
+function defaultFrameSrc(){
+document.getElementById("navscroller").style.marginLeft="16%";
+document.getElementById("fee-frame").src="paymenthistory.html";
+}
 function changeNav(obj){
     i=obj.id;
     if(i.localeCompare("1")==0){
@@ -10,5 +14,7 @@ function changeNav(obj){
     }
     else if(i.localeCompare("3")==0){
         document.getElementById("navscroller").style.marginLeft="73.5%";
+        document.getElementById("fee-frame").src="uploadreceipts.html";
+    
     }
 }

@@ -1,6 +1,6 @@
 body{
     height:100vh;
-    overflow: hidden;
+    
 }
 .sectionbuttons{
     width: 15%;
@@ -96,18 +96,20 @@ thead{
 
 #history-table{
     float: left;
-    width:75%;
+    width:70%;
 }
 
-#gen-receipts{
+.genreceipts{
     float: left;
     margin-left: 1%;
+    width:25%;
 }
 
 .receiptbutton{
     margin-top: 10%;
-    margin-left:30%;
+    margin-left:0%;
 }
+
 
 #gen-button{
     margin-top: 3%;
@@ -116,4 +118,13 @@ thead{
 
 .form-check-input{
     margin-left: 0rem;
+}
+
+#upload-receipt{
+    margin-left: 0%;
+}
+
+.uploadcontrol{
+    width:60%;
+    margin-left: 6%;
 }
