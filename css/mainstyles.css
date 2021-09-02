@@ -66,12 +66,13 @@ body{
 #page-content{
     margin-top:10%;
     margin-left: 10%;
+    float: left;
+    width:33%;
 }
 
 #page-content-box{
     margin-left: 3%;
-    width: 30%;
-    float: left;
+    width: 100%;
     background-color: #eff9fd;
 }
 
