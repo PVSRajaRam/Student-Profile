@@ -11,47 +11,42 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../js/feenavbar.js"></script>
+    <script src="../js/feesearch.js"></script>
     <link rel="stylesheet" href="../css/mainstyles.css">
     <link rel="stylesheet" href="../css/feestyles.css">
-
+    
 </head>
 <body>
    <div id="nav-fee-table">
         <img id="filter-icon" src="../images/filter.png" width="30px" height="30px" />
-        <img id="sort-icon" src="../images/sort.png" width="30px" height="30px" />
         <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
         <div id="search-bar">
             
-            <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no">
+            <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
             
             <div id="search-icon-box">
                 <img src="../images/search-icon.png" width="30px" height="30px"/>
             </div>
         </div>
    </div>
-   <table class="table" style="width: 81.8%;">
+   <table class="table" id="histTable" style="width: 81.8%;">
     <thead>
       <tr>
         <th scope="col">DD/Txn No</th>
-        <th scope="col">DD/Txn Date</th>
+        <th scope="col">DD/Txn Date 
+          <button style="background-color: #fcaf03;border:0px;">
+            <img id="up-arrow" src="../images/upicon.png" width="20px" height="20px" style="float: left;margin-left:5px;" onclick="sortTable()">
+            <img id="down-arrow" src="../images/downicon.png" width="20px" height="20px" style="float: left;margin-left:5px;display:none;" onclick="sortTable()">
+          </button>
+        </th>
         <th scope="col">Purpose</th>
+        <th scope="col">Amount</th>
         <th scope="col">Bank</th>
-        <th scope="col">Staff Details</th>
-        <th scope="col">Receipt No</th>
+        <th scope="col">Staff Details</th>  
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>-</td>
+      <tr id="no-result" style="display: none;">
         <td>-</td>
         <td>-</td>
         <td>-</td>
@@ -59,12 +54,28 @@
         <td>-</td>
       </tr>
       <tr>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td class="txnno">TX892</td>
+        <td class="txndate">2018-8-2</td>
+        <td>Tution Fee</td>
+        <td>150000</td>
+        <td>SBI</td>
+        <td>Naren</td>
+      </tr>
+      <tr>
+        <td class="txnno">TX457</td>
+        <td class="txndate">2018-8-17</td>
+        <td>Bus Fee</td>
+        <td>30000</td>
+        <td>HDFC</td>
+        <td>Naren</td>
+      </tr>
+      <tr>
+        <td class="txnno">TX123</td>
+        <td class="txndate">2019-7-4</td>
+        <td>Tution Fee</td>
+        <td>150000</td>
+        <td>SBI</td>
+        <td>Nitya</td>
       </tr>
     </tbody>
   </table>
