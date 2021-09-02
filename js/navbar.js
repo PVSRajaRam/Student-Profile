@@ -5,4 +5,7 @@ function changeFrame(i){
     else if(i==2){
         document.getElementById("main-frame").src="feepaymentmain.html"
     }
+    else if(i==5){
+        document.getElementById("main-frame").src="achievements.html"
+    }
 }
