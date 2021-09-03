@@ -110,18 +110,72 @@ function checkFilter(){
                 if(ip.value.length==0)
                 alert("Year not specified");
 
-                else
+                else{
+                    year=ip.value;
                 alert("Year Filter Applied");
+                }
             }
             else{
                 if(ip.value.localeCompare("noopt")==0)
                 alert("Purpose not specified");
 
-                else
+                else{
+                purp=ip.value;
                 alert("Purpose Filter Applied");
+                }
             }
         }
     }
+    applyFilter(year,purp);
 
 }
 
+function applyFilter(year,purp){
+    tabrows=document.getElementById('histTable').rows;
+    document.getElementById('no-result').style.display="none";
+    if(year.length>0){
+        var f=0;
+        for(i=2;i<tabrows.length;i++){
+            txnnoDOM=tabrows[i].getElementsByClassName('txndate');
+            if(txnnoDOM.length!=0){
+                console.log(txnnoDOM);
+                if(txnnoDOM[0].innerHTML.startsWith(year)){
+                    tabrows[i].style.display="";
+                    f=1;
+                }
+                else{
+                    tabrows[i].style.display="none";
+                }
+            }
+        }
+
+    }
+
+    else{
+        var f=0;
+        for(i=2;i<tabrows.length;i++){
+            txnnoDOM=tabrows[i].getElementsByTagName('td');
+            if(txnnoDOM.length!=0){
+                console.log(txnnoDOM);
+                if(txnnoDOM[2].innerHTML.startsWith(purp)){
+                    tabrows[i].style.display="";
+                    f=1;
+                }
+                else{
+                    tabrows[i].style.display="none";
+                }
+            }
+        }
+
+        
+        
+    }
+}
+
+function removeFilter(){
+    tabrows=document.getElementById('histTable').rows;
+    document.getElementById('no-result').style.display="none";
+    for(i=2;i<tabrows.length;i++){
+        tabrows[i].style.display="table-row";
+    }
+}

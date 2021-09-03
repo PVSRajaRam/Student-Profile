@@ -62,9 +62,20 @@
     </div>
     <script>
         function changePage(){
-        
-            window.location.href="maindashboard.html";
-        
+
+            var em=document.getElementById('email').value;
+            var pwd=document.getElementById('pwd').value;
+            if((em.length!=0)&&(pwd.length!=0)){
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if(em.match(mailformat))
+                window.location.href="maindashboard.html";
+
+                else
+                alert('Invalid email format');
+            }
+            else{
+                alert('both fields mandatory');
+            }
         
         }
     </script>
