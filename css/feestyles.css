@@ -51,10 +51,10 @@ body{
 #search-bar{
     float: left;
     margin-left: 4%;
-    padding: 5px 5px;
-    padding-right: 0px;
-    background-color: #fcaf03;
-    width: 19%;
+    padding: 5px 5px; 
+    padding-right: 0px; 
+    background-color: #fcaf03; 
+    width: 20%;
 }
 
 #enterTxnNo{
@@ -127,4 +127,23 @@ thead{
 .uploadcontrol{
     width:60%;
     margin-left: 15%;
+}
+
+
+/* search bar  */
+
+.has-search .search-form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .search-form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
 }

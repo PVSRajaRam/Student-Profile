@@ -1,0 +1,99 @@
+body{
+    height:100vh;
+    overflow: hidden;
+}
+.sectionbuttons{
+    width: 15%;
+    margin-left: 13%;
+    margin-top: 0%;
+    border: 0px;
+    background-color:#fcaf03;
+    color:white;
+}
+
+.sectionbuttons:hover{
+    background-color:#fcaf03;
+    color:white;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+}
+
+.label-info {
+    background-color: #75caeb;
+}
+
+#navscroller{
+    height: 4px; 
+    width:100px; 
+    background-color:white;
+    margin-left:16%; 
+    border-radius: 2px;
+}
+
+#nav-details-table{
+    margin-top: 2%;
+    height: 10%;
+}
+#filter-icon{
+    float: left;
+    margin-left: 10%;
+    
+}
+
+#sort-icon{
+    float: left;
+    margin-left: 5%;
+    
+}
+
+
+#search-bar{
+    float: left;
+    margin-left: 50%;
+    padding: 5px 5px;
+    padding-right: 0px;
+    background-color: #fcaf03;
+    width: 19%;
+}
+
+#enterTx{
+    float: left;
+    border-radius: 2px;
+    border-width: 0px;
+    background-color: #fefafa;
+    width: 70%;
+    height: 30px;
+}
+
+#search-icon-box{
+    float: left;
+    border-radius: 2px;
+    border-width: 0px;
+    margin-left: 10%;
+    background-color: #fefafa;
+}
+table{
+    margin-left: 10%;
+    width: 81.8%;
+    margin-top: 2%;
+}
+td{
+    background-color: #f8f4d4;
+}
+thead{
+    background-color: #fcaf03;
+    color: #fefafa; 
+}
+
+
