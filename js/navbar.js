@@ -5,6 +5,9 @@ function changeFrame(i){
     else if(i==2){
         document.getElementById("main-frame").src="feepaymentmain.html"
     }
+    else if(i==3){
+        document.getElementById("main-frame").src="gatepass.html"
+    }
     else if(i==4){
         document.getElementById("main-frame").src="bonafidemain.html"
     }
