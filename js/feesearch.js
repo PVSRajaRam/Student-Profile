@@ -116,6 +116,7 @@ function checkFilter(){
                 }
             }
             else{
+                console.log(ip);
                 if(ip.value.localeCompare("noopt")==0)
                 alert("Purpose not specified");
 

@@ -23,4 +23,10 @@ function changeFrame(i){
     else if(i==8){
         document.getElementById("main-frame").src="librarymain.html"
     }
+    else if(i==9){
+        document.getElementById("main-frame").src="activity_main.html"
+    }
+    else if(i==10){
+        document.getElementById("main-frame").src="attendance_main.html"
+    }
 }
