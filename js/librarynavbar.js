@@ -6,7 +6,7 @@ function changeNav(obj){
     }
     else if(i.localeCompare("2")==0){
         document.getElementById("navscroller").style.marginLeft="45%";
-        document.getElementById("library-frame").src="applybonafide.html";
+        document.getElementById("library-frame").src="renew.html";
     }
     else if(i.localeCompare("3")==0){
         document.getElementById("library-frame").style.marginLeft="73.5%";
