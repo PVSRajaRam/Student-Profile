@@ -144,13 +144,13 @@ function applyFilter(year,purp){
         var f=0;
         for(i=2;i<tabrows.length;i++){
             txnnoDOM=tabrows[i].getElementsByClassName('txndate');
-            txnpurpDOM=tabrows[i].getElementsByTagName('td');
+            txnpurpDOM=tabrows[i].getElementsByClassName('txnpurp');
             console.log(txnnoDOM);
             console.log(txnpurpDOM)
             state=0;
             if((l1>0)&&(l2>0)){
                 console.log()
-                if(txnnoDOM[0].innerHTML.startsWith(year) && txnpurpDOM[2].innerHTML.startsWith(purp)){
+                if(txnnoDOM[0].innerHTML.startsWith(year) && txnpurpDOM[0].innerHTML.startsWith(purp)){
                     state=1;
                 }
                 else
@@ -167,7 +167,7 @@ function applyFilter(year,purp){
             }
 
             else if(l2>0){
-                if(txnpurpDOM[2].innerHTML.startsWith(purp)){
+                if(txnpurpDOM[0].innerHTML.startsWith(purp)){
                     state=1;
                 }
                 else
