@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Student Profile</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <!-- <script src="../js/feesearch.js"></script> -->
+    <link rel="stylesheet" href="../css/mainstyles.css">
+    <link rel="stylesheet" href="../css/profile-styles.css">
+    
+</head>
+<body>
+   <div id="nav-profile-table">
+        <h3><i class="bi bi-funnel" id="filter-icon"></i></h3>
+        <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
+   </div>
+
+<div class="row">
+    <div class="col-md-12">
+                        <div class="panel panel-default">
+                <div class="panel-heading" style="margin-left:3%;">
+                    <h3 class="panel-title">AISSCE - May 2018</h3>
+                </div>
+                <div class="panel-body" style="padding: 5px;">
+                    <table class="table parent-table table-borderless">
+                        <tr>
+                            <th>Medium of Instruction</th>
+                            <td>English</td>
+                        </tr>
+                        <tr>
+                            <th>Board / University</th>
+                            <td>CBSE</td>
+                        </tr>
+                        <tr>
+                            <th>Number of Attempts</th>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th>School/Institution</th>
+                            <td>
+                                <strong>Devi Academy Senior Secondary School</strong><br>
+                                Chennai, Tamil Nadu, India, <br>Pin Code: 600087
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Score</th>
+                            <td><strong>Total:</strong> 445 | <strong>Max.:</strong> 500</td>
+                        </tr>
+                        <tr>
+                            <th>Individual Scores</th>
+                            <td>
+                                <button type="button" class="btn btn-default btn-xs view-scores-btn" data-scores='[{"id":107655,"name":"English Elective -C","score":"92","max_score":100,"qualification_history_id":37716,"created_at":"2019-02-23T09:53:47.000000Z","updated_at":"2019-02-23T09:53:47.000000Z"},{"id":107656,"name":"Mathematics","score":"80","max_score":100,"qualification_history_id":37716,"created_at":"2019-02-23T09:53:47.000000Z","updated_at":"2019-02-23T09:53:47.000000Z"},{"id":107657,"name":"Physics","score":"90","max_score":100,"qualification_history_id":37716,"created_at":"2019-02-23T09:53:47.000000Z","updated_at":"2019-02-23T09:53:47.000000Z"},{"id":107658,"name":"Chemistry","score":"88","max_score":100,"qualification_history_id":37716,"created_at":"2019-02-23T09:53:47.000000Z","updated_at":"2019-02-23T09:53:47.000000Z"},{"id":107659,"name":"Computer Science","score":"95","max_score":100,"qualification_history_id":37716,"created_at":"2019-02-23T09:53:47.000000Z","updated_at":"2019-02-23T09:53:47.000000Z"}]'>
+                                    <i class="fa fa-sort-numeric-asc fa-fw"></i> View scores
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Supporting Documents</th>
+                            <td>
+                                <button type="button" class="btn btn-default btn-xs view-documents-btn" data-documents='["https:\/\/cms.cb.amrita.edu\/resource\/students\/b6d3062d-5356-441b-8fd1-9237967a8a30\/qualification_history\/37716\/1.pdf"]'>
+                                    <i class="fa fa-file-text fa-fw"></i> View documents
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </body>
+        </html>

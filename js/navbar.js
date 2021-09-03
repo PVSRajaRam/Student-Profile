@@ -11,4 +11,7 @@ function changeFrame(i){
     else if(i==6){
         document.getElementById("main-frame").src="courses.html"
     }
+    else if(i==7){
+        document.getElementById("main-frame").src="profile-main.html"
+    }
 }
