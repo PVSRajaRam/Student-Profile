@@ -1,6 +1,6 @@
 function defaultFrameSrc(){
 document.getElementById("navscroller").style.marginLeft="16%";
-document.getElementById("activity-frame").src="attendance.html";
+document.getElementById("activity-frame").src="club.html";
 }
 function changeNav(obj){
     i=obj.id;
@@ -13,7 +13,7 @@ function changeNav(obj){
         document.getElementById("activity-frame").src="event.html";
     }
 	else if(i.localeCompare("3")==0){
-        document.getElementById("navscroller").style.marginLeft="45%";
+        document.getElementById("navscroller").style.marginLeft="73.5%";
         document.getElementById("activity-frame").src="activity_upload.html";
     }
 }
