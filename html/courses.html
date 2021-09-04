@@ -8,8 +8,11 @@
 
     <title>Student Profile</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -22,7 +25,20 @@
 <body>
     <div class="btn btn-warning custom" id="section-bar">COURSES</div>
     <div class="container d-flex justify-content-center" style="margin-top: 5%;">
-        <div class="row ">
+        <div class="row justify-content-around align-content-center">
+            <div class="col-4 m-3">
+                <select class="form-select" aria-label="Select Semester">
+                    <option value="1" selected>Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                </select>
+            </div>
+
             <div class="col-4 m-3">
                 <div class="form-group has-search bg-warning">
                     <span class="bi bi-search form-control-feedback"></span>
@@ -30,15 +46,14 @@
                 </div>
             </div>
 
-            <div class="col-12 m-3">
-                <table class="table table-hover" style="width: 81.8%;">
+            <div class="col-12">
+                <table class="table table-hover">
                     <thead>
                         <tr class="bg-warning">
                             <th scope="col">#</th>
                             <th scope="col">Course ID</th>
                             <th scope="col">Course Name</th>
                             <th scope="col">Credits</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -72,10 +87,7 @@
                     </tbody>
                 </table>
             </div>
-
-
         </div>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

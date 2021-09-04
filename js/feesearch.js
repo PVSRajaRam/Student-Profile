@@ -104,24 +104,29 @@ function checkFilter(){
             f=1;
             fname=row[i].getElementsByClassName("filtername")[0].innerHTML;
             filterval=row[i].getElementsByClassName("filterval")[0];
-            ip=filterval.childNodes[0];
-            console.log(fname);
+            
             if(fname.localeCompare("Year")==0){
+                ip=filterval.childNodes[0];
                 if(ip.value.length==0)
                 alert("Year not specified");
 
                 else{
                     year=ip.value;
-                alert("Year Filter Applied");
+                
                 }
             }
             else{
-                if(ip.value.localeCompare("noopt")==0)
+                ip=filterval.childNodes[1];
+                ip=ip.getElementsByTagName('option');
+                if(ip[0].selected==true)
                 alert("Purpose not specified");
 
                 else{
-                purp=ip.value;
-                alert("Purpose Filter Applied");
+                for(i=1;i<ip.length;i++){
+                    if(ip[i].selected)
+                    purp=ip[i].value;
+                }
+                
                 }
             }
         }
@@ -133,42 +138,49 @@ function checkFilter(){
 function applyFilter(year,purp){
     tabrows=document.getElementById('histTable').rows;
     document.getElementById('no-result').style.display="none";
-    if(year.length>0){
+    l1=year.length;
+    l2=purp.length;
+    if((l1>0)||(l2>0)){
         var f=0;
         for(i=2;i<tabrows.length;i++){
             txnnoDOM=tabrows[i].getElementsByClassName('txndate');
-            if(txnnoDOM.length!=0){
-                console.log(txnnoDOM);
+            txnpurpDOM=tabrows[i].getElementsByClassName('txnpurp');
+            console.log(txnnoDOM);
+            console.log(txnpurpDOM)
+            state=0;
+            if((l1>0)&&(l2>0)){
+                console.log()
+                if(txnnoDOM[0].innerHTML.startsWith(year) && txnpurpDOM[0].innerHTML.startsWith(purp)){
+                    state=1;
+                }
+                else
+                state=0;
+            }
+
+            else if(l1>0)
+            {
                 if(txnnoDOM[0].innerHTML.startsWith(year)){
-                    tabrows[i].style.display="";
-                    f=1;
+                    state=1;
                 }
-                else{
-                    tabrows[i].style.display="none";
-                }
+                else
+                state=0;
             }
+
+            else if(l2>0){
+                if(txnpurpDOM[0].innerHTML.startsWith(purp)){
+                    state=1;
+                }
+                else
+                state=0;
+            }
+
+            if(state==0)
+            tabrows[i].style.display="none";
+
+            else
+            tabrows[i].style.display="";
         }
 
-    }
-
-    else{
-        var f=0;
-        for(i=2;i<tabrows.length;i++){
-            txnnoDOM=tabrows[i].getElementsByTagName('td');
-            if(txnnoDOM.length!=0){
-                console.log(txnnoDOM);
-                if(txnnoDOM[2].innerHTML.startsWith(purp)){
-                    tabrows[i].style.display="";
-                    f=1;
-                }
-                else{
-                    tabrows[i].style.display="none";
-                }
-            }
-        }
-
-        
-        
     }
 }
 

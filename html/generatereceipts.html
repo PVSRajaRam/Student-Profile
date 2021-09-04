@@ -19,19 +19,24 @@
 <body>
     <div>
         <div id="history-table" style="margin-left: 2%;">
-            <div id="nav-fee-table" style="margin-left: 0%;">
-                    <img id="filter-icon" src="../images/filter.png" width="30px" height="30px" style="margin-left: 2%;" />
-                    <button id="export-button" type="button" class="btn btn-outline-warning" style="margin-left: 15%;">Export as CSV</button>
-                    <div id="search-bar" style="width: 30%;background-color: #fcaf03;">
-                        
-                        <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
-                        
-                        <div id="search-icon-box">
-                            <img src="../images/search-icon.png" width="30px" height="30px"/>
-                        </div>
-                    </div>
-            </div>
-            <table class="table" style="width: 81.8%;margin-top:100px;margin-left:0%;">
+            <div id="nav-fee-table">
+                <button style="border: 0px;background-color:transparent;float:left; margin-left:0%;" data-toggle="modal" data-target="#filterModal" ><img id="filter-icon" src="../images/filter.png" style="margin-left:0%" width="30px" height="30px"/></button>
+                <button id="export-button" type="button" class="btn btn-outline-warning" style="margin-left: 13%;">Export as CSV</button>
+                <div id="search-bar" style="background-color: #fcaf03;width:30%;">
+                    
+                  <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
+                    
+                    <div id="search-icon-box">
+                        <img src="../images/search-icon.png" width="30px" height="30px"/>
+                    </div> 
+        
+                    <!--<div class="form-group has-search bg-warning">
+                      <span class="bi bi-search search-form-control-feedback"></span>
+                      <input type="text" class="search-form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
+                    </div>-->
+                </div>
+           </div>
+            <table class="table" id="histTable" style="width: 81.8%;margin-top:100px;margin-left:0%;">
                 <thead>
                 <tr>
                     <th scope="col"></th>
@@ -41,7 +46,7 @@
                           <img id="up-arrow" src="../images/upicon.png" width="20px" height="20px" style="float: left;margin-left:3px;" onclick="sortTable()">
                           <img id="down-arrow" src="../images/downicon.png" width="20px" height="20px" style="float: left;margin-left:3px;display:none;" onclick="sortTable()">
                         </button>
-                      </th>
+                    </th>
                     <th scope="col">Purpose</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Bank</th>
@@ -55,12 +60,14 @@
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td><input class="form-check-input" type="checkbox" value="" id="row1" ></td>
                     <td class="txnno">TX892</td>
                     <td class="txndate">2018-8-2</td>
-                    <td>Tution Fee</td>
+                    <td class="txnpurp">Tution Fee</td>
                     <td>150000</td>
                     <td>SBI</td>
                     <td>Naren</td>
@@ -69,7 +76,7 @@
                     <td><input class="form-check-input" type="checkbox" value="" id="row1"></td>
                     <td class="txnno">TX457</td>
                     <td class="txndate">2018-8-17</td>
-                    <td>Bus Fee</td>
+                    <td class="txnpurp">Bus Fee</td>
                     <td>30000</td>
                     <td>HDFC</td>
                     <td>Naren</td>
@@ -78,7 +85,7 @@
                     <td><input class="form-check-input" type="checkbox" value="" id="row1"></td>
                     <td class="txnno">TX123</td>
                     <td class="txndate">2019-7-4</td>
-                    <td>Tution Fee</td>
+                    <td class="txnpurp">Tution Fee</td>
                     <td>150000</td>
                     <td>SBI</td>
                     <td>Nitya</td>
@@ -93,5 +100,47 @@
             <div><button type="button" class="btn btn-success receiptbutton">Receipt AY_2020_2021</button></div>
         </div>
     </div>
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table" id="filterTable" style="width: 81.8%;">
+                
+                <tbody>
+                  <tr>
+                    <td class="filtersel"><input class="form-check-input" type="checkbox" value="" id="sel" ></td>
+                    <td class="filtername">Year</td>
+                    <td class="filterval"><input class="form-check-input" type="text" value="" id="inputfilter" style="width: 30%;;"></td>
+                  </tr>
+                  <tr>
+                    <td class="filtersel"><input class="form-check-input" type="checkbox" value="" id="sel" ></td>
+                    <td class="filtername">Purpose</td>
+                    <td class="filterval">
+                      <select class="form-select" id="inputfilter">
+                        <option value="noopt" selected>Select</option>
+                        <option value="Tution">Tution</option>
+                        <option value="Mess">Mess</option>
+                        <option value="Bus">Bus</option>
+                      </select>
+                    </td>
+     
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="removeFilter()">Remove Filters</button>
+              <button type="button" class="btn btn-warning" style="background-color: #fcaf03;" onclick="checkFilter()">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>
