@@ -61,7 +61,7 @@ body{
 
 #export-button{
     float: left;
-    margin-left: 68%;
+    margin-left: 7.5%;
     border-color: #fcaf03;
     color: #fcaf03;
 }
@@ -96,31 +96,44 @@ body{
     margin-left: 10%;
     background-color: #fefafa;
 }
+
+#nested-table-row{
+    margin-top: 2%;
+}
+
 table{
     margin-left: 10%;
     width: 81.8%;
     margin-top: 2%;
 }
+
 td{
     background-color: #f8f4d4;
 }
+
 thead{
     background-color: #fcaf03;
     color: #fefafa; 
 }
 
-.parent-table{
-    margin-left: 3%;
-    width: 81.8%;
-    margin-top: 2%;
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-left: 16%;
+    margin-top: 3.8%;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }
 
-#rem-fee{
-    padding-left: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+.parent-table-heading{
+    margin-left: 7.5%;
+}
+
+.parent-table{
+    margin-left: 7.5%;
+    width: 81.8%;
     margin-top: 2%;
-    background-color: #f8f4d4;
 }
 
 #history-table{
@@ -147,13 +160,4 @@ thead{
 
 .form-check-input{
     margin-left: 0rem;
-}
-
-#upload-receipt{
-    margin-left: 0%;
-}
-
-.uploadcontrol{
-    width:60%;
-    margin-left: 15%;
 }

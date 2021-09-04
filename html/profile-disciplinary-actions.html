@@ -20,6 +20,45 @@
 </head>
 <body>
    <div id="nav-profile-table">
-        <h3><i class="bi bi-funnel" id="filter-icon"></i></h3>
         <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
+        <!-- <h3><i class="bi bi-funnel" id="filter-icon"></i></h3> -->
    </div>
+   <!-- Total count
+   Details of all disciplinary actions
+   Status
+   Date, Time, Place
+   Category, Type, Notice period 
+   Reporting Authority
+   Details, Action -->
+   <h3 style="margin-left:10%">Count: <span class="custom-badge badge rounded-pill bg-success">0</span></h3>
+   
+   <table class="table" id="histTable" style="width: 81.8%;">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Date 
+          <button style="background-color: #fcaf03;border:0px;">
+            <img id="down-arrow" src="../images/downicon.png" width="20px" height="20px" style="float: left;margin-left:5px;" onclick="sortTable()">
+            <img id="up-arrow" src="../images/upicon.png" width="20px" height="20px" style="float: left;margin-left:5px;display:none;" onclick="sortTable()">
+          </button>
+        </th>
+        <th scope="col">Time</th>
+        <th scope="col">Place</th>
+        <th scope="col">Category</th>
+        <th scope="col">Notice Period</th> 
+        <th scope="col">Reporting Authority</th>
+        <th scope="col">Details</th>
+        <th scope="col">Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="no-result" style="display: none;">
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>

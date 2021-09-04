@@ -20,9 +20,12 @@
 </head>
 
 <body>
-    <div class="btn btn-warning custom" id="section-bar">ACHIEVEMENTS</div>
+    <div class="btn btn-warning custom" id="section-bar">GATE PASSES</div>
     <div class="container d-flex justify-content-center" style="margin-top: 5%;">
         <div class="row w-100">
+            <h4 >Remaining Passes - <span class="custom-badge badge bg-primary">September 2021</span></h4>
+            <h5 >Day Pass: <span class="custom-badge badge rounded-pill bg-secondary">0</span></h5>
+            <h5 >Home Pass: <span class="custom-badge badge rounded-pill bg-primary">1</span></h5>
             <table class="table table-hover" style="width: 81.8%;">
                 <thead>
                     <tr class="bg-warning">
@@ -31,7 +34,6 @@
                         <th scope="col">Applied to</th>
                         <th scope="col">Date</th>
                         <th scope="col">Approved</th>
-                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,12 +44,7 @@
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
-                        <td><span class="badge rounded-pill bg-success">Approved <i
-                                    class="bi bi-patch-check"></i></span>
-                        </td>
-                        <td><button type="button" class="btn btn-labeled btn-danger btn-sm">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
+                        <td><span class="badge rounded-pill bg-secondary">Pending</span>
                         </td>
                     </tr>
                     <tr>
@@ -57,11 +54,8 @@
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
-                        <td><span class="badge rounded-pill bg-secondary">Not Approved</span></td>
-                        <td><button type="button" class="btn btn-labeled btn-danger btn-sm">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
-                        </td>
+                        <td><span class="badge rounded-pill bg-success">Approved <i
+                            class="bi bi-patch-check"></i></span></td>
                     </tr>
                     <tr>
                         <td>
@@ -70,11 +64,8 @@
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
-                        <td><span class="badge rounded-pill bg-secondary">Not Approved</span></td>
-                        <td><button type="button" class="btn btn-labeled btn-danger btn-sm">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
-                        </td>
+                        <td><span class="badge rounded-pill bg-danger">Not Approved <i
+                            class="bi bi-patch-exclamation"></i></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -90,7 +81,7 @@
                 <label for="achievement_title" class="form-label">Reason</label>
                 <input type="text" class="form-control" id="achievement_title">
 
-                <label for="achievement_type" class="form-label">Apply tp</label>
+                <label for="achievement_type" class="form-label">Apply To</label>
                 <select class="form-select" id="achievement_type" aria-label="Select Type">
                     <option value="1" selected>Warden</option>
                     <option value="2">Faculty Advisor</option>
@@ -103,8 +94,8 @@
                 <input type="date" class="form-control" id="achievement_date">
 
 
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Add
+                <button type="submit" class="btn btn-primary" style="margin-top: 5%">
+                    <i class="bi bi-plus-circle"></i> Apply
                 </button>
 
             </form>
