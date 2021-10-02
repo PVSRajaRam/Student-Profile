@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="../css/mainstyles.css">
-    <!--<link rel="stylesheet" href="../css/achievements_styles.css"> -->
+    <link rel="stylesheet" href="../css/achievements_styles.css">
 
 </head>
 
@@ -120,14 +120,14 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <form>
+            <form method="POST" enctype="multipart/form-data">
                 <legend>
                     <p class="h4">Add achievements</p>
                 </legend>
-                <label for="achievement_title" class="form-label">Title</label>
+                <label for="achievement_title" class="form-label required-field">Title</label>
                 <input type="text" class="form-control" id="achievement_title" minlength="2" maxlength="200" required>
 
-                <label for="achievement_type" class="form-label">Type</label>
+                <label for="achievement_type" class="form-label required-field">Type</label>
                 <select class="form-select" id="achievement_type" aria-label="Select Type" required>
                     <option value="1" selected>Academic</option>
                     <option value="2">Co-Curricular</option>
