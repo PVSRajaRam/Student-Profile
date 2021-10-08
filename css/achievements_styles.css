@@ -1,3 +1,5 @@
+@import "./mainstyles.css";
+
 .required-field::after {
   content: "*";
   color: red;
