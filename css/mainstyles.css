@@ -49,6 +49,7 @@ body{
     margin-top: 0%;
     padding-left: 2%;
     text-align: left;
+    text-transform: uppercase;
 }
 
 #section-bar:hover{
