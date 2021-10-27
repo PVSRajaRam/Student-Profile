@@ -1,0 +1,163 @@
+body{
+    height:100vh;
+    
+}
+
+.sectionbuttons {
+	position: relative;
+    background-color:#fcaf03;
+    color:white;
+    text-decoration: none;
+    padding: 4px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 0.5%;
+    margin-left:2%;
+    margin-right:2%;
+    border: 0px;
+    display: inline-block;
+}
+
+.sectionbuttons:hover{
+    background-color:#e0a800;
+    color:black;
+}
+
+.custom-badge{
+    color: white;
+}
+
+.blank-row
+{
+    height: 10px;
+    background-color: #FFFFFF;
+}
+
+#navscroller{
+    height: 4px; 
+    width: 72px; 
+    background-color:white;
+    margin-left:2%; 
+    border-radius: 2px;
+}
+
+#nav-profile-table{
+    margin-top: 0%;
+    height: 10%;
+}
+
+#filter-icon{
+    float: left;
+    margin-left: 10%;
+    color: #fcaf03;
+    fill:#fcaf03;
+}
+
+#sort-icon{
+    float: left;
+    margin-left: 5%; 
+}
+
+#export-button{
+    float: left;
+    margin-left: 7.5%;
+    border-color: #fcaf03;
+    color: #fcaf03;
+}
+
+#export-button:hover{
+    background-color:#e0a800;
+    color:black;
+}
+
+#search-bar{
+    float: left;
+    margin-left: 4%;
+    padding: 5px 5px;
+    padding-right: 0px;
+    background-color: #fcaf03;
+    width: 19%;
+}
+
+#enterTxnNo{
+    float: left;
+    border-radius: 2px;
+    border-width: 0px;
+    background-color: #fefafa;
+    width: 70%;
+    height: 30px;
+}
+
+#search-icon-box{
+    float: left;
+    border-radius: 2px;
+    border-width: 0px;
+    margin-left: 10%;
+    background-color: #fefafa;
+}
+
+#nested-table-row{
+    margin-top: 2%;
+}
+
+table{
+    margin-left: 10%;
+    width: 81.8%;
+    margin-top: 2%;
+}
+
+td{
+    background-color: #f8f4d4;
+}
+
+thead{
+    background-color: #fcaf03;
+    color: #fefafa; 
+}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-left: 16%;
+    margin-top: 3.8%;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.parent-table-heading{
+    margin-left: 7.5%;
+}
+
+.parent-table{
+    margin-left: 7.5%;
+    width: 81.8%;
+    margin-top: 2%;
+}
+
+#history-table{
+    float: left;
+    width:70%;
+}
+
+.genreceipts{
+    float: left;
+    margin-left: 1%;
+    width:25%;
+}
+
+.receiptbutton{
+    margin-top: 10%;
+    margin-left:0%;
+}
+
+
+#gen-button{
+    margin-top: 3%;
+    margin-left: 45%;
+}
+
+.form-check-input{
+    margin-left: 0rem;
+}

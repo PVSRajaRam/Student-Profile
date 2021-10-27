@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Student Profile</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
+    <script src="${pageContext.request.contextPath}/js/navbar.js"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="page section" id="page-section-1">
+            <img src="${pageContext.request.contextPath}/images/student_icon.png" id="nav-icon" width="50px" height="50px" onclick="changeFrame(7)"/>
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 80%; margin-top:10%;overflow:auto;">
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeFrame(1)">HOME</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-2" onclick="changeFrame(2)">FEE PAYMENTS</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-3" onclick="changeFrame(3)">GATE PASSES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(4)">BONAFIDE CERTIFICATES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(5)">ACHIEVEMENTS</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(6)">COURSES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(8)">LIBRARY</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(9)">ACTIVITIES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(10)">ATTENDANCE</button>  
+            </div>
+        </div>
+        <div class="page section" id="page-section-2">
+            <div>
+            <img src="/Student-Profile-Servlet/images/univ-logo.jpg" width="20%" height="100%" style="float: left;margin-top:20px;">
+            <li class="nav-item dropdown" id="welcome-msg" style="margin-left: 40%;float:left; list-style-type:none;">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: black; " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <strong style="font-size: 15px;"><c:out value="${User.email}" /></strong>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/Student-Profile-Servlet/html/login.html">Log out</a>
+                </div>
+            </li>
+            </div>           
+            <iframe id="main-frame" src="${pageContext.request.contextPath}/html/dashboard.html"></iframe>
+        </div>
+    </div>
+</body>
+</html>
