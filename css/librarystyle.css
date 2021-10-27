@@ -42,8 +42,9 @@ body{
 }
 
 #nav-details-table{
-    margin-top: 2%;
-    height: 10%;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
 }
 #filter-icon{
     float: left;

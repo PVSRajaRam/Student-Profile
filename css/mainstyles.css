@@ -26,7 +26,8 @@ body{
 }
 
 #nav-icon{
-    margin-left: 38%;
+    display: block;
+    margin: 0 auto;
     margin-top:5%;
 }
 
@@ -49,6 +50,7 @@ body{
     margin-top: 0%;
     padding-left: 2%;
     text-align: left;
+    text-transform: uppercase;
 }
 
 #section-bar:hover{
@@ -57,10 +59,17 @@ body{
     cursor: default;
 }
 
-#welcome-msg{
-    float:left ;
-    margin-left: 89%;
-    margin-top: 30px;
+#welcome-msg {
+    float: right;
+    list-style-type: none;
+    /* width: 20%; */
+    vertical-align: middle;
+}
+
+#univ-icon {
+    float: left;
+    margin-top: 0.5em;
+    margin-left: 1em;
 }
 
 #page-content{
