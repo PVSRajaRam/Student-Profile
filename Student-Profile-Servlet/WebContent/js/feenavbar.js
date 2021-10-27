@@ -1,12 +1,12 @@
 function defaultFrameSrc(){
 document.getElementById("navscroller").style.marginLeft="16%";
-document.getElementById("fee-frame").src="paymenthistory.html";
+document.getElementById("fee-frame").src="/Student-Profile-Servlet/PaymentHistory";
 }
 function changeNav(obj){
     i=obj.id;
     if(i.localeCompare("1")==0){
         document.getElementById("navscroller").style.marginLeft="16%";
-        document.getElementById("fee-frame").src="paymenthistory.html";
+        document.getElementById("fee-frame").src="/Student-Profile-Servlet/PaymentHistory";
     }
     else if(i.localeCompare("2")==0){
         document.getElementById("navscroller").style.marginLeft="45%";

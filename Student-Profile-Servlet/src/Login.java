@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import database_conn.Login_DAO;
 import models.User;
 
@@ -54,9 +56,15 @@ public class Login extends HttpServlet {
 		        String pwd=request.getParameter("pwd");
 		        User u = loginDAO.selectUser(em);
 		        RequestDispatcher dispatcher;
-		        
+		          
 		        if(u.getPwd().compareTo(pwd)==0) {
 		        	request.setAttribute("User", u);
+		        	HttpSession session=request.getSession();  
+		        	String rollno=loginDAO.selectRollNoFromEmail(em);
+		        	if(rollno.compareTo("")!=0)
+		        		session.setAttribute("rollno",rollno);
+		        	
+			        session.setAttribute("email",em);
 		        	dispatcher = request.getRequestDispatcher("./jsp/index.jsp");
 		        }
 		        else {

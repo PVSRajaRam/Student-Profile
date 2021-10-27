@@ -22,7 +22,7 @@ public class Login_DAO {
     private static final String SELECT_USER_BY_ID = "select * from login where email =?";
     private static final String SELECT_ALL_USERS = "select * from login";
     private static final String DELETE_USERS_SQL = "delete from login where email = ?;";
-    
+    private static final String SELECT_ROLLNO_BY_EMAIL = "select roll_number from student where email= ?;";
     public Login_DAO() {}
 
     protected Connection getConnection() {
@@ -107,6 +107,27 @@ public class Login_DAO {
         return users;
     }
 
+    public String selectRollNoFromEmail(String email) {
+    	String roll_number="";
+    	try (Connection connection = getConnection();
+                // Step 2:Create a statement using connection object
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ROLLNO_BY_EMAIL);) {
+                preparedStatement.setString(1, email);
+                System.out.println(preparedStatement);
+                // Step 3: Execute the query or update query
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Step 4: Process the ResultSet object.
+                while (rs.next()) {
+                    roll_number=rs.getString("roll_number");
+                }      
+                } 
+            catch (SQLException e) {
+                printSQLException(e);
+            }
+    	return roll_number;
+    }
+    
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {

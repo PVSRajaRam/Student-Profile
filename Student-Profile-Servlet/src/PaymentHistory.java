@@ -15,10 +15,10 @@ import database_conn.Fee_Payment_History_DAO;
 import models.FeeTxnHistory;
 
 /**
- * Servlet implementation class feepayment
+ * Servlet implementation class PaymentHistory
  */
 @WebServlet("/feepayment")
-public class feepayment extends HttpServlet {
+public class PaymentHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Fee_Payment_History_DAO payDAO; 
     /**
@@ -38,8 +38,9 @@ public class feepayment extends HttpServlet {
 		String rollno=(String)session.getAttribute("rollno");
 		System.out.println(rollno);
 		List<FeeTxnHistory> txns = payDAO.selectAllTxnByRollNumber(rollno);
+		request.setAttribute("txns", txns);
         RequestDispatcher dispatcher;
-        dispatcher = request.getRequestDispatcher("./jsp/feepaymentmain.jsp");
+        dispatcher = request.getRequestDispatcher("./jsp/paymenthistory.jsp");
         dispatcher.forward(request, response);
 	}
 
