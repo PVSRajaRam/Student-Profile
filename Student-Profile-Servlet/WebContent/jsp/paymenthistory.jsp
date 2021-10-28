@@ -52,10 +52,12 @@
         <th scope="col">Purpose</th>
         <th scope="col">Amount</th>
         <th scope="col">Bank</th>  
+        <th scope="col">Staff</th>
       </tr>
     </thead>
     <tbody>
       <tr id="no-result" style="display: none;">
+        <td>-</td>
         <td>-</td>
         <td>-</td>
         <td>-</td>
@@ -69,6 +71,7 @@
 	        <td class="txnpurp"><c:out value="${txn.txn_purpose}" /></td>
 	        <td><c:out value="${txn.txn_amt}" /></td>
 	        <td><c:out value="${txn.bank}" /></td>
+	        <td><c:out value="${txn.staff}" /></td>
 	      </tr>
       </c:forEach>
     </tbody>

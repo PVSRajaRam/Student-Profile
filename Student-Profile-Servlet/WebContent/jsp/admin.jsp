@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,24 +19,15 @@
 </head>
 <body>
     <div class="page">
-        <div class="page section" id="page-section-1">
-            <img src="${pageContext.request.contextPath}/images/student_icon.png" id="nav-icon" width="50px" height="50px" onclick="changeFrame(7)"/>
+        <div class="page section" id="page-section-1" style="width:10%;">
             <div class="btn-group-vertical" id="nav-buttons" style="height: 80%; margin-top:10%;overflow:auto;">
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeFrame(1)">HOME</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-2" onclick="changeFrame(2)">FEE PAYMENTS</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-3" onclick="changeFrame(3)">GATE PASSES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(4)">BONAFIDE CERTIFICATES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(5)">ACHIEVEMENTS</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(6)">COURSES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(8)">LIBRARY</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(9)">ACTIVITIES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(10)">ATTENDANCE</button>  
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeAdminFrame(1)">FINANCE</button>
             </div>
         </div>
-        <div class="page section" id="page-section-2">
+        <div class="page section" id="page-section-2" style="width:90%;">
             <div>
             <img src="/Student-Profile-Servlet/images/univ-logo.jpg" width="20%" height="100%" style="float: left;margin-top:20px;">
-            <li class="nav-item dropdown" id="welcome-msg" style="margin-left: 40%;float:left; list-style-type:none;">
+            <li class="nav-item dropdown" id="welcome-msg" style="margin-left: 60%;float:left; list-style-type:none;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: black; " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <strong style="font-size: 15px;"><c:out value="${User.email}" /></strong>
                 </a>
@@ -46,7 +36,7 @@
                 </div>
             </li>
             </div>           
-            <iframe id="main-frame" src="${pageContext.request.contextPath}/html/dashboard.html"></iframe>
+            <iframe id="main-frame" src="${pageContext.request.contextPath}/FinanceAdmin"></iframe>
         </div>
     </div>
 </body>

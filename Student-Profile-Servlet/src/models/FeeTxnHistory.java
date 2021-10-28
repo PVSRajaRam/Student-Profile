@@ -10,9 +10,32 @@ public class FeeTxnHistory {
 	protected String txn_purpose;
 	protected float txn_amt;
 	protected int receipt_no;
+	protected String staff;
 	
 	public FeeTxnHistory(String txn_number, String bank, String roll_number, Date txn_date, String txn_purpose,
-			float txn_amt, int receipt_no) {
+			float txn_amt, String staff) {
+		super();
+		this.txn_number = txn_number;
+		this.bank = bank;
+		this.roll_number = roll_number;
+		this.txn_date = txn_date;
+		this.txn_purpose = txn_purpose;
+		this.txn_amt = txn_amt;
+		this.staff = staff;
+	}
+	
+	public FeeTxnHistory(String txn_number, String bank, String roll_number, Date txn_date, String txn_purpose,
+			float txn_amt) {
+		super();
+		this.txn_number = txn_number;
+		this.bank = bank;
+		this.roll_number = roll_number;
+		this.txn_date = txn_date;
+		this.txn_purpose = txn_purpose;
+		this.txn_amt = txn_amt;
+	}
+	public FeeTxnHistory(String txn_number, String bank, String roll_number, Date txn_date, String txn_purpose,
+			float txn_amt, int receipt_no, String staff) {
 		super();
 		this.txn_number = txn_number;
 		this.bank = bank;
@@ -21,8 +44,17 @@ public class FeeTxnHistory {
 		this.txn_purpose = txn_purpose;
 		this.txn_amt = txn_amt;
 		this.receipt_no = receipt_no;
+		this.staff = staff;	
 	}
 	
+	public String getStaff() {
+		return staff;
+	}
+
+	public void setStaff(String staff) {
+		this.staff = staff;
+	}
+
 	public String getTxn_number() {
 		return txn_number;
 	}

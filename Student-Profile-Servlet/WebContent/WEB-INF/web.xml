@@ -25,6 +25,22 @@
 	<servlet-name>PaymentHistory</servlet-name>  
 	<url-pattern>/PaymentHistory</url-pattern>  
   </servlet-mapping>  
+  <servlet>
+	  <servlet-name>UploadReceipt</servlet-name>  
+	  <servlet-class>UploadReceipt</servlet-class>  
+  </servlet>
+  <servlet-mapping>  
+	<servlet-name>UploadReceipt</servlet-name>  
+	<url-pattern>/UploadReceipt</url-pattern>  
+  </servlet-mapping>
+  <servlet>
+	  <servlet-name>FinanceAdmin</servlet-name>  
+	  <servlet-class>FinanceAdmin</servlet-class>  
+  </servlet>
+  <servlet-mapping>  
+	<servlet-name>FinanceAdmin</servlet-name>  
+	<url-pattern>/FinanceAdmin</url-pattern>  
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>

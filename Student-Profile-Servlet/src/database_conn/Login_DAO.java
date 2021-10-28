@@ -17,7 +17,7 @@ public class Login_DAO {
     private String jdbcPassword = "password";
 
     private static final String INSERT_USERS_SQL = "INSERT INTO login" + " VALUES" +
-        " (?, ?, ?);";
+        " (?, ?, ?, ?);";
 
     private static final String SELECT_USER_BY_ID = "select * from login where email =?";
     private static final String SELECT_ALL_USERS = "select * from login";
@@ -49,6 +49,7 @@ public class Login_DAO {
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPwd());
             preparedStatement.setBoolean(3, user.isAdmin());
+            preparedStatement.setString(4, user.getDept());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +72,8 @@ public class Login_DAO {
             while (rs.next()) {
                 String pwd = rs.getString("password");
                 boolean isAdmin  = rs.getBoolean("is_admin");
-                user = new User(email, pwd,isAdmin);
+                String dept=rs.getString("admin_type");
+                user = new User(email, pwd,isAdmin,dept);
             }
             System.out.println(user.getEmail());        
             } 
@@ -99,7 +101,8 @@ public class Login_DAO {
             	String email=rs.getString("email");
             	String pwd = rs.getString("password");
                 boolean isAdmin  = rs.getBoolean("is_admin");
-                users.add(new User(email, pwd,isAdmin));
+                String dept=rs.getString("admin_type");
+                users.add(new User(email, pwd,isAdmin,dept));
             }
         } catch (SQLException e) {
             printSQLException(e);

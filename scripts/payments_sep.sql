@@ -7,7 +7,6 @@ CREATE TABLE if not exists login (
     email varchar(100) NOT NULL,
     password varchar(100) NOT NULL,
     is_admin bit NOT NULL,
-    admin_type varchar(100),
     CONSTRAINT login_pk PRIMARY KEY (email)
 );
 
@@ -29,8 +28,7 @@ CREATE TABLE if not exists Payment_history (
     txn_date date NOT NULL,
     txn_purpose varchar(100) NOT NULL,
     txn_amount float(10,2) NOT NULL,
-    receipt_no int NULL,
-    staff varchar(100) NULL,
+    receipt_no int NOT NULL,
     CONSTRAINT Payment_history_pk PRIMARY KEY (txn_number,bank)
 );
 
@@ -42,8 +40,8 @@ CREATE TABLE if not exists Payments_To_Be_Approved (
     txn_date date NOT NULL,
     txn_purpose varchar(100) NOT NULL,
     txn_amount float(10,2) NOT NULL,
-    payment_mode varchar(100) NOT NULL,
-    file_path varchar(200) NULL,
+    file blob NOT NULL,
+    student_id int NOT NULL,
     CONSTRAINT Payments_To_Be_Approved_pk PRIMARY KEY (bank,txn_number)
 );
 
@@ -73,26 +71,3 @@ ALTER TABLE Payment_history ADD CONSTRAINT student_Payment_history FOREIGN KEY s
 ALTER TABLE student ADD CONSTRAINT student_login FOREIGN KEY student_login (email)
     REFERENCES login (email);
     
-use student_profile;
-
-insert into login values('cb.en.u4cse17001@cb.students.amrita.edu','stud1',0,null);
-insert into login values('cb.en.u4cse17002@cb.students.amrita.edu','stud2',0,null);
-insert into login values('cb.en.u4cse17003@cb.students.amrita.edu','stud3',0,null);
-insert into login values('Naren@cb.amrita.edu','admin1',1,'Finance');
-
-insert into student values('CB.EN.U4CSE17001','Arun','S','cb.en.u4cse17001@cb.students.amrita.edu','1111133331');
-insert into student values('CB.EN.U4CSE17002','Anusha','J','cb.en.u4cse17002@cb.students.amrita.edu','1111133332');
-insert into student values('CB.EN.U4CSE17003','Bharat','R','cb.en.u4cse17003@cb.students.amrita.edu','1111133333');
-
-insert into Payment_history values('TX001','SBI','CB.EN.U4CSE17001','2017-07-11','Tution',150000,1,'Naren');
-insert into Payment_history values('TX002','Axis','CB.EN.U4CSE17001','2017-07-20','Mess',100000,1,'Naren');
-insert into Payment_history values('TX011','SBI','CB.EN.U4CSE17002','2017-07-14','Tution',300000,1,'Naren');
-insert into Payment_history values('TX012','Dhanalakshmi','CB.EN.U4CSE17002','2017-07-18','Mess',100000,1,'Naren');
-insert into Payment_history values('TX021','SBI','CB.EN.U4CSE17003','2017-07-08','Tution',150000,1,'Nitya');
-insert into Payment_history values('TX022','SBI','CB.EN.U4CSE17003','2017-07-21','Mess',100000,1,'Nitya');
-insert into Payment_history values('TX023','SBI','CB.EN.U4CSE17003','2017-11-11','Tution',150000,2,'Nitya');
-insert into Payment_history values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,2,'Nitya');
-
-insert into Payments_To_Be_Approved values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,'Cheque',null);
-insert into Payments_To_Be_Approved values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,'DD',null);
-select * from Payments_To_Be_Approved where roll_number='CB.EN.U4CSE17001';
