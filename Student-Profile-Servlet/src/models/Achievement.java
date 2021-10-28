@@ -3,11 +3,19 @@ package models;
 import java.util.Date;
 
 public class Achievement {
-    protected int id;
+    protected int id, achievement_type_id;
     protected String student_id, achievement_type, title;
     protected Date proof_date;
-
-    public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date) {
+    
+    public Achievement(String student_id, String title, Date proof_date, int achievement_type_id) {
+		super();
+		this.achievement_type_id = achievement_type_id;
+		this.student_id = student_id;
+		this.title = title;
+		this.proof_date = proof_date;
+	}
+   
+	public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date) {
 		super();
 		this.id = id;
 		this.student_id = student_id;
@@ -18,6 +26,14 @@ public class Achievement {
 
 	public Date getProof_date() {
 		return proof_date;
+	}
+
+	public int getAchievement_type_id() {
+		return achievement_type_id;
+	}
+
+	public void setAchievement_type_id(int achievement_type_id) {
+		this.achievement_type_id = achievement_type_id;
 	}
 
 	public void setProof_date(Date proof_date) {

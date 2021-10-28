@@ -1,7 +1,13 @@
 
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +54,41 @@ public class AchievementController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		getAchievementData(request, response);
 	}
 
+	private void getAchievementData(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			String title = request.getParameter("achievement_title");
+			int achievement_type = Integer.parseInt(request.getParameter("achievement_type"));
+
+			String proof_date_str = request.getParameter("achievement_date");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+			Date proof_date = formatter.parse(proof_date_str);
+			Date proof_date_sql = new java.sql.Date(proof_date.getTime());
+
+
+//		String student_id = session.getAttribute("rollno"); TODO
+			String student_id = "CB.EN.U4CSE17001";
+
+			Achievement_DAO dao;
+			RequestDispatcher dispatcher;
+
+			Achievement achv = new Achievement(student_id, title, proof_date_sql, achievement_type);
+			dao = new Achievement_DAO();
+			dao.addAchievement(achv);
+
+//	        dispatcher = request.getRequestDispatcher("./jsp/achievements.jsp");
+//	        dispatcher.forward(request, response);
+			doGet(request, response);
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }

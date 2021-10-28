@@ -79,7 +79,7 @@
                                     <c:out value="${achv.achievement_type}" />
                                 </td>
                                 <td>
-									${achv.proof_date}
+                                    ${achv.proof_date}
                                 </td>
                                 <td><span class="badge rounded-pill bg-secondary">Not Verified</span></td>
                                 <td><button type="button" class="btn btn-labeled btn-info btn-sm">
@@ -100,13 +100,13 @@
             </div>
 
             <div class="col-10 col-lg-3">
-                <form method="POST" enctype="multipart/form-data">
+                <form method="post" action="./AchievementController">
                     <legend>
                         <h3>Add Achievements</h3>
                     </legend>
                     <label for="achievement_title" class="form-label required-field">Title</label>
                     <input type="text" class="form-control" id="achievement_title" minlength="2" maxlength="200"
-                        required>
+                        required name="achievement_title">
 
                     <label for="achievement_type" class="form-label required-field">Type</label>
                     <select class="form-select" id="achievement_type" name="achievement_type" aria-label="Select Type"
@@ -119,11 +119,12 @@
                     </select>
 
                     <label for="achievement_date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="achievement_date">
+                    <input type="date" class="form-control" id="achievement_date" name="achievement_date">
 
                     <div class="">
                         <label for="formFile" class="form-label">Document</label>
-                        <input class="form-control" type="file" id="formFile" accept="image/*,.doc,.pdf,.docx">
+                        <input class="form-control" type="file" name="proof_file" id="formFile"
+                            accept="image/*,.doc,.pdf,.docx">
                     </div>
 
                     <button type="submit" class="btn btn-primary" id="add_button">

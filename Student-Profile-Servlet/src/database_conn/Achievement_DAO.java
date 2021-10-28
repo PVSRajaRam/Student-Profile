@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.sql.DriverManager;
-
+import java.sql.PreparedStatement;
 
 import models.Achievement;
 
@@ -89,35 +89,34 @@ public class Achievement_DAO {
 		}
 	}
 
-	// public void addAchievement(Student theStudent) throws Exception {
+	public void addAchievement(Achievement achv) throws Exception {
 
-	// 	Connection myConn = null;
-	// 	PreparedStatement myStmt = null;
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
 
-	// 	try {
-	// 		// get db connection
-	// 		myConn = dataSource.getConnection();
+		try {
+			myConn = getConnection();
+            System.out.println("Connection established......");
 
-	// 		// create sql for insert
-	// 		String sql = "insert into student "
-	// 				   + "(first_name, last_name, email) "
-	// 				   + "values (?, ?, ?)";
+			String sql = "insert into achievement "
+					   + "(achievement_type, title, proof_date, student_id) "
+					   + "values (?, ?, ?, ?);";
+			myStmt = myConn.prepareStatement(sql);
 
-	// 		myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, achv.getAchievement_type_id());
+			myStmt.setString(2, achv.getTitle());
+			myStmt.setDate(3, (java.sql.Date) achv.getProof_date());
+			myStmt.setString(4, achv.getStudent_id());
 
-	// 		// set the param values for the student
-	// 		myStmt.setString(1, theStudent.getFirstName());
-	// 		myStmt.setString(2, theStudent.getLastName());
-	// 		myStmt.setString(3, theStudent.getEmail());
+			myStmt.execute();
+            System.out.println("Achievement Added");
 
-	// 		// execute sql insert
-	// 		myStmt.execute();
-	// 	}
-	// 	finally {
-	// 		// clean up JDBC objects
-	// 		close(myConn, myStmt, null);
-	// 	}
-	// }
+		}
+		finally {
+			// clean up JDBC objects
+			close(myConn, myStmt, null);
+		}
+	}
 
 	// public Student getStudent(String theStudentId) throws Exception {
 
