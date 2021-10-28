@@ -65,13 +65,13 @@
       <c:forEach var="appr" items="${approvals}">
       	
 	      <tr id="<c:out value='${appr.txn_number}' />">
-	        <td class="txnno"><input type="text" class="form-control uploadcontrol" id="upload-txn-no" name="uploadtxnno" value="<c:out value='${appr.txn_number}' />" readonly></td>
-	        <td class="txndate"><input type="date" class="form-control uploadcontrol" id="upload-txn-date" name="uploadtxndate" value="<c:out value='${appr.txn_date}' />" readonly></td>
-	        <td class="rollno"><input type="text" class="form-control uploadcontrol" id="uploadrollno" name="uploadrollno" value="<c:out value='${appr.roll_number}' />" readonly></td>
-	        <td class="txnpurp"><input type="text" class="form-control uploadcontrol" id="upload-txn-purpose" name="uploadtxnpurpose" value="<c:out value='${appr.txn_purpose}' />" readonly></td>
-	        <td class="amt"><input type="text" class="form-control uploadcontrol" id="upload-txn-amount" name="uploadtxnamount" value="<c:out value='${appr.txn_amt}' />" readonly></td>
-	        <td class="bank"><input type="text" class="form-control uploadcontrol" id="upload-txn-bank" name="uploadtxnbank" value="<c:out value='${appr.bank}' />" readonly></td>
-	        <td class="mode"><input type="text" class="form-control uploadcontrol" id="upload-txn-mode" name="uploadtxnmode" value="<c:out value='${appr.payment_mode}' />" readonly></td>
+	        <td class="txnno"><c:out value='${appr.txn_number}' /></td>
+	        <td class="txndate"><c:out value='${appr.txn_date}' /></td>
+	        <td class="rollno"><c:out value='${appr.roll_number}' /></td>
+	        <td class="txnpurp"><c:out value='${appr.txn_purpose}' /></td>
+	        <td class="amt"><c:out value='${appr.txn_amt}' /></td>
+	        <td class="bank"><c:out value='${appr.bank}' /></td>
+	        <td class="mode"><c:out value='${appr.payment_mode}' /></td>
 	        <td><button type="button" id="<c:out value='${appr.txn_number}' />" class="btn btn-success" onclick="expand(this)">Expand</button></td>
 	      </tr>
       </c:forEach>
@@ -134,13 +134,13 @@
 		  if(tabrows[i].id.localeCompare(s.id)==0)
 			 {
 			  console.log(tabrows[i].children);
-			  document.getElementById('disp-txn-no').value=tabrows[i].getElementsByClassName('txnno')[0].children[0].value;
-			  document.getElementById('disp-txn-date').value=tabrows[i].getElementsByClassName('txndate')[0].children[0].value;
-			  document.getElementById('disp-txn-roll').value=tabrows[i].getElementsByClassName('rollno')[0].children[0].value;
-			  document.getElementById('disp-txn-purpose').value=tabrows[i].getElementsByClassName('txnpurp')[0].children[0].value;
-			  document.getElementById('disp-txn-amount').value=tabrows[i].getElementsByClassName('amt')[0].children[0].value;
-			  document.getElementById('disp-txn-bank').value=tabrows[i].getElementsByClassName('bank')[0].children[0].value;
-			  document.getElementById('disp-txn-mode').value=tabrows[i].getElementsByClassName('mode')[0].children[0].value;	  
+			  document.getElementById('disp-txn-no').value=tabrows[i].getElementsByClassName('txnno')[0].innerHTML;
+			  document.getElementById('disp-txn-date').value=tabrows[i].getElementsByClassName('txndate')[0].innerHTML;
+			  document.getElementById('disp-txn-roll').value=tabrows[i].getElementsByClassName('rollno')[0].innerHTML;
+			  document.getElementById('disp-txn-purpose').value=tabrows[i].getElementsByClassName('txnpurp')[0].innerHTML;
+			  document.getElementById('disp-txn-amount').value=tabrows[i].getElementsByClassName('amt')[0].innerHTML;
+			  document.getElementById('disp-txn-bank').value=tabrows[i].getElementsByClassName('bank')[0].innerHTML;
+			  document.getElementById('disp-txn-mode').value=tabrows[i].getElementsByClassName('mode')[0].innerHTML;	  
               document.getElementById('rem-fee').style.display="block";			 
 			 } 
 	  }
