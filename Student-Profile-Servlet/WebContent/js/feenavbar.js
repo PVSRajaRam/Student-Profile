@@ -10,7 +10,7 @@ function changeNav(obj){
     }
     else if(i.localeCompare("2")==0){
         document.getElementById("navscroller").style.marginLeft="45%";
-        document.getElementById("fee-frame").src="generatereceipts.html";
+        document.getElementById("fee-frame").src="/Student-Profile-Servlet/GenerateReceipt";
     }
     else if(i.localeCompare("3")==0){
         document.getElementById("navscroller").style.marginLeft="73.5%";

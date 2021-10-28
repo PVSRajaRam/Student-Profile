@@ -1,46 +1,33 @@
 
-import java.io.*;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import database_conn.Fee_Payment_History_DAO;
-import models.FeeTxnHistory;
 
 /**
- * Servlet implementation class PaymentHistory
+ * Servlet implementation class UploadReceipt
  */
-@WebServlet("/PaymentHistory")
-public class PaymentHistory extends HttpServlet {
+@WebServlet("/UploadReceipt")
+public class UploadReceipt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Fee_Payment_History_DAO payDAO; 
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-	public void init() {
-        payDAO = new Fee_Payment_History_DAO();
+    public UploadReceipt() {
+        super();
+        // TODO Auto-generated constructor stub
     }
-    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session=request.getSession(false);
-		String rollno=(String)session.getAttribute("rollno");
-		System.out.println(rollno);
-		List<FeeTxnHistory> txns = payDAO.selectAllTxnByRollNumber(rollno);
-		request.setAttribute("txns", txns);
-        RequestDispatcher dispatcher;
-        dispatcher = request.getRequestDispatcher("./jsp/paymenthistory.jsp");
-        dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

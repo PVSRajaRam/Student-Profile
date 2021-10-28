@@ -16,4 +16,4 @@ insert into Payment_history values('TX012','Dhanalakshmi','CB.EN.U4CSE17002','20
 insert into Payment_history values('TX021','SBI','CB.EN.U4CSE17003','2017-07-08','Tution',150000,1);
 insert into Payment_history values('TX022','SBI','CB.EN.U4CSE17003','2017-07-21','Mess',100000,1);
 insert into Payment_history values('TX023','SBI','CB.EN.U4CSE17003','2017-11-11','Tution',150000,2);
-\
+
