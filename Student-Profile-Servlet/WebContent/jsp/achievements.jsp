@@ -23,7 +23,7 @@
     <script src="${pageContext.request.contextPath}/js/trigger_toast.js"></script>
     <script src="${pageContext.request.contextPath}/js/delete_achievement.js"></script>
 
-    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css"> -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/achievements_styles.css">
 
 </head>
@@ -33,21 +33,28 @@
     <div class="container-fluid" style="margin-top: 5%;">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="bg-warning">
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Verified</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Modal -->
-                        <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                <c:choose>
+                    <c:when test="${empty achievements}">
+                        <div class="alert alert-info" role="alert">
+                            No Achievement Data
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Verified</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Modal -->
+                                <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -69,42 +76,42 @@
                                 </div>
                             </div>
                         </div> -->
+                                <c:forEach var="achv" items="${achievements}">
+                                    <tr>
+                                        <td>
+                                            <c:out value="${achv.id}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${achv.title}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${achv.achievement_type}" />
+                                        </td>
+                                        <td>
+                                            ${achv.proof_date}
+                                        </td>
+                                        <td><span class="badge rounded-pill bg-secondary">Not Verified</span></td>
+                                        <td><button type="button" class="btn btn-labeled btn-info btn-sm">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </button>
+                                        </td>
 
-                        <c:forEach var="achv" items="${achievements}">
-                            <tr>
-                                <td>
-                                    <c:out value="${achv.id}" />
-                                </td>
-                                <td>
-                                    <c:out value="${achv.title}" />
-                                </td>
-                                <td>
-                                    <c:out value="${achv.achievement_type}" />
-                                </td>
-                                <td>
-                                    ${achv.proof_date}
-                                </td>
-                                <td><span class="badge rounded-pill bg-secondary">Not Verified</span></td>
-                                <td><button type="button" class="btn btn-labeled btn-info btn-sm">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </button>
-                                </td>
+                                        <td>
+                                            <form method="get" action="./AchievementController">
+                                                <button type="submit" class="btn btn-labeled btn-danger btn-sm">
+                                                    <!-- data-bs-toggle="modal" data-bs-target="#deleteModal"> -->
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                                <input type="hidden" name="achievement_to_del" value="${achv.id}">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
 
-                                <td>
-                                    <form method="get" action="./AchievementController">
-                                        <button type="submit" class="btn btn-labeled btn-danger btn-sm">
-                                            <!-- data-bs-toggle="modal" data-bs-target="#deleteModal"> -->
-                                            <i class="bi bi-trash"></i> Delete
-                                        </button>
-                                        <input type="hidden" name="achievement_to_del" value="${achv.id}">
-                                    </form>
-                                </td>
-                            </tr>
-
-                        </c:forEach>
-
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
             <div class="col-10 col-lg-3">

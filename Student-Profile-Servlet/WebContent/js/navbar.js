@@ -12,7 +12,7 @@ function changeFrame(i){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/bonafidemain.html"
     }
     else if(i==5){
-        document.getElementById("main-frame").src="/Student-Profile-Servlet/html/achievements.html"
+        document.getElementById("main-frame").src="/Student-Profile-Servlet/AchievementController"
     }
     else if(i==6){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/courses.html"

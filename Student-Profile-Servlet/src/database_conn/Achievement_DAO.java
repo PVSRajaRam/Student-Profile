@@ -47,7 +47,8 @@ public class Achievement_DAO {
 			// String sql = "SELECT achievement_id,student_id,title FROM achievement";
 			String sql = "SELECT A.achievement_id, A.student_id, B.achievement_type_description, A.title, A.proof_date " +
 					        "FROM achievement A, achievement_types B " +
-                            "WHERE A.achievement_type = B.achievement_type_id;";
+                            "WHERE A.achievement_type = B.achievement_type_id " +
+                            "ORDER BY A.achievement_id ASC;";
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery(sql);
 
