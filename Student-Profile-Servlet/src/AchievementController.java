@@ -34,10 +34,19 @@ public class AchievementController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Achievement_DAO dao;
 		RequestDispatcher dispatcher;
+        dao = new Achievement_DAO();
+
+        if(request.getParameter("achievement_to_del") != null) {
+            try {
+				deleteAchievementReq(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+        else{
 		try {
 //			HttpSession session=request.getSession(false);
 
-			dao = new Achievement_DAO();
 			List<Achievement> achievements = dao.getAchievements();
 			request.setAttribute("achievements", achievements);
 			request.setAttribute("test", "test_Value");
@@ -47,7 +56,7 @@ public class AchievementController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+        }
 	}
 
 	/**
@@ -55,6 +64,23 @@ public class AchievementController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getAchievementData(request, response);
+	}
+
+	// protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 	try {
+	// 		deleteAchievementReq(request, response);
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
+
+	private void deleteAchievementReq(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int achievement_id = Integer.parseInt(request.getParameter("achievement_to_del"));
+		Achievement_DAO dao = new Achievement_DAO();
+		// RequestDispatcher dispatcher;
+
+		dao.deleteAchievement(achievement_id);
+		response.sendRedirect(getServletName());
 	}
 
 	private void getAchievementData(HttpServletRequest request, HttpServletResponse response) {

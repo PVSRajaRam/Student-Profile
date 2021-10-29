@@ -13,8 +13,8 @@ import models.FeeTxnHistory;
 
 public class Upload_Receipt_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "password";
+    private String jdbcUsername = DBCredentials.getUsername();
+    private String jdbcPassword = DBCredentials.getPassword();
 
     private static final String INSERT_APPROVALS_SQL = "insert into Payment_history(txn_number,bank,roll_number,txn_date,txn_purpose,txn_amount,payment_mode,approved) " + " VALUES" +
         " (?, ?, ?, ?, ?, ?, ?, ?);";

@@ -14,8 +14,8 @@ import models.Achievement;
 
 public class Achievement_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "password";
+    private String jdbcUsername = DBCredentials.getUsername();
+    private String jdbcPassword = DBCredentials.getPassword();
 //    private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =?";
 
     protected Connection getConnection() {
@@ -47,7 +47,8 @@ public class Achievement_DAO {
 			// String sql = "SELECT achievement_id,student_id,title FROM achievement";
 			String sql = "SELECT A.achievement_id, A.student_id, B.achievement_type_description, A.title, A.proof_date " +
 					        "FROM achievement A, achievement_types B " +
-                            "WHERE A.achievement_type = B.achievement_type_id;";
+                            "WHERE A.achievement_type = B.achievement_type_id " +
+                            "ORDER BY A.achievement_id ASC;";
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery(sql);
 
@@ -90,7 +91,6 @@ public class Achievement_DAO {
 	}
 
 	public void addAchievement(Achievement achv) throws Exception {
-
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 
@@ -116,6 +116,27 @@ public class Achievement_DAO {
 			// clean up JDBC objects
 			close(myConn, myStmt, null);
 		}
+	}
+
+	public void deleteAchievement(int achievement_id) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+        System.out.println("My a" + achievement_id);
+		try {
+			myConn = getConnection();
+            System.out.println("Connection established......");
+
+			String sql = "DELETE FROM achievement WHERE achievement_id = ?";
+			myStmt = myConn.prepareStatement(sql);
+
+			myStmt.setInt(1, achievement_id);
+			myStmt.execute();
+            System.out.println("Achievement Deleted");
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}
+
 	}
 
 	// public Student getStudent(String theStudentId) throws Exception {

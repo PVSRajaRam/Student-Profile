@@ -1,6 +1,7 @@
+drop database IF EXISTS student_profile;
 create database if not exists student_profile;
 use student_profile;
--- drop database student_profile;
+
 
 -- Table: login
 CREATE TABLE if not exists login (
@@ -97,19 +98,13 @@ insert into Payments_To_Be_Approved values('TX101','Dhanalakshmi','CB.EN.U4CSE17
 insert into Payments_To_Be_Approved values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,'DD',null);
 select * from Payments_To_Be_Approved where roll_number='CB.EN.U4CSE17001';
 
-create database if not exists `student_profile`;
-USE `student_profile`;
-
-DROP TABLE achievement;
-DROP TABLE achievement_types;
-
 -- Table: achievement
 CREATE TABLE achievement (
     achievement_id int NOT NULL AUTO_INCREMENT,
     student_id varchar(16) NULL,
     achievement_type int NULL,
     title varchar(100) NOT NULL,
-    proof_date date NULL,
+    proof_date date NOT NULL,
     proof_file blob NULL,
     CONSTRAINT achievement_pk PRIMARY KEY (achievement_id)
 );
@@ -132,7 +127,6 @@ ALTER TABLE achievement ADD CONSTRAINT achievement_student_constrain FOREIGN KEY
     ON DELETE SET NULL
     ON UPDATE SET NULL;
 
-
 -- dummy data
 INSERT INTO achievement_types (achievement_type_description)
 VALUES
@@ -151,3 +145,4 @@ VALUES
 ("CB.EN.U4CSE17001", 3, "Chess", "2004-04-01");
 
 SELECT * FROM achievement;
+

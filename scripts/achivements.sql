@@ -10,7 +10,7 @@ CREATE TABLE achievement (
     student_id varchar(16) NULL,
     achievement_type int NULL,
     title varchar(100) NOT NULL,
-    proof_date date NULL,
+    proof_date date NOT NULL,
     proof_file blob NULL,
     CONSTRAINT achievement_pk PRIMARY KEY (achievement_id)
 );
