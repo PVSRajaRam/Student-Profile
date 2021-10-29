@@ -52,7 +52,7 @@ CREATE TABLE if not exists Remaining_Fees (
 -- Reference: Remaining_Fees_student (table: Remaining_Fees)
 ALTER TABLE Remaining_Fees ADD CONSTRAINT Remaining_Fees_student FOREIGN KEY Remaining_Fees_student (roll_number)
     REFERENCES student (roll_number);
-    
+
 -- Reference: student_Payment_history (table: Payment_history)
 ALTER TABLE Payment_history ADD CONSTRAINT student_Payment_history FOREIGN KEY student_Payment_history (roll_number)
     REFERENCES student (roll_number);
@@ -60,7 +60,7 @@ ALTER TABLE Payment_history ADD CONSTRAINT student_Payment_history FOREIGN KEY s
 -- Reference: student_login (table: student)
 ALTER TABLE student ADD CONSTRAINT student_login FOREIGN KEY student_login (email)
     REFERENCES login (email);
-    
+
 use student_profile;
 
 insert into login values('cb.en.u4cse17001@cb.students.amrita.edu','stud1',0,null);
@@ -91,6 +91,7 @@ CREATE TABLE achievement (
     title varchar(100) NOT NULL,
     proof_date date NOT NULL,
     proof_file blob NULL,
+    verified bit DEFAULT 0,
     CONSTRAINT achievement_pk PRIMARY KEY (achievement_id)
 );
 

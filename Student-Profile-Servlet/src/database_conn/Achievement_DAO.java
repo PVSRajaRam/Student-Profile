@@ -6,6 +6,9 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.sql.Blob;
+
 import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,34 +36,34 @@ public class Achievement_DAO {
         return connection;
     }
 
-	public List<Achievement> getAchievements() throws Exception {
+	public List<Achievement> getAchievements(String rollno) throws Exception {
 		List<Achievement> achievements = new ArrayList<>();
 
 		Connection myConn = null;
-		Statement myStmt = null;
+		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-			// String sql = "SELECT achievement_id,student_id,title FROM achievement";
-			String sql = "SELECT A.achievement_id, A.student_id, B.achievement_type_description, A.title, A.proof_date " +
+			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date " +
 					        "FROM achievement A, achievement_types B " +
-                            "WHERE A.achievement_type = B.achievement_type_id " +
-                            "ORDER BY A.achievement_id ASC;";
-			myStmt = myConn.createStatement();
-			myRs = myStmt.executeQuery(sql);
+                            "WHERE A.achievement_type = B.achievement_type_id AND A.student_id = ? " +
+                            "ORDER BY A.proof_date DESC; ";
+
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setString(1, rollno);
+			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
 				int id = myRs.getInt("achievement_id");
-				String student_id = myRs.getString("student_id");
 				String achievement_type = myRs.getString("achievement_type_description");
 				String title = myRs.getString("title");
 				Date proof_date = myRs.getDate("proof_date");
-                // TODO : FILE
+                // java.sql.Blob proof_file = myRs.getBlob("proof_file");
 
-				Achievement achievement = new Achievement(id, student_id, achievement_type, title, proof_date);
+				Achievement achievement = new Achievement(id, rollno, achievement_type, title, proof_date );
 				achievements.add(achievement);
                 System.out.println(achievement);
 			}
@@ -100,7 +103,7 @@ public class Achievement_DAO {
 
 			String sql = "insert into achievement "
 					   + "(achievement_type, title, proof_date, student_id) "
-					   + "values (?, ?, ?, ?);";
+					   + "values (?, ?, ?, ?); ";
 			myStmt = myConn.prepareStatement(sql);
 
 			myStmt.setInt(1, achv.getAchievement_type_id());

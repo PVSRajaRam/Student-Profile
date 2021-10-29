@@ -40,15 +40,15 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="achv_table">
                             <thead>
                                 <tr class="bg-warning">
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Date</th>
+                                    <!-- <th scope="col">Proof</th> -->
                                     <th scope="col">Verified</th>
-                                    <th scope="col">Edit</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -78,8 +78,8 @@
                         </div> -->
                                 <c:forEach var="achv" items="${achievements}">
                                     <tr>
-                                        <td>
-                                            <c:out value="${achv.id}" />
+                                        <td class="counter-col">
+                                            <!-- <c:out value="${achv.id}" /> -->
                                         </td>
                                         <td>
                                             <c:out value="${achv.title}" />
@@ -90,11 +90,18 @@
                                         <td>
                                             ${achv.proof_date}
                                         </td>
+
+                                        <!-- <td><a class="btn btn-labeled btn-info btn-sm" download
+                                                href="${achv.proof_file}">
+                                                <i class="bi bi-file-earmark-arrow-down"></i> Proof
+                                            </a>
+                                        </td> -->
+
                                         <td><span class="badge rounded-pill bg-secondary">Not Verified</span></td>
-                                        <td><button type="button" class="btn btn-labeled btn-info btn-sm">
+                                        <!-- <td><button type="button" class="btn btn-labeled btn-info btn-sm">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </button>
-                                        </td>
+                                        </td> -->
 
                                         <td>
                                             <form method="get" action="./AchievementController">
@@ -119,7 +126,7 @@
                     <legend>
                         <h3>Add Achievements</h3>
                     </legend>
-                    <label for="achievement_title" class="form-label required-field">Title</label>
+                    <label for=" achievement_title" class="form-label required-field">Title</label>
                     <input type="text" class="form-control" id="achievement_title" minlength="2" maxlength="200"
                         required name="achievement_title">
 
@@ -136,11 +143,11 @@
                     <label for="achievement_date" class="form-label required-field">Date</label>
                     <input type="date" class="form-control" id="achievement_date" name="achievement_date">
 
-                    <div class="">
+                    <!-- <div class="">
                         <label for="formFile" class="form-label">Document</label>
                         <input class="form-control" type="file" name="proof_file" id="formFile"
                             accept="image/*,.doc,.pdf,.docx">
-                    </div>
+                    </div> -->
 
                     <button type="submit" class="btn btn-primary" id="add_button">
                         <i class="bi bi-plus-circle"></i> Add
