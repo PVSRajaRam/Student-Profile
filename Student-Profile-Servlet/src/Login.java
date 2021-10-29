@@ -56,8 +56,11 @@ public class Login extends HttpServlet {
 		        String pwd=request.getParameter("pwd");
 		        User u = loginDAO.selectUser(em);
 		        RequestDispatcher dispatcher;
-		          
-		        if(u.getPwd().compareTo(pwd)==0) {
+		        if(u==null) {
+		        	request.setAttribute("Error", "No account found");
+		        	dispatcher = request.getRequestDispatcher("./jsp/login-error.jsp");
+		        }
+		        else if(u.getPwd().compareTo(pwd)==0) {
 		        	request.setAttribute("User", u);
 		        	HttpSession session=request.getSession();  
 		        	String rollno=loginDAO.selectRollNoFromEmail(em);

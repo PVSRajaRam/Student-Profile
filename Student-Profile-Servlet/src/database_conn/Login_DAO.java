@@ -75,7 +75,7 @@ public class Login_DAO {
                 String dept=rs.getString("admin_type");
                 user = new User(email, pwd,isAdmin,dept);
             }
-            System.out.println(user.getEmail());        
+                
             } 
         catch (SQLException e) {
             printSQLException(e);
