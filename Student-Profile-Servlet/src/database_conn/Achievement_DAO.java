@@ -90,7 +90,6 @@ public class Achievement_DAO {
 	}
 
 	public void addAchievement(Achievement achv) throws Exception {
-
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 
@@ -116,6 +115,27 @@ public class Achievement_DAO {
 			// clean up JDBC objects
 			close(myConn, myStmt, null);
 		}
+	}
+
+	public void deleteAchievement(int achievement_id) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+        System.out.println("My a" + achievement_id);
+		try {
+			myConn = getConnection();
+            System.out.println("Connection established......");
+
+			String sql = "DELETE FROM achievement WHERE achievement_id = ?";
+			myStmt = myConn.prepareStatement(sql);
+
+			myStmt.setInt(1, achievement_id);
+			myStmt.execute();
+            System.out.println("Achievement Deleted");
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}
+
 	}
 
 	// public Student getStudent(String theStudentId) throws Exception {

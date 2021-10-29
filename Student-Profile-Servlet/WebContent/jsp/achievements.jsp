@@ -21,6 +21,7 @@
     <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <script src="${pageContext.request.contextPath}/js/trigger_toast.js"></script>
+    <script src="${pageContext.request.contextPath}/js/delete_achievement.js"></script>
 
     <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css"> -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/achievements_styles.css">
@@ -46,7 +47,7 @@
                     </thead>
                     <tbody>
                         <!-- Modal -->
-                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                        <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -61,11 +62,13 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        <button type="button"
+                                            onclick="deleteAchievement(document.getElementById('video'))"
+                                            class="btn btn-danger">Delete</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <c:forEach var="achv" items="${achievements}">
                             <tr>
@@ -86,10 +89,15 @@
                                         <i class="bi bi-pencil-square"></i> Edit
                                     </button>
                                 </td>
-                                <td><button type="button" class="btn btn-labeled btn-danger btn-sm"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
+
+                                <td>
+                                    <form method="get" action="./AchievementController">
+                                        <button type="submit" class="btn btn-labeled btn-danger btn-sm">
+                                            <!-- data-bs-toggle="modal" data-bs-target="#deleteModal"> -->
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                        <input type="hidden" name="achievement_to_del" value="${achv.id}">
+                                    </form>
                                 </td>
                             </tr>
 
@@ -118,7 +126,7 @@
                         <option value="4">Other</option>
                     </select>
 
-                    <label for="achievement_date" class="form-label">Date</label>
+                    <label for="achievement_date" class="form-label required-field">Date</label>
                     <input type="date" class="form-control" id="achievement_date" name="achievement_date">
 
                     <div class="">
