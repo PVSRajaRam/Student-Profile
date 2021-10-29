@@ -88,33 +88,33 @@
                 <div class="form-group row">
                   <label for="disp-txn-date" class="col-sm-2 col-form-label">Txn Date</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control uploadcontrol" id="disp-txn-date" name="uploadtxndate" required>
+                    <input type="date" class="form-control uploadcontrol" id="disp-txn-date" name="uploadtxndate" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
                     <label for="disp-txn-roll" class="col-sm-2 col-form-label">Roll Number</label>
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-roll" name="uploadrollno" required>
+                    <input type="text" class="form-control uploadcontrol" id="disp-txn-roll" name="uploadrollno" readonly>
                 </div> 
                 <div class="form-group row">
                   <label for="disp-txn-purpose" class="col-sm-2 col-form-label">Purpose</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-purpose" name="uploadtxnpurpose" required>
+                    <input type="text" class="form-control uploadcontrol" id="disp-txn-purpose" name="uploadtxnpurpose" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
                     <label for="disp-txn-amount" class="col-sm-2 col-form-label">Amount</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control uploadcontrol" id="disp-txn-amount" name="uploadtxnamount" required>
+                      <input type="text" class="form-control uploadcontrol" id="disp-txn-amount" name="uploadtxnamount" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="disp-txn-bank" class="col-sm-2 col-form-label">Bank</label>
-                    <input type="text"class="form-control uploadcontrol" id="disp-txn-bank" name="uploadtxnbank" required>
+                    <input type="text"class="form-control uploadcontrol" id="disp-txn-bank" name="uploadtxnbank" readonly>
                       
                 </div>
                 <div class="form-group row">
                     <label for="disp-txn-mode" class="col-sm-2 col-form-label">Payment <br>Mode</label>
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-mode" name="uploadtxnmode" required>
+                    <input type="text" class="form-control uploadcontrol" id="disp-txn-mode" name="uploadtxnmode" readonly>
                 </div>
                 
                 <div class="form-group row">
