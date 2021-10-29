@@ -13,8 +13,8 @@ import models.User;
 
 public class Login_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "password";
+    private String jdbcUsername = DBCredentials.getUsername();
+    private String jdbcPassword = DBCredentials.getPassword();
 
     private static final String INSERT_USERS_SQL = "INSERT INTO login" + " VALUES" +
         " (?, ?, ?, ?);";

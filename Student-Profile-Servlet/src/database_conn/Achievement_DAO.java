@@ -14,8 +14,8 @@ import models.Achievement;
 
 public class Achievement_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "password";
+    private String jdbcUsername = DBCredentials.getUsername();
+    private String jdbcPassword = DBCredentials.getPassword();
 //    private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =?";
 
     protected Connection getConnection() {

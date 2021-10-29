@@ -13,8 +13,8 @@ import models.FeeTxnHistory;
 
 public class Fee_Payment_History_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "password";
+    private String jdbcUsername = DBCredentials.getUsername();
+    private String jdbcPassword = DBCredentials.getPassword();
 
     private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =?";
     private static final String SELECT_ALL_TXNS_BY_ROLLNO = "select * from Payment_history where roll_number =?";
