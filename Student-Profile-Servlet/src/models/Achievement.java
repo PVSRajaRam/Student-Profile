@@ -1,28 +1,13 @@
 package models;
 
+import java.sql.Blob;
 import java.util.Date;
 
 public class Achievement {
     protected int id, achievement_type_id;
     protected String student_id, achievement_type, title;
     protected Date proof_date;
-    
-    public Achievement(String student_id, String title, Date proof_date, int achievement_type_id) {
-		super();
-		this.achievement_type_id = achievement_type_id;
-		this.student_id = student_id;
-		this.title = title;
-		this.proof_date = proof_date;
-	}
-   
-	public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date) {
-		super();
-		this.id = id;
-		this.student_id = student_id;
-		this.achievement_type = achievement_type;
-		this.title = title;
-		this.proof_date = proof_date;
-	}
+    protected Blob proof_file;
 
 	public Date getProof_date() {
 		return proof_date;
@@ -32,9 +17,19 @@ public class Achievement {
 		return achievement_type_id;
 	}
 
+	public Blob getProof_file() {
+		return proof_file;
+	}
+
+	public void setProof_file(Blob proof_file) {
+		this.proof_file = proof_file;
+	}
+
 	public void setAchievement_type_id(int achievement_type_id) {
 		this.achievement_type_id = achievement_type_id;
 	}
+
+
 
 	public void setProof_date(Date proof_date) {
 		this.proof_date = proof_date;
@@ -42,8 +37,27 @@ public class Achievement {
 
 	@Override
 	public String toString() {
-		return "Achievement [id=" + id + ", student_id=" + student_id + ", achievement_type=" + achievement_type
-				+ ", title=" + title + ", proof_date=" + proof_date + "]";
+		return "Achievement [id=" + id + ", achievement_type_id=" + achievement_type_id + ", student_id=" + student_id
+				+ ", achievement_type=" + achievement_type + ", title=" + title + ", proof_date=" + proof_date
+				+ ", proof_file=" + proof_file + "]";
+	}
+
+	public Achievement(String student_id, int achievement_type_id, String title,
+			Date proof_date) {
+		super();
+		this.student_id = student_id;
+		this.achievement_type_id = achievement_type_id;
+		this.title = title;
+		this.proof_date = proof_date;
+	}
+
+	public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date) {
+		super();
+		this.id = id;
+		this.student_id = student_id;
+		this.achievement_type = achievement_type;
+		this.title = title;
+		this.proof_date = proof_date;
 	}
 
 	public int getId() {

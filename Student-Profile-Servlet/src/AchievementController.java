@@ -1,10 +1,9 @@
 
 
 import java.io.IOException;
-import java.text.DateFormat;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -16,14 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import database_conn.Achievement_DAO;
 import models.Achievement;
 
 /**
- * Servlet implementation class AchievementController
+ * Servlet implementation c lass AchievementController
  */
 //@WebServlet(description = "AchievementController", urlPatterns = { "/AchievementController" })
+// @MultipartConfig
 @WebServlet("/AchievementController")
 public class AchievementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,9 +46,11 @@ public class AchievementController extends HttpServlet {
         }
         else{
 		try {
-//			HttpSession session=request.getSession(false);
+            HttpSession session=request.getSession(false);
+            String rollno=(String)session.getAttribute("rollno");
+            System.out.println(rollno);
 
-			List<Achievement> achievements = dao.getAchievements();
+			List<Achievement> achievements = dao.getAchievements(rollno);
 			request.setAttribute("achievements", achievements);
 			request.setAttribute("test", "test_Value");
 
@@ -86,21 +89,22 @@ public class AchievementController extends HttpServlet {
 	private void getAchievementData(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			String title = request.getParameter("achievement_title");
-			int achievement_type = Integer.parseInt(request.getParameter("achievement_type"));
+			int achievement_type_id = Integer.parseInt(request.getParameter("achievement_type"));
 
 			String proof_date_str = request.getParameter("achievement_date");
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
 			Date proof_date = formatter.parse(proof_date_str);
 			Date proof_date_sql = new java.sql.Date(proof_date.getTime());
 
-
-//		String student_id = session.getAttribute("rollno"); TODO
-			String student_id = "CB.EN.U4CSE17001";
+			// Part proof_file_part = getPart("file");
+            HttpSession session=request.getSession(false);
+            String rollno=(String)session.getAttribute("rollno");
+            // System.out.println(rollno);
 
 			Achievement_DAO dao;
 			RequestDispatcher dispatcher;
 
-			Achievement achv = new Achievement(student_id, title, proof_date_sql, achievement_type);
+			Achievement achv = new Achievement(rollno, achievement_type_id, title, proof_date_sql);
 			dao = new Achievement_DAO();
 			dao.addAchievement(achv);
 

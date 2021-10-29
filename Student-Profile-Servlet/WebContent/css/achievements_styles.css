@@ -4,3 +4,12 @@
     content: "*";
     color: red;
 }
+
+#achv_table {
+    counter-reset: achv-counter;
+}
+
+.counter-col::before {
+    counter-increment: achv-counter;
+    content: counter(achv-counter);
+}
