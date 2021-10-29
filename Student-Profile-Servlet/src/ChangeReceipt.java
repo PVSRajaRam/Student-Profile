@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import database_conn.Upload_Receipt_DAO;
 import database_conn.Fee_Payment_History_DAO;
-import models.PaymentsApproval;
 import models.FeeTxnHistory;
 
 /**
@@ -56,10 +55,8 @@ public class ChangeReceipt extends HttpServlet {
 		String mode = (String)request.getParameter("uploadtxnmode");
 		System.out.println(mode);
 		
-		approvalDAO.deleteReceipt(txnno, bank);
-		FeeTxnHistory txn=new FeeTxnHistory(txnno,bank,rollno,txndate,purp,amt,staff);
-		payDAO.insertTxn(txn);
-		List<PaymentsApproval> approvals = approvalDAO.selectAllApprovals();
+		approvalDAO.updateReceipt(staff,txnno, bank);
+		List<FeeTxnHistory> approvals = approvalDAO.selectAllApprovals();
 		request.setAttribute("approvals", approvals);	
         RequestDispatcher dispatcher;
         dispatcher = request.getRequestDispatcher("./jsp/financeadmin.jsp");

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-import models.PaymentsApproval;
+import models.FeeTxnHistory;
 
 
 public class Upload_Receipt_DAO {
@@ -16,11 +16,12 @@ public class Upload_Receipt_DAO {
     private String jdbcUsername = "root";
     private String jdbcPassword = "password";
 
-    private static final String INSERT_APPROVALS_SQL = "insert into Payments_To_Be_Approved(txn_number,bank,roll_number,txn_date,txn_purpose,txn_amount,payment_mode) " + " VALUES" +
-        " (?, ?, ?, ?, ?, ?, ?);";
-    private static final String SELECT_APPROVALS_BY_ROLL_NUMBER = "select * from Payments_To_Be_Approved where ROLL_NUMBER =?";
-    private static final String SELECT_ALL_APPROVALS = "select * from Payments_To_Be_Approved";
-    private static final String DELETE_APPROVALS_SQL = "delete from Payments_To_Be_Approved where txn_number = ? and bank = ?;";
+    private static final String INSERT_APPROVALS_SQL = "insert into Payment_history(txn_number,bank,roll_number,txn_date,txn_purpose,txn_amount,payment_mode,approved) " + " VALUES" +
+        " (?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String SELECT_APPROVALS_BY_ROLL_NUMBER = "select * from Payment_history where ROLL_NUMBER =? and approved=false;";
+    private static final String SELECT_ALL_APPROVALS = "select * from Payment_history where approved=false;";
+    private static final String UPDATE_APPROVALS_SQL = "UPDATE Payment_history set approved=true, staff=? where txn_number = ? and bank = ?;";
+    private static final String DELETE_APPROVALS_SQL = "delete from Payment_history where txn_number = ? and bank = ?;";
     
     public Upload_Receipt_DAO() {}
 
@@ -41,17 +42,18 @@ public class Upload_Receipt_DAO {
         return connection;
     }
 
-    public void insertApproval(PaymentsApproval appr) throws SQLException {
+    public void insertApproval(FeeTxnHistory txn) throws SQLException {
         System.out.println(INSERT_APPROVALS_SQL);
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_APPROVALS_SQL)) {
-            preparedStatement.setString(1, appr.getTxn_number());
-            preparedStatement.setString(2, appr.getBank());
-            preparedStatement.setString(3, appr.getRoll_number());
-            preparedStatement.setDate(4, appr.getTxn_date());
-            preparedStatement.setString(5, appr.getTxn_purpose());
-            preparedStatement.setFloat(6, appr.getTxn_amt());
-            preparedStatement.setString(7, appr.getPayment_mode());
+            preparedStatement.setString(1, txn.getTxn_number());
+            preparedStatement.setString(2, txn.getBank());
+            preparedStatement.setString(3, txn.getRoll_number());
+            preparedStatement.setDate(4, txn.getTxn_date());
+            preparedStatement.setString(5, txn.getTxn_purpose());
+            preparedStatement.setFloat(6, txn.getTxn_amt());
+            preparedStatement.setString(7, txn.getPayment_mode());
+            preparedStatement.setBoolean(8, false);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -59,8 +61,8 @@ public class Upload_Receipt_DAO {
         }
     }
 
-    public PaymentsApproval selectAprrovalByRollNumber(String roll_number) {
-    	PaymentsApproval appr = null;
+    public FeeTxnHistory selectAprrovalByRollNumber(String roll_number) {
+    	FeeTxnHistory txn = null;
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
@@ -72,26 +74,27 @@ public class Upload_Receipt_DAO {
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                appr = new PaymentsApproval(rs.getString(1),
+                txn = new FeeTxnHistory(rs.getString(1),
                 							rs.getString(2),
                 							rs.getString(3),
                 							rs.getDate(4),
                 							rs.getString(5),
                 							rs.getFloat(6),
-                							rs.getString(7));
+                							rs.getString(9),
+                							rs.getBoolean(11));
             }
                    
         } 
         catch (SQLException e) {
             printSQLException(e);
         }
-        return appr;
+        return txn;
     }
 
-    public List < PaymentsApproval > selectAllApprovals() {
+    public List < FeeTxnHistory > selectAllApprovals() {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
-        List < PaymentsApproval > approvals = new ArrayList < > ();
+        List < FeeTxnHistory > approvals = new ArrayList < > ();
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
 
@@ -103,13 +106,15 @@ public class Upload_Receipt_DAO {
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                approvals.add(new PaymentsApproval(rs.getString(1),
+                approvals.add(new FeeTxnHistory(rs.getString(1),
 						rs.getString(2),
 						rs.getString(3),
 						rs.getDate(4),
 						rs.getString(5),
 						rs.getFloat(6),
-						rs.getString(7)));
+						rs.getString(9),
+						rs.getBoolean(11)));
+               
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -118,17 +123,30 @@ public class Upload_Receipt_DAO {
     }
 
         
-    public boolean deleteReceipt(String txn_number, String bank) throws SQLException {
+    public boolean updateReceipt(String staff,String txn_number, String bank) throws SQLException {
         boolean rowDeleted;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_APPROVALS_SQL);) {
-            statement.setString(1, txn_number);
-            statement.setString(2, bank);
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_APPROVALS_SQL);) {
+            
+        	statement.setString(1, staff);
+            statement.setString(2, txn_number);
+            statement.setString(3, bank);
+            System.out.println(statement);
             rowDeleted = statement.executeUpdate() > 0;
         }
         return rowDeleted;
     }
 
-    
+    public boolean deleteReceipt(String txn_number, String bank) throws SQLException {
+        boolean rowDeleted;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_APPROVALS_SQL);) {
+            statement.setString(1, txn_number);
+            statement.setString(2, bank);
+            System.out.println(statement);
+            rowDeleted = statement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
+
 
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

@@ -16,9 +16,8 @@ public class Fee_Payment_History_DAO {
     private String jdbcUsername = "root";
     private String jdbcPassword = "password";
 
-    private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =?";
-    private static final String SELECT_ALL_TXNS_BY_ROLLNO = "select * from Payment_history where roll_number =?";
-    private static final String INSERT_TXN_HISTORY = "insert into Payment_history values(?,?,?,?,?,?,null,?);";
+    private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =? and approved=true;";
+    private static final String SELECT_ALL_TXNS_BY_ROLLNO = "select * from Payment_history where roll_number =? and approved=true;";
     
     public Fee_Payment_History_DAO() {}
 
@@ -37,25 +36,6 @@ public class Fee_Payment_History_DAO {
             e.printStackTrace();
         }
         return connection;
-    }
-
-    public void insertTxn(FeeTxnHistory txn) throws SQLException {
-        System.out.println(INSERT_TXN_HISTORY);
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TXN_HISTORY)) {
-            preparedStatement.setString(1, txn.getTxn_number());
-            preparedStatement.setString(2, txn.getBank());
-            preparedStatement.setString(3, txn.getRoll_number());
-            preparedStatement.setDate(4, txn.getTxn_date());
-            preparedStatement.setString(5, txn.getTxn_purpose());
-            preparedStatement.setFloat(6, txn.getTxn_amt());
-            
-            preparedStatement.setString(7, txn.getStaff());
-            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
     }
 
     public FeeTxnHistory selectTxnByTxnNo(String txnno) {

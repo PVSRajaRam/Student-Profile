@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database_conn.Upload_Receipt_DAO;
-import models.PaymentsApproval;
+import models.FeeTxnHistory;
 
 /**
  * Servlet implementation class UploadReceipt
@@ -33,7 +33,7 @@ public class UploadReceipt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<PaymentsApproval> approvals = approvalDAO.selectAllApprovals();
+		List<FeeTxnHistory> approvals = approvalDAO.selectAllApprovals();
 		request.setAttribute("approvals", approvals);	
         RequestDispatcher dispatcher;
         dispatcher = request.getRequestDispatcher("./jsp/uploadreceipts.jsp");

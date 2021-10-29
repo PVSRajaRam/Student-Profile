@@ -31,21 +31,12 @@ CREATE TABLE if not exists Payment_history (
     txn_amount float(10,2) NOT NULL,
     receipt_no int NULL,
     staff varchar(100) NULL,
+    payment_mode varchar(100) NOT NULL,
+    file_path varchar(200) NULL,
+    approved boolean NOT NULL,
     CONSTRAINT Payment_history_pk PRIMARY KEY (txn_number,bank)
 );
 
--- Table: Payments_To_Be_Approved
-CREATE TABLE if not exists Payments_To_Be_Approved (
-    txn_number varchar(100) NOT NULL,
-    bank varchar(100) NOT NULL,
-    roll_number varchar(16) NOT NULL,
-    txn_date date NOT NULL,
-    txn_purpose varchar(100) NOT NULL,
-    txn_amount float(10,2) NOT NULL,
-    payment_mode varchar(100) NOT NULL,
-    file_path varchar(200) NULL,
-    CONSTRAINT Payments_To_Be_Approved_pk PRIMARY KEY (bank,txn_number)
-);
 
 -- Table: Remaining_Fees
 CREATE TABLE if not exists Remaining_Fees (
@@ -53,13 +44,10 @@ CREATE TABLE if not exists Remaining_Fees (
     fee_arrears float(10,2) NOT NULL,
     tuition_fee_payable float(10,2) NOT NULL,
     caution_deposit_payable float(10,2) NOT NULL,
+    scholarship int NULL,
     CONSTRAINT Remaining_Fees_pk PRIMARY KEY (roll_number)
 );
 
--- foreign keys
--- Reference: Payments_To_Be_Approved_student (table: Payments_To_Be_Approved)
-ALTER TABLE Payments_To_Be_Approved ADD CONSTRAINT Payments_To_Be_Approved_student FOREIGN KEY Payments_To_Be_Approved_student (roll_number)
-    REFERENCES student (roll_number);
 
 -- Reference: Remaining_Fees_student (table: Remaining_Fees)
 ALTER TABLE Remaining_Fees ADD CONSTRAINT Remaining_Fees_student FOREIGN KEY Remaining_Fees_student (roll_number)
@@ -84,15 +72,12 @@ insert into student values('CB.EN.U4CSE17001','Arun','S','cb.en.u4cse17001@cb.st
 insert into student values('CB.EN.U4CSE17002','Anusha','J','cb.en.u4cse17002@cb.students.amrita.edu','1111133332');
 insert into student values('CB.EN.U4CSE17003','Bharat','R','cb.en.u4cse17003@cb.students.amrita.edu','1111133333');
 
-insert into Payment_history values('TX001','SBI','CB.EN.U4CSE17001','2017-07-11','Tution',150000,1,'Naren');
-insert into Payment_history values('TX002','Axis','CB.EN.U4CSE17001','2017-07-20','Mess',100000,1,'Naren');
-insert into Payment_history values('TX011','SBI','CB.EN.U4CSE17002','2017-07-14','Tution',300000,1,'Naren');
-insert into Payment_history values('TX012','Dhanalakshmi','CB.EN.U4CSE17002','2017-07-18','Mess',100000,1,'Naren');
-insert into Payment_history values('TX021','SBI','CB.EN.U4CSE17003','2017-07-08','Tution',150000,1,'Nitya');
-insert into Payment_history values('TX022','SBI','CB.EN.U4CSE17003','2017-07-21','Mess',100000,1,'Nitya');
-insert into Payment_history values('TX023','SBI','CB.EN.U4CSE17003','2017-11-11','Tution',150000,2,'Nitya');
-insert into Payment_history values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,2,'Nitya');
-
-insert into Payments_To_Be_Approved values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,'Cheque',null);
-insert into Payments_To_Be_Approved values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,'DD',null);
-select * from Payments_To_Be_Approved where roll_number='CB.EN.U4CSE17001';
+insert into Payment_history values('TX001','SBI','CB.EN.U4CSE17001','2017-07-11','Tution',150000,1,'Naren','Online',NULL,true);
+insert into Payment_history values('TX002','Axis','CB.EN.U4CSE17001','2017-07-20','Mess',100000,1,'Naren','Online',NULL,true);
+insert into Payment_history values('TX011','SBI','CB.EN.U4CSE17002','2017-07-14','Tution',300000,1,'Naren','Online',NULL,true);
+insert into Payment_history values('TX012','Dhanalakshmi','CB.EN.U4CSE17002','2017-07-18','Mess',100000,1,'Naren','Online',NULL,true);
+insert into Payment_history values('TX021','SBI','CB.EN.U4CSE17003','2017-07-08','Tution',150000,1,'Nitya','Online',NULL,true);
+insert into Payment_history values('TX022','SBI','CB.EN.U4CSE17003','2017-07-21','Mess',100000,1,'Nitya','Online',NULL,true);
+insert into Payment_history values('TX023','SBI','CB.EN.U4CSE17003','2017-11-11','Tution',150000,2,'Nitya','Online',NULL,true);
+insert into Payment_history values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,NULL,NULL,'Cheque',NULL,false);
+insert into Payment_history values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,NULL,NULL,'DD',NULL,false);

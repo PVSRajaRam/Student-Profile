@@ -119,7 +119,8 @@
                 
                 <div class="form-group row">
                     <div class="col-sm-10">
-                      <button type="submit" class="btn btn-success">Approve</button>
+                      <button type="submit" class="btn btn-success" style="float:left;">Approve</button>
+                      <button type="button" class="btn btn-danger" style="float:left; margin-left:5%;"><a id="denyref" href="./DeleteReceipt" style="text-decoration:none;color:white;">Deny</a></button>
                     </div>
                 </div>
               </form>
@@ -134,14 +135,20 @@
 		  if(tabrows[i].id.localeCompare(s.id)==0)
 			 {
 			  console.log(tabrows[i].children);
-			  document.getElementById('disp-txn-no').value=tabrows[i].getElementsByClassName('txnno')[0].innerHTML;
+			  var txnno=tabrows[i].getElementsByClassName('txnno')[0].innerHTML;
+			  var bank=tabrows[i].getElementsByClassName('bank')[0].innerHTML;
+			  document.getElementById('disp-txn-no').value=txnno;
 			  document.getElementById('disp-txn-date').value=tabrows[i].getElementsByClassName('txndate')[0].innerHTML;
 			  document.getElementById('disp-txn-roll').value=tabrows[i].getElementsByClassName('rollno')[0].innerHTML;
 			  document.getElementById('disp-txn-purpose').value=tabrows[i].getElementsByClassName('txnpurp')[0].innerHTML;
 			  document.getElementById('disp-txn-amount').value=tabrows[i].getElementsByClassName('amt')[0].innerHTML;
-			  document.getElementById('disp-txn-bank').value=tabrows[i].getElementsByClassName('bank')[0].innerHTML;
+			  document.getElementById('disp-txn-bank').value=bank;
 			  document.getElementById('disp-txn-mode').value=tabrows[i].getElementsByClassName('mode')[0].innerHTML;	  
-              document.getElementById('rem-fee').style.display="block";			 
+              document.getElementById('rem-fee').style.display="block";		
+              var query="./DeleteReceipt?" + "uploadtxnno=" + txnno + "&uploadtxnbank=" + bank;
+    
+              document.getElementById('denyref').href=query;
+              
 			 } 
 	  }
   }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database_conn.Upload_Receipt_DAO;
-import models.PaymentsApproval;
+import models.FeeTxnHistory;
 /**
  * Servlet implementation class InsertReceipt
  */
@@ -55,9 +55,9 @@ public class InsertReceipt extends HttpServlet {
 			System.out.println(bank);
 			String mode = (String)request.getParameter("uploadtxnmode");
 			System.out.println(mode);
-			PaymentsApproval appr = new PaymentsApproval(txnno,bank,rollno,txndate,purp,amt,mode);
+			FeeTxnHistory appr = new FeeTxnHistory(txnno,bank,rollno,txndate,purp,amt,mode,false);
 			approvalDAO.insertApproval(appr);
-			List<PaymentsApproval> approvals = approvalDAO.selectAllApprovals();
+			List<FeeTxnHistory> approvals = approvalDAO.selectAllApprovals();
 			request.setAttribute("approvals", approvals);	
 	        RequestDispatcher dispatcher;
 	        dispatcher = request.getRequestDispatcher("./jsp/uploadreceipts.jsp");

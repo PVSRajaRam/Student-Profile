@@ -3,6 +3,19 @@ package models;
 import java.sql.Date;
 
 public class FeeTxnHistory {
+	public FeeTxnHistory(String txn_number, String bank, String roll_number, Date txn_date, String txn_purpose,
+			float txn_amt, String payment_mode, boolean approved) {
+		super();
+		this.txn_number = txn_number;
+		this.bank = bank;
+		this.roll_number = roll_number;
+		this.txn_date = txn_date;
+		this.txn_purpose = txn_purpose;
+		this.txn_amt = txn_amt;
+		this.payment_mode = payment_mode;
+		this.approved = approved;
+	}
+
 	protected String txn_number;	
 	protected String bank;
 	protected String roll_number;
@@ -11,6 +24,9 @@ public class FeeTxnHistory {
 	protected float txn_amt;
 	protected int receipt_no;
 	protected String staff;
+	protected String payment_mode;
+	protected String file_path;
+	protected boolean approved;
 	
 	public FeeTxnHistory(String txn_number, String bank, String roll_number, Date txn_date, String txn_purpose,
 			float txn_amt, String staff) {
@@ -96,5 +112,29 @@ public class FeeTxnHistory {
 	}
 	public void setReceipt_no(int receipt_no) {
 		this.receipt_no = receipt_no;
+	}
+
+	public String getPayment_mode() {
+		return payment_mode;
+	}
+
+	public void setPayment_mode(String payment_mode) {
+		this.payment_mode = payment_mode;
+	}
+
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 }
