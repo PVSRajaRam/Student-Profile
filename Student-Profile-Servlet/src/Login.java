@@ -61,11 +61,17 @@ public class Login extends HttpServlet {
 		        	request.setAttribute("User", u);
 		        	HttpSession session=request.getSession();  
 		        	String rollno=loginDAO.selectRollNoFromEmail(em);
-		        	if(rollno.compareTo("")!=0)
+		        	session.setAttribute("email",em);
+		        	if(u.isAdmin()==true)
+		        	{
+		        		session.setAttribute("dept",u.getDept());
+		        		dispatcher = request.getRequestDispatcher("./jsp/admin.jsp");
+		        	}
+		        	else
+		        	{	
 		        		session.setAttribute("rollno",rollno);
-		        	
-			        session.setAttribute("email",em);
-		        	dispatcher = request.getRequestDispatcher("./jsp/index.jsp");
+		        		dispatcher = request.getRequestDispatcher("./jsp/index.jsp");
+		        	}
 		        }
 		        else {
 		        	request.setAttribute("Error", "No account found");

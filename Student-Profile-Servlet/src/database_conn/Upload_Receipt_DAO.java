@@ -8,19 +8,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-import models.FeeTxnHistory;
+import models.PaymentsApproval;
 
 
-public class Fee_Payment_History_DAO {
+public class Upload_Receipt_DAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/student_profile";
     private String jdbcUsername = "root";
     private String jdbcPassword = "password";
 
-    private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =?";
-    private static final String SELECT_ALL_TXNS_BY_ROLLNO = "select * from Payment_history where roll_number =?";
-    private static final String INSERT_TXN_HISTORY = "insert into Payment_history values(?,?,?,?,?,?,null,?);";
+    private static final String INSERT_APPROVALS_SQL = "insert into Payments_To_Be_Approved(txn_number,bank,roll_number,txn_date,txn_purpose,txn_amount,payment_mode) " + " VALUES" +
+        " (?, ?, ?, ?, ?, ?, ?);";
+    private static final String SELECT_APPROVALS_BY_ROLL_NUMBER = "select * from Payments_To_Be_Approved where ROLL_NUMBER =?";
+    private static final String SELECT_ALL_APPROVALS = "select * from Payments_To_Be_Approved";
+    private static final String DELETE_APPROVALS_SQL = "delete from Payments_To_Be_Approved where txn_number = ? and bank = ?;";
     
-    public Fee_Payment_History_DAO() {}
+    public Upload_Receipt_DAO() {}
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -39,18 +41,17 @@ public class Fee_Payment_History_DAO {
         return connection;
     }
 
-    public void insertTxn(FeeTxnHistory txn) throws SQLException {
-        System.out.println(INSERT_TXN_HISTORY);
+    public void insertApproval(PaymentsApproval appr) throws SQLException {
+        System.out.println(INSERT_APPROVALS_SQL);
         // try-with-resource statement will auto close the connection.
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TXN_HISTORY)) {
-            preparedStatement.setString(1, txn.getTxn_number());
-            preparedStatement.setString(2, txn.getBank());
-            preparedStatement.setString(3, txn.getRoll_number());
-            preparedStatement.setDate(4, txn.getTxn_date());
-            preparedStatement.setString(5, txn.getTxn_purpose());
-            preparedStatement.setFloat(6, txn.getTxn_amt());
-            
-            preparedStatement.setString(7, txn.getStaff());
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_APPROVALS_SQL)) {
+            preparedStatement.setString(1, appr.getTxn_number());
+            preparedStatement.setString(2, appr.getBank());
+            preparedStatement.setString(3, appr.getRoll_number());
+            preparedStatement.setDate(4, appr.getTxn_date());
+            preparedStatement.setString(5, appr.getTxn_purpose());
+            preparedStatement.setFloat(6, appr.getTxn_amt());
+            preparedStatement.setString(7, appr.getPayment_mode());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -58,66 +59,76 @@ public class Fee_Payment_History_DAO {
         }
     }
 
-    public FeeTxnHistory selectTxnByTxnNo(String txnno) {
-        FeeTxnHistory txn = null;
+    public PaymentsApproval selectAprrovalByRollNumber(String roll_number) {
+    	PaymentsApproval appr = null;
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TXN_BY_TXNNO);) {
-            preparedStatement.setString(1, txnno);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_APPROVALS_BY_ROLL_NUMBER);) {
+            preparedStatement.setString(1, roll_number);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                txn=new FeeTxnHistory(rs.getString(1),
-                					  rs.getString(2),
-                					  rs.getString(3),
-                					  rs.getDate(4),
-                					  rs.getString(5),
-                					  rs.getFloat(6),
-                					  rs.getInt(7),
-                					  rs.getString(8));
+                appr = new PaymentsApproval(rs.getString(1),
+                							rs.getString(2),
+                							rs.getString(3),
+                							rs.getDate(4),
+                							rs.getString(5),
+                							rs.getFloat(6),
+                							rs.getString(7));
             }
-               
-            } 
+                   
+        } 
         catch (SQLException e) {
             printSQLException(e);
         }
-        return txn;
+        return appr;
     }
 
-    public List < FeeTxnHistory > selectAllTxnByRollNumber(String rollno) {
+    public List < PaymentsApproval > selectAllApprovals() {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
-        List < FeeTxnHistory > txns = new ArrayList < > ();
+        List < PaymentsApproval > approvals = new ArrayList < > ();
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
 
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_TXNS_BY_ROLLNO);) {
-        	preparedStatement.setString(1, rollno);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APPROVALS);) {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                txns.add(new FeeTxnHistory(rs.getString(1),
-                						   rs.getString(2),
-                						   rs.getString(3),
-                						   rs.getDate(4),
-                						   rs.getString(5),
-                						   rs.getFloat(6),
-                						   rs.getInt(7),
-                						   rs.getString(8)));
+                approvals.add(new PaymentsApproval(rs.getString(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getDate(4),
+						rs.getString(5),
+						rs.getFloat(6),
+						rs.getString(7)));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-        return txns;
-    }    
+        return approvals;
+    }
+
+        
+    public boolean deleteReceipt(String txn_number, String bank) throws SQLException {
+        boolean rowDeleted;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_APPROVALS_SQL);) {
+            statement.setString(1, txn_number);
+            statement.setString(2, bank);
+            rowDeleted = statement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
+
+    
 
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

@@ -30,3 +30,9 @@ function changeFrame(i){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/attendance_main.html"
     }
 }
+
+function changeAdminFrame(i){
+	if(i==1){
+        document.getElementById("main-frame").src="/Student-Profile-Servlet/FinanceAdmin";
+    }
+}

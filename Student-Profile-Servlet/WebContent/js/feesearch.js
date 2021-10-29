@@ -1,6 +1,6 @@
 
 var sort=0;
-function searchTable(obj){
+function searchTable(obj,type=0){
     var query=obj.value;
     tabrows=document.getElementById('histTable').rows;
     document.getElementById('no-result').style.display="none";
@@ -10,13 +10,24 @@ function searchTable(obj){
             txnnoDOM=tabrows[i].getElementsByClassName('txnno');
             if(txnnoDOM.length!=0){
                 console.log(txnnoDOM);
-                if(txnnoDOM[0].innerHTML.startsWith(query)){
-                    tabrows[i].style.display="";
-                    f=1;
-                }
-                else{
-                    tabrows[i].style.display="none";
-                }
+                if(type==0){
+	                if(txnnoDOM[0].innerHTML.startsWith(query)){
+	                    tabrows[i].style.display="";
+	                    f=1;
+	                }
+	                else{
+	                    tabrows[i].style.display="none";
+	                }
+				}
+				else{
+					if(txnnoDOM[0].children[0].value.startsWith(query)){
+	                    tabrows[i].style.display="";
+	                    f=1;
+	                }
+	                else{
+	                    tabrows[i].style.display="none";
+	                }	
+				}
             }
         }
 

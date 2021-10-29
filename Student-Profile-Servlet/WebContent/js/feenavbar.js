@@ -14,7 +14,7 @@ function changeNav(obj){
     }
     else if(i.localeCompare("3")==0){
         document.getElementById("navscroller").style.marginLeft="73.5%";
-        document.getElementById("fee-frame").src="uploadreceipts.html";
+        document.getElementById("fee-frame").src="/Student-Profile-Servlet/UploadReceipt";
     
     }
 }
