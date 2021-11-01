@@ -18,7 +18,7 @@ function changeFrame(i){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/courses.html"
     }
     else if(i==7){
-        document.getElementById("main-frame").src="/Student-Profile-Servlet/html/profile-main.html"
+        document.getElementById("main-frame").src="/Student-Profile-Servlet/jsp/profile-main.jsp"
     }
     else if(i==8){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/librarymain.html"

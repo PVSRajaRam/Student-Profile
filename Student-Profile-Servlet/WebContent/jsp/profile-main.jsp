@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../js/profile-navbar.js"></script>
-    <link rel="stylesheet" href="../css/mainstyles.css">
-    <link rel="stylesheet" href="../css/profile-styles.css">
+    <script src="${pageContext.request.contextPath}/js/profile-navbar.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile-styles.css">
 
 </head>
 <body style="overflow:hidden;" onload="defaultFrameSrc()">
@@ -30,7 +33,7 @@
 
         </div>
     </div>
-    <iframe id="profile-frame" src="./profile-summary.html" style="height: 84%; width:100%;overflow:hidden"></iframe>
+    <iframe id="profile-frame" src="./Student-Profile-Servlet/PersonalDetails" style="height: 84%; width:100%;overflow:hidden"></iframe>
    
 </body>
 </html>
