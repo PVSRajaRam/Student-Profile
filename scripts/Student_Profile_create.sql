@@ -132,3 +132,17 @@ VALUES
 
 SELECT * FROM achievement;
 
+CREATE TABLE `bonafide` (
+   `applied_date` varchar(25) DEFAULT NULL,
+   `purpose` varchar(200) DEFAULT NULL,
+   `Status` varchar(250) DEFAULT NULL,
+   `approved_staff` varchar(20) DEFAULT NULL,
+   `approved_time` varchar(45) DEFAULT NULL,
+   `prepared_staff` varchar(45) DEFAULT NULL,
+    `prepared_time` varchar(45) DEFAULT NULL,
+   `action` varchar(45) DEFAULT NULL
+);
+
+drop table bonafide;
+
+select * from bonafide;

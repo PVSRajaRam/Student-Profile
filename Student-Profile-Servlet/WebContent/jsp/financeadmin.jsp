@@ -23,10 +23,11 @@
 </head>
 <body>
    <div id="nav-fee-table">
-        <!-- <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button> -->
+        <button style="border: 0px;background-color:transparent;float:left; margin-left:10%;" data-toggle="modal" data-target="#filterModal" ><img id="filter-icon" src="${pageContext.request.contextPath}/images/filter.png" style="margin-left:0%" width="30px" height="30px"/></button>
+        <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
         <div id="search-bar" style="background-color: #fcaf03;">
             
-          <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this,1)">
+          <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
             
             <div id="search-icon-box">
                 <img src="${pageContext.request.contextPath}/images/search-icon.png" width="30px" height="30px"/>
@@ -124,7 +125,48 @@
                     </div>
                 </div>
               </form>
-
+  </div>
+  <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table" id="filterTable" style="width: 81.8%;">
+            
+            <tbody>
+              <tr>
+                <td class="filtersel"><input class="form-check-input" type="checkbox" value="" id="sel" ></td>
+                <td class="filtername">Year</td>
+                <td class="filterval"><input class="form-check-input" type="text" value="" id="inputfilter" style="width: 30%;;"></td>
+              </tr>
+              <tr>
+                <td class="filtersel"><input class="form-check-input" type="checkbox" value="" id="sel" ></td>
+                <td class="filtername">Purpose</td>
+                <td class="filterval">
+                  <select class="form-select" id="inputfilter">
+                    <option value="noopt" selected>Select</option>
+                    <option value="Tution">Tution</option>
+                    <option value="Mess">Mess</option>
+                    <option value="Bus">Bus</option>
+                  </select>
+                </td>
+ 
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="removeFilter()">Remove Filters</button>
+          <button type="button" class="btn btn-warning" style="background-color: #fcaf03;" onclick="checkFilter()">Apply</button>
+        </div>
+      </div>
+    </div>
   </div>
   <script>
   function expand(s){
