@@ -275,3 +275,16 @@ VALUES
 ("CB.EN.U4CSE17003", 3, "Cricket", "2001-08-01"),
 ("CB.EN.U4CSE17001", 1, "Arduino Project", "2065-11-21"),
 ("CB.EN.U4CSE17001", 3, "Chess", "2004-04-01");
+
+
+CREATE TABLE `bonafide` (
+   `applied_date` varchar(25) DEFAULT NULL,
+   `purpose` varchar(200) DEFAULT NULL,
+   `Status` varchar(250) DEFAULT NULL,
+   `approved_staff` varchar(20) DEFAULT NULL,
+   `approved_time` varchar(45) DEFAULT NULL,
+   `prepared_staff` varchar(45) DEFAULT NULL,
+    `prepared_time` varchar(45) DEFAULT NULL,
+   `action` varchar(45) DEFAULT NULL
+);
+

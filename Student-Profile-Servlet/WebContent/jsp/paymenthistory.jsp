@@ -76,14 +76,7 @@
       </c:forEach>
     </tbody>
   </table>
-  <div id="rem-fee">
-      <strong>
-        <h5>Remaining Fees:</h5><br>
-        <h6>Fee Arrears               ----</h6>
-        <h6>Tution Fee Payable        ----</h6>
-        <h6>Caution Deposit Payable   ----</h6>
-      </strong>
-  </div>
+  
 
   <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

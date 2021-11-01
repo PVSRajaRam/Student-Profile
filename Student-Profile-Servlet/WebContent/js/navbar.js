@@ -35,4 +35,8 @@ function changeAdminFrame(i){
 	if(i==1){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/FinanceAdmin";
     }
+	else if(i==2)
+	{
+		document.getElementById("main-frame").src="/Student-Profile-Servlet/bonafideservlet";		
+	}
 }
