@@ -67,7 +67,8 @@ public class bonafideservlet extends HttpServlet {
 		
 		try {
 			Bonafidedao.bonafidedetalis(bonafide);	
-			doGet(request,response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./jsp/sucess.jsp");
+			dispatcher.forward(request, response);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

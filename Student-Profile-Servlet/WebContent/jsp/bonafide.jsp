@@ -20,9 +20,6 @@
                 <legend>
                     <h1 class="h4">Bonafide Certificate Detalis</h1>
                 </legend>
-
-				<label for="reqno" class="form-label">Request Number</label>
-                <input type="text" class="form-control" name="applieddate">
                 
                 <label for="applieddate" class="form-label">Applied Date</label>
                 <input type="date" class="form-control" name="applieddate">
