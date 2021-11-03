@@ -27,162 +27,103 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body>
-    <div id="nav-fee-table">
-        <!-- <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button> -->
-        <div id="search-bar" style="background-color: #fcaf03;">
+    <h2 class="btn btn-warning custom" id="section-bar">Achievements</h2>
+    <div class="container-fluid" style="margin-top: 5%;">
+        <div class="row justify-content-center">
+            <div class="col-12 table-responsive">
+                <c:choose>
+                    <c:when test="${empty achievements}">
+                        <div class="alert alert-info" role="alert">
+                            No Achievement Data
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <table class="table table-hover" id="achv_table">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Student</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Date</th>
+                                    <!-- <th scope="col">Proof</th> -->
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Acknowledge</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-            <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no"
-                oninput="searchTable(this,1)">
+                                <c:forEach var="achv" items="${achievements}">
+                                    <tr>
+                                        <td class="counter-col"></td>
+                                        <td>
+                                            <c:out value="${achv.student_id}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${achv.title}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${achv.achievement_type}" />
+                                        </td>
+                                        <td>
+                                            ${achv.proof_date}
+                                        </td>
 
-            <div id="search-icon-box">
-                <img src="${pageContext.request.contextPath}/images/search-icon.png" width="30px" height="30px" />
+                                        <!-- <td><a class="btn btn-labeled btn-info btn-sm" download
+                                                href="${achv.proof_file}">
+                                                <i class="bi bi-file-earmark-arrow-down"></i> Proof
+                                            </a>
+                                        </td> -->
+                                        <c:choose>
+                                            <c:when test="${achv.verified==0}">
+                                                <td><span class="badge rounded-pill bg-secondary">Not Verified</span>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${achv.verified==1}">
+                                                <td><span class="badge rounded-pill bg-success">Verified <i
+                                                            class="bi bi-patch-check"></i></span></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><span class="badge rounded-pill bg-danger">Rejected <i
+                                                            class="bi bi-x-octagon"></i></span></td>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <td>
+                                            <form method="get" action="./AchievementAdmin">
+                                                <button type="submit" class="btn btn-labeled btn-info btn-sm">
+                                                    <i class="bi bi-check"></i> Accept
+                                                </button>
+                                                <input type="hidden" name="achievement_to_acc" value="${achv.id}">
+                                            </form>
+                                            <form method="get" action="./AchievementAdmin">
+                                                <button type="submit" class="btn btn-labeled btn-warning btn-sm">
+                                                    <i class="bi bi-x"></i> Reject
+                                                </button>
+                                                <input type="hidden" name="achievement_to_rej" value="${achv.id}">
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            <form method="get" action="./AchievementAdmin">
+                                                <button type="submit" class="btn btn-labeled btn-danger btn-sm">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                                <input type="hidden" name="achievement_to_del" value="${achv.id}">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
-            <!--<div class="form-group has-search bg-warning">
-          <span class="bi bi-search search-form-control-feedback"></span>
-          <input type="text" class="search-form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
-        </div>-->
         </div>
     </div>
-    <table class="table" id="histTable" style="width: 97%;margin-left:1%;">
-        <thead>
-            <tr>
-                <th scope="col">DD/Txn No</th>
-                <th scope="col">DD/Txn Date </th>
-                <th scope="col">Roll Number </th>
-                <th scope="col">Purpose</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Bank</th>
-                <th scope="col">Payment Mode</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="no-result" style="display: none;">
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <c:forEach var="appr" items="${approvals}">
-
-                <tr id="<c:out value='${appr.txn_number}' />">
-                    <td class="txnno">
-                        <c:out value='${appr.txn_number}' />
-                    </td>
-                    <td class="txndate">
-                        <c:out value='${appr.txn_date}' />
-                    </td>
-                    <td class="rollno">
-                        <c:out value='${appr.roll_number}' />
-                    </td>
-                    <td class="txnpurp">
-                        <c:out value='${appr.txn_purpose}' />
-                    </td>
-                    <td class="amt">
-                        <c:out value='${appr.txn_amt}' />
-                    </td>
-                    <td class="bank">
-                        <c:out value='${appr.bank}' />
-                    </td>
-                    <td class="mode">
-                        <c:out value='${appr.payment_mode}' />
-                    </td>
-                    <td><button type="button" id="<c:out value='${appr.txn_number}' />" class="btn btn-success"
-                            onclick="expand(this)">Expand</button></td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <div id="rem-fee" style="display:none;">
-        <form action="./ChangeReceipt" method="post">
-            <div class="form-group row">
-                <label for="disp-txn-no" class="col-sm-2 col-form-label">Txn No</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-no" name="uploadtxnno" readonly>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-date" class="col-sm-2 col-form-label">Txn Date</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control uploadcontrol" id="disp-txn-date" name="uploadtxndate"
-                        required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-roll" class="col-sm-2 col-form-label">Roll Number</label>
-                <input type="text" class="form-control uploadcontrol" id="disp-txn-roll" name="uploadrollno" required>
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-purpose" class="col-sm-2 col-form-label">Purpose</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-purpose" name="uploadtxnpurpose"
-                        required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-amount" class="col-sm-2 col-form-label">Amount</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control uploadcontrol" id="disp-txn-amount" name="uploadtxnamount"
-                        required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-bank" class="col-sm-2 col-form-label">Bank</label>
-                <input type="text" class="form-control uploadcontrol" id="disp-txn-bank" name="uploadtxnbank" required>
-
-            </div>
-            <div class="form-group row">
-                <label for="disp-txn-mode" class="col-sm-2 col-form-label">Payment <br>Mode</label>
-                <input type="text" class="form-control uploadcontrol" id="disp-txn-mode" name="uploadtxnmode" required>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-success" style="float:left;">Approve</button>
-                    <button type="button" class="btn btn-danger" style="float:left; margin-left:5%;"><a id="denyref"
-                            href="./DeleteReceipt" style="text-decoration:none;color:white;">Deny</a></button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-    <script>
-        function expand(s) {
-
-            tabrows = document.getElementById('histTable').rows;
-            for (i = 0; i < tabrows.length; i++) {
-                console.log(tabrows[i].id)
-                if (tabrows[i].id.localeCompare(s.id) == 0) {
-                    console.log(tabrows[i].children);
-                    var txnno = tabrows[i].getElementsByClassName('txnno')[0].innerHTML;
-                    var bank = tabrows[i].getElementsByClassName('bank')[0].innerHTML;
-                    document.getElementById('disp-txn-no').value = txnno;
-                    document.getElementById('disp-txn-date').value = tabrows[i].getElementsByClassName('txndate')[0]
-                        .innerHTML;
-                    document.getElementById('disp-txn-roll').value = tabrows[i].getElementsByClassName('rollno')[0]
-                        .innerHTML;
-                    document.getElementById('disp-txn-purpose').value = tabrows[i].getElementsByClassName('txnpurp')[0]
-                        .innerHTML;
-                    document.getElementById('disp-txn-amount').value = tabrows[i].getElementsByClassName('amt')[0]
-                        .innerHTML;
-                    document.getElementById('disp-txn-bank').value = bank;
-                    document.getElementById('disp-txn-mode').value = tabrows[i].getElementsByClassName('mode')[0]
-                        .innerHTML;
-                    document.getElementById('rem-fee').style.display = "block";
-                    var query = "./DeleteReceipt?" + "uploadtxnno=" + txnno + "&uploadtxnbank=" + bank;
-
-                    document.getElementById('denyref').href = query;
-
-                }
-            }
-        }
-
-    </script>
 
 </body>
 

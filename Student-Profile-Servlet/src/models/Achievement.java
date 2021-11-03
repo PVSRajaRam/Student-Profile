@@ -69,6 +69,17 @@ public class Achievement {
 		this.verified = verified;
 	}
 
+    // public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date, int verified, String student_id) {
+	// 	super();
+	// 	this.id = id;
+	// 	this.student_id = student_id;
+	// 	this.achievement_type = achievement_type;
+	// 	this.title = title;
+	// 	this.proof_date = proof_date;
+	// 	this.verified = verified;
+	// 	this.student_id = student_id;
+	// }
+
 	public int getId() {
 		return id;
 	}

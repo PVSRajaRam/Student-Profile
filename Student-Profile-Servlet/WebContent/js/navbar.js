@@ -39,4 +39,8 @@ function changeAdminFrame(i){
 	{
 		document.getElementById("main-frame").src="/Student-Profile-Servlet/bonafideservlet";		
 	}
+    else if(i==3)
+	{
+		document.getElementById("main-frame").src="/Student-Profile-Servlet/AchievementAdmin";		
+	}
 }
