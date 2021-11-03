@@ -47,7 +47,7 @@ public class Achievement_DAO {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date " +
+			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date, A.verified " +
 					        "FROM achievement A, achievement_types B " +
                             "WHERE A.achievement_type = B.achievement_type_id AND A.student_id = ? " +
                             "ORDER BY A.proof_date DESC; ";
@@ -61,9 +61,10 @@ public class Achievement_DAO {
 				String achievement_type = myRs.getString("achievement_type_description");
 				String title = myRs.getString("title");
 				Date proof_date = myRs.getDate("proof_date");
+				int verified = myRs.getInt("verified");
                 // java.sql.Blob proof_file = myRs.getBlob("proof_file");
 
-				Achievement achievement = new Achievement(id, rollno, achievement_type, title, proof_date );
+				Achievement achievement = new Achievement(id, rollno, achievement_type, title, proof_date, verified);
 				achievements.add(achievement);
                 System.out.println(achievement);
 			}

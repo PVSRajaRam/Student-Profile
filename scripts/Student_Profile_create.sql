@@ -239,7 +239,7 @@ CREATE TABLE achievement (
     title varchar(100) NOT NULL,
     proof_date date NOT NULL,
     proof_file blob NULL,
-    verified bit DEFAULT 0,
+    verified int DEFAULT 0,
     CONSTRAINT achievement_pk PRIMARY KEY (achievement_id)
 );
 
@@ -268,13 +268,15 @@ VALUES
 ("Co-Curricular"),
 ("Sports");
 
-INSERT INTO achievement (student_id, achievement_type, title, proof_date)
+SELECT * FROM achievement_types;
+
+INSERT INTO achievement (student_id, achievement_type, title, proof_date, verified)
 VALUES
-("CB.EN.U4CSE17001", 1, "Published Paper", "2021-12-01"),
-("CB.EN.U4CSE17002", 2, "CodeChef", "2021-11-27"),
-("CB.EN.U4CSE17003", 3, "Cricket", "2001-08-01"),
-("CB.EN.U4CSE17001", 1, "Arduino Project", "2065-11-21"),
-("CB.EN.U4CSE17001", 3, "Chess", "2004-04-01");
+("CB.EN.U4CSE17001", 1, "Published Paper", "2021-12-01", 0),
+("CB.EN.U4CSE17002", 2, "CodeChef", "2021-11-27", 1),
+("CB.EN.U4CSE17003", 3, "Cricket", "2001-08-01", 1),
+("CB.EN.U4CSE17001", 1, "Arduino Project", "2065-11-21", 1),
+("CB.EN.U4CSE17001", 3, "Chess", "2004-04-01", -1);
 
 
 CREATE TABLE `bonafide` (

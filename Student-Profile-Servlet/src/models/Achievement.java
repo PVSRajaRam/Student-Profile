@@ -4,7 +4,7 @@ import java.sql.Blob;
 import java.util.Date;
 
 public class Achievement {
-    protected int id, achievement_type_id;
+    protected int id, achievement_type_id, verified;
     protected String student_id, achievement_type, title;
     protected Date proof_date;
     protected Blob proof_file;
@@ -19,6 +19,14 @@ public class Achievement {
 
 	public Blob getProof_file() {
 		return proof_file;
+	}
+
+	public int getVerified() {
+		return verified;
+	}
+
+	public void setVerified(int verified) {
+		this.verified = verified;
 	}
 
 	public void setProof_file(Blob proof_file) {
@@ -37,9 +45,9 @@ public class Achievement {
 
 	@Override
 	public String toString() {
-		return "Achievement [id=" + id + ", achievement_type_id=" + achievement_type_id + ", student_id=" + student_id
-				+ ", achievement_type=" + achievement_type + ", title=" + title + ", proof_date=" + proof_date
-				+ ", proof_file=" + proof_file + "]";
+		return "Achievement [id=" + id + ", achievement_type_id=" + achievement_type_id + ", verified=" + verified
+				+ ", student_id=" + student_id + ", achievement_type=" + achievement_type + ", title=" + title
+				+ ", proof_date=" + proof_date + ", proof_file=" + proof_file + "]";
 	}
 
 	public Achievement(String student_id, int achievement_type_id, String title,
@@ -51,13 +59,14 @@ public class Achievement {
 		this.proof_date = proof_date;
 	}
 
-	public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date) {
+	public Achievement(int id, String student_id, String achievement_type, String title, Date proof_date, int verified) {
 		super();
 		this.id = id;
 		this.student_id = student_id;
 		this.achievement_type = achievement_type;
 		this.title = title;
 		this.proof_date = proof_date;
+		this.verified = verified;
 	}
 
 	public int getId() {

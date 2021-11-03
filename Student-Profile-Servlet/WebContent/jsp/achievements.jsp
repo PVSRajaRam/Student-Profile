@@ -96,8 +96,24 @@
                                                 <i class="bi bi-file-earmark-arrow-down"></i> Proof
                                             </a>
                                         </td> -->
+                                        <c:choose>
+                                            <c:when test="${achv.verified==0}">
+                                                <td><span class="badge rounded-pill bg-secondary">Not Verified</span>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${achv.verified==1}">
+                                                <td><span class="badge rounded-pill bg-success">Verified <i
+                                                            class="bi bi-patch-check"></i></span></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><span class="badge rounded-pill bg-danger">Rejected <i
+                                                            class="bi bi-x-octagon"></i></span></td>
+                                            </c:otherwise>
 
-                                        <td><span class="badge rounded-pill bg-secondary">Not Verified</span></td>
+
+                                        </c:choose>
+
+
                                         <!-- <td><button type="button" class="btn btn-labeled btn-info btn-sm">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </button>
@@ -141,7 +157,7 @@
                     </select>
 
                     <label for="achievement_date" class="form-label required-field">Date</label>
-                    <input type="date" class="form-control" id="achievement_date" name="achievement_date">
+                    <input type="date" class="form-control" id="achievement_date" name="achievement_date" required>
 
                     <!-- <div class="">
                         <label for="formFile" class="form-label">Document</label>
