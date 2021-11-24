@@ -37,7 +37,7 @@ public class Courses_DAO {
         return connection;
     }
 
-    public List<Course> getCourses(int semester, int dept_fk) throws Exception {
+    public List<Course> getCourses(String rollno, int semester, int dept_fk) throws Exception {
         List<Course> courses = new ArrayList<>();
 
         Connection myConn = null;
@@ -48,16 +48,10 @@ public class Courses_DAO {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-            String sql = "SELECT A.courses_id, A.course_code, A.course_name, A.credits, B.dept_name "
-                    + "FROM courses A, department B "
+            String sql = "SELECT A.courses_id, A.course_code, A.course_name, A.credits, B.dept_name, C.verified "
+                    + "FROM courses A, department B, courses_enroll "
                     + "WHERE A.semester = ? AND A.dept_fk = ? AND A.dept_fk = B.dept_id "
                     + "ORDER BY A.courses_id ASC; ";
-
-            // String sql = "SELECT A.courses_id, A.course_code, A.course_name, A.credits,
-            // B.dept_name "
-            // + "FROM courses A, department B "
-            // + "WHERE A.semester = 2 AND A.dept_fk = 1 "
-            // + "ORDER BY A.courses_id ASC;";
 
             myStmt = myConn.prepareStatement(sql);
             myStmt.setInt(1, semester);

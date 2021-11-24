@@ -67,6 +67,7 @@
                                     <th scope="col">Course Code</th>
                                     <th scope="col">Course Name</th>
                                     <th scope="col">Credits</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,6 +77,20 @@
                                         <td>${itr.course_code}</td>
                                         <td>${itr.course_name}</td>
                                         <td><span class="badge rounded-pill bg-secondary">${itr.credits}</span></td>
+                                        <c:choose>
+                                            <c:when test="${itr.verified==0}">
+                                                <td><span class="badge rounded-pill bg-secondary">Waiting</span>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${itr.verified==1}">
+                                                <td><span class="badge rounded-pill bg-success">Accepted <i
+                                                            class="bi bi-patch-check"></i></span></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><span class="badge rounded-pill bg-danger">Rejected <i
+                                                            class="bi bi-x-octagon"></i></span></td>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </tr>
                                 </c:forEach>
                             </tbody>
