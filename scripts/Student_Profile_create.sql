@@ -161,12 +161,11 @@ CREATE TABLE if not exists Payment_history (
 -- Table: Remaining_Fees
 CREATE TABLE if not exists Remaining_Fees (
     roll_number varchar(16) NOT NULL,
-    fee_arrears float(10,2) NOT NULL,
     tuition_fee_payable float(10,2) NOT NULL,
-    caution_deposit_payable float(10,2) NOT NULL,
     scholarship int NULL,
     CONSTRAINT Remaining_Fees_pk PRIMARY KEY (roll_number)
 );
+select * from Remaining_Fees;
 
 -- Reference: academic_history_student (table: academic_history)
 ALTER TABLE academic_history ADD CONSTRAINT academic_history_student FOREIGN KEY academic_history_student (roll_number)
@@ -220,12 +219,12 @@ insert into student values('CB.EN.U4CSE17003','Bharat','R','cb.en.u4cse17003@cb.
 insert into enrollment values('CB.EN.U4CSE17001','1334512345', 'Coimbatore', 'B.Tech.','Computer Science', 2017,'A',4,7,'Mr. Kumar S','9999834567', '2017-06-01', 'Enrolled','AEEE','Tamil Nadu','Merit','AmritaVidhya 50%');
 insert into enrollment values('CB.EN.U4CSE17002','1334512346', 'Coimbatore', 'B.Tech.','Computer Science', 2017,'A',4,7,'Mr. Kumar S','9999834567', '2017-06-01', 'Enrolled','12 Boards','Tamil Nadu','Management',null);
 
-insert into Dayscholar values('CB.EN.U4CSE17001', 'TVS Nagar', 'Avila Convent');
+insert into dayscholar values('CB.EN.U4CSE17001', 'TVS Nagar', 'Avila Convent');
 
-insert into Hostelite values('CB.EN.U4CSE17002', 'Yagnalvika Bhavan', 'A1', 248, True);
+insert into hostelite values('CB.EN.U4CSE17002', 'Yagnalvika Bhavan', 'A1', 248, True);
 
-insert into Health values('CB.EN.U4CSE17001', 'O+', 'Peanut allergy', null);
-insert into Health values('CB.EN.U4CSE17002', 'A1+', null, 'Pending Covid-19 Vaccination');
+insert into health values('CB.EN.U4CSE17001', 'O+', 'Peanut allergy', null);
+insert into health values('CB.EN.U4CSE17002', 'A1+', null, 'Pending Covid-19 Vaccination');
 
 insert into parent values('CB.EN.U4CSE17001', 'Father', 'B Dhanasekaran', '9935728467', 'dhanasekaran@yahoo.co.in','Bank Chief Manager', '92, H.J.S. Chambers, 1st Floor, Richmond Road, Bangalore 560025, Karnataka, India', '12',True);
 insert into parent values('CB.EN.U4CSE17001', 'Mother', 'N Nagarathinam', '9635723467', 'nagarathinam@yahoo.co.in','Home Maker', null, 0, False);
@@ -249,6 +248,8 @@ insert into Payment_history values('TX023','SBI','CB.EN.U4CSE17003','2017-11-11'
 insert into Payment_history values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','2018-07-11','Tution',150000,NULL,NULL,'Cheque',NULL,false);
 insert into Payment_history values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,NULL,NULL,'DD',NULL,false);
 
+insert into Remaining_Fees values('CB.EN.U4CSE17001',300000,0);
+insert into Remaining_Fees values('CB.EN.U4CSE17002',150000,50);
 
 -- Table: achievement
 CREATE TABLE achievement (
@@ -362,3 +363,32 @@ VALUES
 ("CB.EN.U4CSE17001", 6, -1),
 ("CB.EN.U4CSE17001", 2, 1),
 ("CB.EN.U4CSE17001", 3, 0);
+
+
+delimiter //
+
+CREATE TRIGGER feeupdate AFTER UPDATE ON Payment_history
+  FOR EACH ROW
+  BEGIN
+	DECLARE totalfee float;
+    declare nyear int;
+    declare remtution float;
+    IF ((NEW.approved = true) and (NEW.txn_purpose ='Tution'))
+    
+    THEN
+		set nyear = year(new.txn_date);
+		SET totalfee = (SELECT sum(txn_amount) FROM (select * from Payment_history where roll_number=NEW.roll_number and txn_purpose=NEW.txn_purpose and year(txn_date)=nyear) as Specifictable); 
+		set remtution = (select tuition_fee_payable from Remaining_Fees where roll_number=NEW.roll_number);
+        IF (totalfee <= remtution)
+        then
+			UPDATE Remaining_Fees SET tuition_fee_payable = tuition_fee_payable - totalfee  WHERE roll_number = NEW.roll_number;
+		END IF;
+    END IF;
+ END;
+//
+
+-- select * from Remaining_Fees;
+-- drop trigger feeupdate;
+-- drop table Remaining_Fees;
+-- update Remaining_Fees set tuition_fee_payable=300000 where roll_number='CB.EN.U4CSE17001';
+-- update Payment_history set approved=false where roll_number='CB.EN.U4CSE17001' AND TXN_PURPOSE='Tution' and year(txn_date)=2018;
