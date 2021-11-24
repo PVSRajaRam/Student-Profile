@@ -68,16 +68,6 @@
 	<url-pattern>/CoursesController</url-pattern>
   </servlet-mapping>
 
-    <servlet>
-	  <servlet-name>CoursesAdmin</servlet-name>
-	  <servlet-class>CoursesAdmin</servlet-class>
-  </servlet>
-  <servlet-mapping>
-	<servlet-name>CoursesAdmin</servlet-name>
-	<url-pattern>/CoursesAdmin</url-pattern>
-  </servlet-mapping>
-
-
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
