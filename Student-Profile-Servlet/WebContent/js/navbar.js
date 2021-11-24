@@ -15,10 +15,10 @@ function changeFrame(i){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/AchievementController"
     }
     else if(i==6){
-        document.getElementById("main-frame").src="/Student-Profile-Servlet/html/courses.html"
+        document.getElementById("main-frame").src="/Student-Profile-Servlet/CoursesController"
     }
     else if(i==7){
-        document.getElementById("main-frame").src="/Student-Profile-Servlet/html/profile-main.html"
+        document.getElementById("main-frame").src="/Student-Profile-Servlet/jsp/profile-main.jsp"
     }
     else if(i==8){
         document.getElementById("main-frame").src="/Student-Profile-Servlet/html/librarymain.html"
@@ -38,5 +38,13 @@ function changeAdminFrame(i){
 	else if(i==2)
 	{
 		document.getElementById("main-frame").src="/Student-Profile-Servlet/bonafideservlet";		
+	}
+    else if(i==3)
+	{
+		document.getElementById("main-frame").src="/Student-Profile-Servlet/AchievementAdmin";		
+	}
+    else if(i==4)
+	{
+		document.getElementById("main-frame").src="/Student-Profile-Servlet/CoursesAdmin";		
 	}
 }

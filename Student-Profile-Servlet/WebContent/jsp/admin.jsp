@@ -20,12 +20,20 @@
 <body>
     <div class="page">
         <div class="page section" id="page-section-1" style="width:10%;">
-            <div class="btn-group-vertical" id="nav-buttons" style="height: 40%; margin-top:10%;overflow:auto;">
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeAdminFrame(1)">FINANCE</button>
             </div>
-            <div class="btn-group-vertical" id="nav-buttons" style="height: 40%; margin-top:10%;overflow:auto;">
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeAdminFrame(2)">BONAFIDE</button>
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-2" onclick="changeAdminFrame(2)">BONAFIDE</button>
             </div>
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-3" onclick="changeAdminFrame(3)">ACHIEVEMENTS</button>
+            </div>
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeAdminFrame(4)">COURSES</button>
+            </div>
+
+
         </div>
         <div class="page section" id="page-section-2" style="width:90%;">
             <div>

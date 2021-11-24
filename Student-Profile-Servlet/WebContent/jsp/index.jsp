@@ -28,10 +28,10 @@
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-3" onclick="changeFrame(3)">GATE PASSES</button>
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(4)">BONAFIDE CERTIFICATES</button>
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(5)">ACHIEVEMENTS</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-5" onclick="changeFrame(6)">COURSES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(8)">LIBRARY</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(9)">ACTIVITIES</button>
-                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeFrame(10)">ATTENDANCE</button>  
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-6" onclick="changeFrame(6)">COURSES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-7" onclick="changeFrame(8)">LIBRARY</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-8" onclick="changeFrame(9)">ACTIVITIES</button>
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-9" onclick="changeFrame(10)">ATTENDANCE</button>  
             </div>
         </div>
         <div class="page section" id="page-section-2">

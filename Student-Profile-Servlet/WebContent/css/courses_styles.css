@@ -13,3 +13,21 @@
     pointer-events: none;
     color: #aaa;
 }
+
+.set-width {
+    min-width: 200px;
+}
+
+.required-field::after {
+    content: "*";
+    color: red;
+}
+
+#course_table {
+    counter-reset: course-counter;
+}
+
+.counter-col::before {
+    counter-increment: course-counter;
+    content: counter(course-counter);
+}

@@ -47,7 +47,7 @@ public class Achievement_DAO {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date " +
+			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date, A.verified " +
 					        "FROM achievement A, achievement_types B " +
                             "WHERE A.achievement_type = B.achievement_type_id AND A.student_id = ? " +
                             "ORDER BY A.proof_date DESC; ";
@@ -61,9 +61,10 @@ public class Achievement_DAO {
 				String achievement_type = myRs.getString("achievement_type_description");
 				String title = myRs.getString("title");
 				Date proof_date = myRs.getDate("proof_date");
+				int verified = myRs.getInt("verified");
                 // java.sql.Blob proof_file = myRs.getBlob("proof_file");
 
-				Achievement achievement = new Achievement(id, rollno, achievement_type, title, proof_date );
+				Achievement achievement = new Achievement(id, rollno, achievement_type, title, proof_date, verified);
 				achievements.add(achievement);
                 System.out.println(achievement);
 			}
@@ -74,6 +75,49 @@ public class Achievement_DAO {
 		}
 		return achievements;
 	}
+
+    public List<Achievement> getAllAchievements() throws Exception {
+		List<Achievement> achievements = new ArrayList<>();
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+            myConn = getConnection();
+            System.out.println("Connection established......");
+
+			String sql = "SELECT A.achievement_id, B.achievement_type_description, A.title, A.proof_date, A.verified, A.student_id " +
+					        "FROM achievement A, achievement_types B " +
+                            "WHERE A.achievement_type = B.achievement_type_id " +
+                            "ORDER BY A.student_id ASC; ";
+
+			myStmt = myConn.prepareStatement(sql);
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+                String student_id = myRs.getString("student_id");
+				int id = myRs.getInt("achievement_id");
+				String achievement_type = myRs.getString("achievement_type_description");
+				String title = myRs.getString("title");
+				Date proof_date = myRs.getDate("proof_date");
+				int verified = myRs.getInt("verified");
+                // java.sql.Blob proof_file = myRs.getBlob("proof_file");
+
+				Achievement achievement = new Achievement(id, student_id, achievement_type, title, proof_date, verified);
+				achievements.add(achievement);
+                System.out.println(achievement);
+			}
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+			close(myConn, myStmt, myRs);
+		}
+		return achievements;
+	}
+
+
+
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 
@@ -124,7 +168,6 @@ public class Achievement_DAO {
 	public void deleteAchievement(int achievement_id) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-        System.out.println("My a" + achievement_id);
 		try {
 			myConn = getConnection();
             System.out.println("Connection established......");
@@ -140,6 +183,29 @@ public class Achievement_DAO {
 			close(myConn, myStmt, null);
 		}
 
+	}
+
+	public void changeVerifiedStatus(int achievement_id, int verified_status) throws SQLException {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		try {
+			myConn = getConnection();
+            System.out.println("Connection established......");
+
+			String sql = "UPDATE achievement "
+					+ " SET verified = ? "
+					+ " WHERE achievement_id = ?;";
+			
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, verified_status);
+			myStmt.setInt(2, achievement_id);
+			myStmt.execute();
+            System.out.println("Achievement Updated");
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}
+		
 	}
 
 	// public Student getStudent(String theStudentId) throws Exception {
