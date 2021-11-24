@@ -298,7 +298,7 @@ VALUES
 
 
 CREATE TABLE `bonafide` (
-   
+
    `applied_date` varchar(25) DEFAULT NULL,
    `purpose` varchar(200) DEFAULT NULL,
    `Status` varchar(250) DEFAULT NULL,
@@ -352,17 +352,18 @@ CREATE TABLE courses_enroll (
     student_fk varchar(16) NULL,
     courses_fk int NULL,
     verified int DEFAULT 0,
+    applied int DEFAULT 0,
     CONSTRAINT enroll_pk PRIMARY KEY (enroll_id),
     FOREIGN KEY (student_fk) REFERENCES student (roll_number),
     FOREIGN KEY (courses_fk) REFERENCES courses (courses_id)
 );
 
-INSERT INTO courses_enroll (student_fk, courses_fk, verified)
+INSERT INTO courses_enroll (student_fk, courses_fk, verified, applied)
 VALUES
-("CB.EN.U4CSE17001", 1, 0),
-("CB.EN.U4CSE17001", 6, -1),
-("CB.EN.U4CSE17001", 2, 1),
-("CB.EN.U4CSE17001", 3, 0);
+("CB.EN.U4CSE17001", 1, 0, 0),
+("CB.EN.U4CSE17001", 6, -1, 0),
+("CB.EN.U4CSE17001", 2, 1, 0),
+("CB.EN.U4CSE17001", 3, 1, 1);
 
 
 delimiter //
@@ -374,10 +375,10 @@ CREATE TRIGGER feeupdate AFTER UPDATE ON Payment_history
     declare nyear int;
     declare remtution float;
     IF ((NEW.approved = true) and (NEW.txn_purpose ='Tution'))
-    
+
     THEN
 		set nyear = year(new.txn_date);
-		SET totalfee = (SELECT sum(txn_amount) FROM (select * from Payment_history where roll_number=NEW.roll_number and txn_purpose=NEW.txn_purpose and year(txn_date)=nyear) as Specifictable); 
+		SET totalfee = (SELECT sum(txn_amount) FROM (select * from Payment_history where roll_number=NEW.roll_number and txn_purpose=NEW.txn_purpose and year(txn_date)=nyear) as Specifictable);
 		set remtution = (select tuition_fee_payable from Remaining_Fees where roll_number=NEW.roll_number);
         IF (totalfee <= remtution)
         then
@@ -392,3 +393,4 @@ CREATE TRIGGER feeupdate AFTER UPDATE ON Payment_history
 -- drop table Remaining_Fees;
 -- update Remaining_Fees set tuition_fee_payable=300000 where roll_number='CB.EN.U4CSE17001';
 -- update Payment_history set approved=false where roll_number='CB.EN.U4CSE17001' AND TXN_PURPOSE='Tution' and year(txn_date)=2018;
+

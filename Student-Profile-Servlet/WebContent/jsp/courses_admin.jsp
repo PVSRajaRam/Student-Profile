@@ -19,8 +19,6 @@ pageEncoding="UTF-8"%>
     <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     </script>
 
-    <!-- <script src="${pageContext.request.contextPath}/js/delete_achievement.js"></script> -->
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/achievements_styles.css">
 
@@ -32,9 +30,9 @@ pageEncoding="UTF-8"%>
         <div class="row justify-content-center">
             <div class="col-12 table-responsive">
                 <c:choose>
-                    <c:when test="${empty achievements}">
+                    <c:when test="${empty courses}">
                         <div class="alert alert-info" role="alert">
-                            No Achievement Data
+                            No Course Data
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -43,10 +41,9 @@ pageEncoding="UTF-8"%>
                                 <tr class="bg-warning">
                                     <th scope="col">#</th>
                                     <th scope="col">Student</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Date</th>
-                                    <!-- <th scope="col">Proof</th> -->
+                                    <th scope="col">Course Code</th>
+                                    <th scope="col">Course Name</th>
+                                    <th scope="col">Credits</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Acknowledge</th>
                                     <th scope="col">Delete</th>
@@ -54,33 +51,20 @@ pageEncoding="UTF-8"%>
                             </thead>
                             <tbody>
 
-                                <c:forEach var="achv" items="${achievements}">
+                                <c:forEach var="itr" items="${courses}">
                                     <tr>
                                         <td class="counter-col"></td>
-                                        <td>
-                                            <c:out value="${achv.student_id}" />
-                                        </td>
-                                        <td>
-                                            <c:out value="${achv.title}" />
-                                        </td>
-                                        <td>
-                                            <c:out value="${achv.achievement_type}" />
-                                        </td>
-                                        <td>
-                                            ${achv.proof_date}
-                                        </td>
+                                        <td> ${itr.student_id} </td>
+                                        <td>${itr.course_code}</td>
+                                        <td>${itr.course_name}</td>
+                                        <td><span class="badge rounded-pill bg-secondary">${itr.credits}</span></td>
 
-                                        <!-- <td><a class="btn btn-labeled btn-info btn-sm" download
-                                                href="${achv.proof_file}">
-                                                <i class="bi bi-file-earmark-arrow-down"></i> Proof
-                                            </a>
-                                        </td> -->
                                         <c:choose>
-                                            <c:when test="${achv.verified==0}">
+                                            <c:when test="${itr.verified==0}">
                                                 <td><span class="badge rounded-pill bg-secondary">Not Verified</span>
                                                 </td>
                                             </c:when>
-                                            <c:when test="${achv.verified==1}">
+                                            <c:when test="${itr.verified==1}">
                                                 <td><span class="badge rounded-pill bg-success">Verified <i
                                                             class="bi bi-patch-check"></i></span></td>
                                             </c:when>
@@ -91,26 +75,29 @@ pageEncoding="UTF-8"%>
                                         </c:choose>
 
                                         <td>
-                                            <form method="get" action="./AchievementAdmin">
+                                            <form method="get" action="./CoursesAdmin">
+                                                <input type="hidden" name="rollno" value="${itr.rollno}">
                                                 <button type="submit" class="btn btn-labeled btn-info btn-sm">
                                                     <i class="bi bi-check"></i> Accept
                                                 </button>
-                                                <input type="hidden" name="achievement_to_acc" value="${achv.id}">
+                                                <input type="hidden" name="course_to_acc" value="${itr.id}">
                                             </form>
-                                            <form method="get" action="./AchievementAdmin">
+                                            <form method="get" action="./CoursesAdmin">
+                                                <input type="hidden" name="rollno" value="${itr.rollno}">
                                                 <button type="submit" class="btn btn-labeled btn-warning btn-sm">
                                                     <i class="bi bi-x"></i> Reject
                                                 </button>
-                                                <input type="hidden" name="achievement_to_rej" value="${achv.id}">
+                                                <input type="hidden" name="course_to_rej" value="${itr.id}">
                                             </form>
                                         </td>
 
                                         <td>
-                                            <form method="get" action="./AchievementAdmin">
+                                            <form method="get" action="./CoursesAdmin">
+                                                <input type="hidden" name="rollno" value="${itr.rollno}">
                                                 <button type="submit" class="btn btn-labeled btn-danger btn-sm">
                                                     <i class="bi bi-trash"></i> Delete
                                                 </button>
-                                                <input type="hidden" name="achievement_to_del" value="${achv.id}">
+                                                <input type="hidden" name="course_to_del" value="${itr.id}">
                                             </form>
                                         </td>
                                     </tr>

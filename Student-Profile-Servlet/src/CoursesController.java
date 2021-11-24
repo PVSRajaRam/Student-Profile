@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import database_conn.Courses_DAO;
 import models.Course;
 
-@WebServlet("/	")
+@WebServlet("/CoursesController")
 public class CoursesController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -36,13 +36,28 @@ public class CoursesController extends HttpServlet {
                 String rollno = (String) session.getAttribute("rollno");
 
                 int semester = Integer.parseInt(request.getParameter("semester"));
-                List<Course> courses = dao.getCourses(semester, 1);
+                List<Course> courses = dao.getCourses(rollno, semester, 1);
                 request.setAttribute("courses", courses);
-
-                // System.out.println(courses);
+                request.setAttribute("semester", semester);
 
                 dispatcher = request.getRequestDispatcher("./jsp/courses.jsp");
                 dispatcher.forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (request.getParameter("courses_id") != null) {
+            try {
+                HttpSession session = request.getSession(false);
+                String rollno = (String) session.getAttribute("rollno");
+
+                int courses_id = Integer.parseInt(request.getParameter("courses_id"));
+                dao.applyCourse(rollno, courses_id);
+                // request.setAttribute("courses", courses);
+                // request.setAttribute("semester", semester);
+
+                // dispatcher = request.getRequestDispatcher("./jsp/courses.jsp");
+                // dispatcher.forward(request, response);
+                response.sendRedirect(getServletName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -52,10 +67,9 @@ public class CoursesController extends HttpServlet {
                 String rollno = (String) session.getAttribute("rollno");
 
                 // int semester = Integer.parseInt(request.getParameter("semester"));
-                List<Course> courses = dao.getCourses(1, 1);
+                List<Course> courses = dao.getCourses(rollno, 1, 1);
                 request.setAttribute("courses", courses);
-
-                // System.out.println(courses);
+                request.setAttribute("semester", 1);
 
                 dispatcher = request.getRequestDispatcher("./jsp/courses.jsp");
                 dispatcher.forward(request, response);

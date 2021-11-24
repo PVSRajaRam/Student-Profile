@@ -29,38 +29,36 @@
 <body>
     <div class="btn btn-warning custom" id="section-bar">COURSES</div>
     <div class="container d-flex justify-content-center" style="margin-top: 5%;">
-        <div class="justify-content-around align-content-center">
+        <div class="row justify-content-around align-content-center">
             <form method="get" action="./CoursesController">
-                <select class="form-select" aria-label="Select Semester" name="semester">
-                    <option value="1" selected>Semester 1</option>
-                    <option value="2">Semester 2</option>
-                    <option value="3">Semester 3</option>
-                    <option value="4">Semester 4</option>
-                    <option value="5">Semester 5</option>
-                    <option value="6">Semester 6</option>
-                    <option value="7">Semester 7</option>
-                    <option value="8">Semester 8</option>
-                </select>
-                <button type="submit" class="btn btn-success">Go <i class="bi bi-arrow-right"></i></button>
+                <div class="col-8">
+                    <select class="form-select" aria-label="Select Semester" name="semester">
+                        <option value="1" selected>Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                    </select>
+                </div>
 
+                <div class="col-2">
+                    <button type="submit" class="btn btn-success">Go <i class="bi bi-arrow-right"></i></button>
+                </div>
             </form>
 
-            <!-- <div class="col-4 m-3">
-                <div class="form-group has-search bg-warning">
-                    <span class="bi bi-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-            </div> -->
-
-            <div class="set-width">
+            <div class="col-12">
+                <h2>Semester ${semester}</h2>
                 <c:choose>
                     <c:when test="${empty courses}">
-                        <div class="alert alert-info" role="alert">
+                        <div class="alert alert-info col-12" role="alert">
                             No Courses Data
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <table class="table table-hover" id="course_table">
+                        <table class="col-12 table table-hover" id="course_table">
                             <thead>
                                 <tr class="bg-warning">
                                     <th scope="col">#</th>
@@ -78,12 +76,21 @@
                                         <td>${itr.course_name}</td>
                                         <td><span class="badge rounded-pill bg-secondary">${itr.credits}</span></td>
                                         <c:choose>
+                                            <c:when test="${itr.applied==0}">
+                                                <td>
+                                                    <form method="get" action="./CoursesController">
+                                                        <input type="hidden" name="courses_id"
+                                                            value="${itr.courses_id}">
+                                                        <button type="submit" class="btn btn-success">Apply</button>
+                                                    </form>
+                                                </td>
+                                            </c:when>
                                             <c:when test="${itr.verified==0}">
                                                 <td><span class="badge rounded-pill bg-secondary">Waiting</span>
                                                 </td>
                                             </c:when>
                                             <c:when test="${itr.verified==1}">
-                                                <td><span class="badge rounded-pill bg-success">Accepted <i
+                                                <td><span class="badge rounded-pill bg-success">Enrolled <i
                                                             class="bi bi-patch-check"></i></span></td>
                                             </c:when>
                                             <c:otherwise>
