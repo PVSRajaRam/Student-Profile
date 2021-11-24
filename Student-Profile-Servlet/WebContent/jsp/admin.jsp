@@ -40,7 +40,7 @@
             <img src="/Student-Profile-Servlet/images/univ-logo.jpg" width="20%" height="100%" style="float: left;margin-top:20px;">
             <li class="nav-item dropdown" id="welcome-msg" style="margin-left: 60%;float:left; list-style-type:none;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: black; " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <strong style="font-size: 15px;"><c:out value="${User.email}" /></strong>
+                    <strong id="adminid" style="font-size: 15px;"><c:out value="${User.email}" /></strong>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="/Student-Profile-Servlet/login.html">Log out</a>

@@ -55,7 +55,7 @@
               <label for="exampleInputPassword1">Password</label>
               <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
             </div>
-            <h6>Invalid Credentials</h6>
+            <h6 id="err-msg">Invalid Credentials</h6>
             <button type="submit" style="border: 0px;margin-left:20%; background-color:transparent;"><img src="./images/loginbutton.png" width="100" height="50"></button>
         
         </form>
