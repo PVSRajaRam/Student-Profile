@@ -308,9 +308,7 @@ CREATE TABLE `bonafide` (
    `action` varchar(45) DEFAULT NULL
 );
 
-<<<<<<< HEAD
 -- drop table bonafide;
-=======
 -- Table: courses
 CREATE TABLE courses (
     courses_id int NOT NULL AUTO_INCREMENT,
@@ -326,7 +324,6 @@ ALTER TABLE courses ADD CONSTRAINT dept_fk_constrain FOREIGN KEY dept_fk_constra
     REFERENCES department (dept_id)
     ON DELETE SET NULL
     ON UPDATE SET NULL;
->>>>>>> 1ed1d06e459e9798fdb1f505ec1e037263fdd177
 
 
 INSERT INTO courses (semester, course_code, course_name, dept_fk, credits)
