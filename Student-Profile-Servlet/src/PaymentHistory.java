@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database_conn.Fee_Payment_History_DAO;
+import database_conn.Remaining_Fees_DAO;
 import models.FeeTxnHistory;
+import models.Remaining_Fees;
 
 /**
  * Servlet implementation class PaymentHistory
@@ -20,11 +22,13 @@ import models.FeeTxnHistory;
 public class PaymentHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Fee_Payment_History_DAO payDAO; 
+	private Remaining_Fees_DAO remDAO;
     /**
      * @see HttpServlet#HttpServlet()
      */
 	public void init() {
         payDAO = new Fee_Payment_History_DAO();
+        remDAO=new Remaining_Fees_DAO();
     }
     
 
@@ -38,6 +42,8 @@ public class PaymentHistory extends HttpServlet {
 		System.out.println(rollno);
 		List<FeeTxnHistory> txns = payDAO.selectAllTxnByRollNumber(rollno);
 		request.setAttribute("txns", txns);
+		Remaining_Fees rem=remDAO.selectRecordByRollno(rollno);
+		request.setAttribute("remfee", rem);
         RequestDispatcher dispatcher;
         dispatcher = request.getRequestDispatcher("./jsp/paymenthistory.jsp");
         dispatcher.forward(request, response);

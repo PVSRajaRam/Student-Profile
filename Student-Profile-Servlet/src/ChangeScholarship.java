@@ -9,22 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import database_conn.Upload_Receipt_DAO;
-import models.FeeTxnHistory;
+import database_conn.Remaining_Fees_DAO;
+import models.Remaining_Fees;
 
 /**
- * Servlet implementation class FinanceAdmin
+ * Servlet implementation class ChangeScholarship
  */
-@WebServlet("/FinanceAdmin")
-public class FinanceAdmin extends HttpServlet {
+@WebServlet("/ChangeScholarship")
+public class ChangeScholarship extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Upload_Receipt_DAO approvalDAO; 
+	private Remaining_Fees_DAO recordDAO; 
     /**
      * @see HttpServlet#HttpServlet()
      */
 	public void init() {
-        approvalDAO = new Upload_Receipt_DAO();
+        recordDAO = new Remaining_Fees_DAO();
     }
     
 
@@ -32,9 +33,11 @@ public class FinanceAdmin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
+		List<Remaining_Fees> fees = recordDAO.selectAllRecords();
+		request.setAttribute("fees", fees);
         RequestDispatcher dispatcher;
-        dispatcher = request.getRequestDispatcher("./jsp/financeadmin.jsp");
+        dispatcher = request.getRequestDispatcher("./jsp/ChangeScholarship.jsp");
         dispatcher.forward(request, response);
 	}
 

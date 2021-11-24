@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="page">
-        <div class="page section" id="page-section-1" style="width:10%;">
+        <div class="page section" id="page-section-1" style="width:12%;">
             <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-1" onclick="changeAdminFrame(1)">FINANCE</button>
             </div>
@@ -35,7 +35,7 @@
 
 
         </div>
-        <div class="page section" id="page-section-2" style="width:90%;">
+        <div class="page section" id="page-section-2" style="width:88%;">
             <div>
             <img src="/Student-Profile-Servlet/images/univ-logo.jpg" width="20%" height="100%" style="float: left;margin-top:20px;">
             <li class="nav-item dropdown" id="welcome-msg" style="margin-left: 60%;float:left; list-style-type:none;">

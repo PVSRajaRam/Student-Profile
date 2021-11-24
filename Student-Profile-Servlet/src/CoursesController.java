@@ -23,7 +23,7 @@ public class CoursesController extends HttpServlet {
         RequestDispatcher dispatcher;
         dao = new Courses_DAO();
 
-        if (request.getParameter("course_to_del") != null) {
+       /* if (request.getParameter("course_to_del") != null) {
             try {
                 // deleteCourseReq(request, response);
 
@@ -62,7 +62,7 @@ public class CoursesController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     // protected void doPost(HttpServletRequest request, HttpServletResponse

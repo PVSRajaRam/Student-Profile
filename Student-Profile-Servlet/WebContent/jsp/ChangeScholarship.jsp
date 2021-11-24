@@ -14,22 +14,45 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="${pageContext.request.contextPath}/js/feenavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/js/feesearch.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/feestyles.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
 </head>
-<body style="overflow:hidden;" onload="defaultFeeFrameSrc()">
-    <div class="btn btn-warning custom" id="section-bar" style="height: 10%;">
-        <div>
-            <button type="button" class="btn btn-warning sectionbuttons" id="1" onclick="changeFeeNav(this)"><strong>APPROVE/REJECT PAYMENTS</strong></button>
-            <button type="button" class="btn btn-warning sectionbuttons" id="2" style="width: 15.5%;" onclick="changeFeeNav(this)"><strong>UPDATE SCHOLARSHIP</strong></button>
-        </div>
-        <div id="navscroller">
-
-        </div>
-    </div>
-    <iframe id="fee-frame" src="./ApprovePayments" style="height: 84%; width:100%;overflow:hidden"></iframe>
-   
+<body>
+    <table class="table" id="histTable" style="width: 97%;margin-left:1%;">
+    <thead>
+      <tr>
+        <th scope="col">Roll Number </th>
+        <th scope="col">Scholarship</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="no-result" style="display: none;">
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <c:forEach var="fee" items="${fees}">
+      	<form action="./UpdateScholarship" method="post">
+	      <tr id="<c:out value='${fee.rollnumber}' />">
+	        <td> <input class="form-control" id="rollno" name="rollno" value="${fee.rollnumber}" type="text" readonly></td>
+	        <td><select class="form-control" id="slab" name="slab" value="${fee.slab}">
+			      <option value="0">0 %</option>
+			      <option value="50">50 %</option>
+			      <option value="75">75 %</option>
+			    </select>
+	    	</td>
+	        <td><button type="submit" class="btn btn-success receiptbutton">Update</button></td>
+	       </tr>
+	     </form>
+      </c:forEach>
+    </tbody>
+  </table>
+  
+  
 </body>
 </html>
