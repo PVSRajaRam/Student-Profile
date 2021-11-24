@@ -21,36 +21,34 @@ import models.Achievement;
 
 @WebServlet("/AchievementAdmin")
 public class AchievementAdmin extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Achievement_DAO dao;
-		RequestDispatcher dispatcher;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Achievement_DAO dao;
+        RequestDispatcher dispatcher;
         dao = new Achievement_DAO();
 
-        if(request.getParameter("achievement_to_del") != null) {
+        if (request.getParameter("achievement_to_del") != null) {
             try {
-				// deleteAchievementReq(request, response);
-				deleteAllAchievementReq(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-        }
-        else if(request.getParameter("achievement_to_acc") != null) {
+                // deleteAchievementReq(request, response);
+                // deleteAllAchievementReq(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (request.getParameter("achievement_to_acc") != null) {
             try {
-				acceptAchievement(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-        }
-        else if(request.getParameter("achievement_to_rej") != null) {
+                // acceptAchievement(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (request.getParameter("achievement_to_rej") != null) {
             try {
-				rejectAchievement(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-        }
-        else{
+                // rejectAchievement(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
             try {
                 // HttpSession session=request.getSession(false);
                 // String rollno=(String)session.getAttribute("rollno");
@@ -65,67 +63,70 @@ public class AchievementAdmin extends HttpServlet {
                 e.printStackTrace();
             }
         }
-	}
+    }
 
-	// private void acceptAchievement(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-	// 	int achievement_id = Integer.parseInt(request.getParameter("achievement_to_acc"));
-	// 	Achievement_DAO dao = new Achievement_DAO();
+    private void acceptAchievement(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, SQLException {
+        int achievement_id = Integer.parseInt(request.getParameter("achievement_to_acc"));
+        Achievement_DAO dao = new Achievement_DAO();
 
-	// 	dao.changeVerifiedStatus(achievement_id, 1);
-	// 	response.sendRedirect(getServletName());
-		
-	// }
-	
-	// private void rejectAchievement(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-	// 	int achievement_id = Integer.parseInt(request.getParameter("achievement_to_rej"));
-	// 	Achievement_DAO dao = new Achievement_DAO();
+        dao.changeVerifiedStatus(achievement_id, 1);
+        response.sendRedirect(getServletName());
 
-	// 	dao.changeVerifiedStatus(achievement_id, -1);
-	// 	response.sendRedirect(getServletName());
-		
-	// }
+    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getAchievementData(request, response);
-	}
+    private void rejectAchievement(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, SQLException {
+        int achievement_id = Integer.parseInt(request.getParameter("achievement_to_rej"));
+        Achievement_DAO dao = new Achievement_DAO();
 
-	// private void deleteAchievementReq(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	// 	int achievement_id = Integer.parseInt(request.getParameter("achievement_to_del"));
-	// 	Achievement_DAO dao = new Achievement_DAO();
+        dao.changeVerifiedStatus(achievement_id, -1);
+        response.sendRedirect(getServletName());
 
-	// 	dao.deleteAchievement(achievement_id);
-	// 	response.sendRedirect(getServletName());
-	// }
+    }
 
-	private void getAchievementData(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			String title = request.getParameter("achievement_title");
-			int achievement_type_id = Integer.parseInt(request.getParameter("achievement_type"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        getAchievementData(request, response);
+    }
 
-			String proof_date_str = request.getParameter("achievement_date");
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
-			Date proof_date = formatter.parse(proof_date_str);
-			Date proof_date_sql = new java.sql.Date(proof_date.getTime());
+    private void deleteAchievementReq(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int achievement_id = Integer.parseInt(request.getParameter("achievement_to_del"));
+        Achievement_DAO dao = new Achievement_DAO();
 
-            HttpSession session=request.getSession(false);
-            String rollno=(String)session.getAttribute("rollno");
+        dao.deleteAchievement(achievement_id);
+        response.sendRedirect(getServletName());
+    }
 
-			Achievement_DAO dao;
-			// RequestDispatcher dispatcher;
+    private void getAchievementData(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String title = request.getParameter("achievement_title");
+            int achievement_type_id = Integer.parseInt(request.getParameter("achievement_type"));
 
-			Achievement achv = new Achievement(rollno, achievement_type_id, title, proof_date_sql);
-			dao = new Achievement_DAO();
-			dao.addAchievement(achv);
+            String proof_date_str = request.getParameter("achievement_date");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+            Date proof_date = formatter.parse(proof_date_str);
+            Date proof_date_sql = new java.sql.Date(proof_date.getTime());
 
-			doGet(request, response);
+            HttpSession session = request.getSession(false);
+            String rollno = (String) session.getAttribute("rollno");
 
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            Achievement_DAO dao;
+            // RequestDispatcher dispatcher;
 
-	}
+            Achievement achv = new Achievement(rollno, achievement_type_id, title, proof_date_sql);
+            dao = new Achievement_DAO();
+            dao.addAchievement(achv);
+
+            doGet(request, response);
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
