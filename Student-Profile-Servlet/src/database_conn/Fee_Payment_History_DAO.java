@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import models.FeeTxnHistory;
+import models.TxnYear;
 
 
 public class Fee_Payment_History_DAO {
@@ -18,7 +19,9 @@ public class Fee_Payment_History_DAO {
 
     private static final String SELECT_TXN_BY_TXNNO = "select * from Payment_history where txn_number =? and approved=true;";
     private static final String SELECT_ALL_TXNS_BY_ROLLNO = "select * from Payment_history where roll_number =? and approved=true;";
-    
+    private static final String SELECT_TXN_BY_YEAR ="select * from Payment_history where approved=true and roll_number=? and txn_date like ?";
+    private static final String SELECT_DISTINCT_YEARS = "select distinct year(txn_date) as year from Payment_history where approved=true;";
+
     public Fee_Payment_History_DAO() {}
 
     protected Connection getConnection() {
@@ -98,6 +101,58 @@ public class Fee_Payment_History_DAO {
         }
         return txns;
     }    
+
+    public List < FeeTxnHistory > selectAllTxnByYear(String rollno,String year) {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List < FeeTxnHistory > txns = new ArrayList < > ();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TXN_BY_YEAR);) {
+        	preparedStatement.setString(1, rollno);
+        	preparedStatement.setString(2, year+"%");
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                txns.add(new FeeTxnHistory(rs.getString(1),
+                						   rs.getString(2),
+                						   rs.getString(3),
+                						   rs.getDate(4),
+                						   rs.getString(5),
+                						   rs.getFloat(6),
+                						   rs.getInt(7),
+                						   rs.getString(8)));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return txns;
+    }    
+    
+    public List<TxnYear> selectAllYears(){
+    	List<TxnYear> allYears=new ArrayList<TxnYear>();
+    	
+    	try (Connection connection = getConnection();
+                // Step 2:Create a statement using connection object
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DISTINCT_YEARS);) {
+                System.out.println(preparedStatement);
+                // Step 3: Execute the query or update query
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Step 4: Process the ResultSet object.
+                while (rs.next()) {
+                    allYears.add(new TxnYear(rs.getString(1)));
+                }
+            } catch (SQLException e) {
+                printSQLException(e);
+            }
+    	return allYears;
+    }
 
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

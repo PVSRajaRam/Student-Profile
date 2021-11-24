@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.itextpdf.text.Document;  
+import com.itextpdf.text.DocumentException;  
+import com.itextpdf.text.Paragraph;  
+import com.itextpdf.text.pdf.PdfWriter;  
 
 import database_conn.Upload_Receipt_DAO;
 import models.FeeTxnHistory;

@@ -83,6 +83,7 @@ insert into Payment_history values('TX101','Dhanalakshmi','CB.EN.U4CSE17001','20
 insert into Payment_history values('TX102','Dhanalakshmi','CB.EN.U4CSE17001','2018-08-11','Mess',100000,NULL,NULL,'DD',NULL,false);
 select * from Payment_history;
 
+
 -- Table: achievement
 CREATE TABLE achievement (
     achievement_id int NOT NULL AUTO_INCREMENT,
@@ -133,6 +134,7 @@ VALUES
 SELECT * FROM achievement;
 
 CREATE TABLE `bonafide` (
+   
    `applied_date` varchar(25) DEFAULT NULL,
    `purpose` varchar(200) DEFAULT NULL,
    `Status` varchar(250) DEFAULT NULL,
@@ -143,6 +145,6 @@ CREATE TABLE `bonafide` (
    `action` varchar(45) DEFAULT NULL
 );
 
-drop table bonafide;
+-- drop table bonafide;
 
 select * from bonafide;

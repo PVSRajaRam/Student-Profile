@@ -1,33 +1,34 @@
 
-import java.io.*;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import models.GeneratePDF;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database_conn.Fee_Payment_History_DAO;
-import models.FeeTxnHistory;
-import models.TxnYear;
-
 /**
- * Servlet implementation class GenerateReceipt
+ * Servlet implementation class ReceiptGen
  */
-@WebServlet("/GenerateReceipt")
-public class GenerateReceipt extends HttpServlet {
+@WebServlet("/ReceiptGen")
+public class ReceiptGen extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Fee_Payment_History_DAO payDAO; 
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-	public void init() {
-        payDAO = new Fee_Payment_History_DAO();
+    public ReceiptGen() {
+        super();
+        // TODO Auto-generated constructor stub
     }
-    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,15 +38,16 @@ public class GenerateReceipt extends HttpServlet {
 		HttpSession session=request.getSession(false);
 		String rollno=(String)session.getAttribute("rollno");
 		System.out.println(rollno);
-		List<FeeTxnHistory> txns = payDAO.selectAllTxnByRollNumber(rollno);
-		List<TxnYear> allYears = payDAO.selectAllYears();
-		
-		request.setAttribute("txns", txns);
-		request.setAttribute("years", allYears);
-        RequestDispatcher dispatcher;
-        dispatcher = request.getRequestDispatcher("./jsp/generatereceipt.jsp");
-        dispatcher.forward(request, response);
-	}
+		String year = request.getParameter("year");
+		response.setContentType("application/pdf;charset=UTF-8");
+
+        response.addHeader("Content-Disposition", "inline; filename=" + "cities.pdf");
+        ServletOutputStream out = response.getOutputStream();
+
+
+        ByteArrayOutputStream baos = new GeneratePDF().getPdfFile(rollno,year);
+        baos.writeTo(out);	
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

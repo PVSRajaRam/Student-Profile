@@ -14,6 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/feesearch.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/feestyles.css">
@@ -82,12 +83,12 @@
                 
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success receiptbutton" id="gen-button" style="margin-left: 35%;">Generate</button>
+            <button type="button" class="btn btn-success receiptbutton" id="gen-button" style="margin-left: 35%;"><a href="./ReceiptGen" style="color:white;text-decoration:none;">Generate</a></button>
         </div>
-        <div class="genreceipts">
-            <div><button type="button" class="btn btn-success receiptbutton" style="margin-top: 50%;">Receipt AY_2018_2019</button></div>
-            <div><button type="button" class="btn btn-success receiptbutton">Receipt AY_2019_2020</button></div>
-            <div><button type="button" class="btn btn-success receiptbutton">Receipt AY_2020_2021</button></div>
+        <div class="genreceipts" style="margin-top:5%;">
+            <c:forEach var="yr" items="${years}">
+	            <div><button type="button" class="btn btn-success receiptbutton"><a href="./ReceiptGen?year=${yr.year}" style="color:white;text-decoration:none;">Receipt AY_<c:out value="${yr.year}"/></a></button></div>
+	        </c:forEach>
         </div>
     </div>
     <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
