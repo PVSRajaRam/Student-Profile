@@ -11,6 +11,23 @@ CREATE TABLE login (
     CONSTRAINT login_pk PRIMARY KEY (email)
 );
 
+-- Table: department
+CREATE TABLE department (
+    dept_id int NOT NULL AUTO_INCREMENT,
+    dept_code varchar(10) NOT NULL,
+    dept_name varchar(50) NOT NULL,
+    CONSTRAINT department_pk PRIMARY KEY (dept_id)
+);
+-- dummy data
+INSERT INTO department (dept_code, dept_name)
+VALUES
+("CSE", "Computer Science Engineering"),
+("MATH", "Mathematics"),
+("MECH", "Mechanical Engineering"),
+("CIVIL", "Civil Engineering"),
+("CHEM", "Chemical Engineering"),
+("ECE", "Electronics and Communication Engineering");
+
 -- Table: student
 CREATE TABLE student (
     roll_number varchar(16) NOT NULL,
@@ -29,6 +46,7 @@ CREATE TABLE student (
     aadhar_no varchar(12) NOT NULL,
     address varchar(100) NOT NULL,
     picture_fpath varchar(100) NOT NULL,
+    dept_fk int NULL,
     UNIQUE INDEX student_unique_cols (email,personal_email,phone,aadhar_no),
     CONSTRAINT student_pk PRIMARY KEY (roll_number)
 );
@@ -195,9 +213,9 @@ insert into login values('cb.en.u4cse17002@cb.students.amrita.edu','stud2',0,nul
 insert into login values('cb.en.u4cse17003@cb.students.amrita.edu','stud3',0,null);
 insert into login values('Naren@cb.amrita.edu','admin1',1,'Finance');
 
-insert into student values('CB.EN.U4CSE17001','Arun','S', 'cb.en.u4cse17001@cb.students.amrita.edu','aruns@gmail.com','9841984321','1111133331','M', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '5-310 KS Road, KS Puram, CBE 112','abd');
-insert into student values('CB.EN.U4CSE17002','Anusha','J','cb.en.u4cse17002@cb.students.amrita.edu','anushaj@gmail.com','9841984321','1111133332','F', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '3 NK Road, NK Puram, CH 11','abd');
-insert into student values('CB.EN.U4CSE17003','Bharat','R','cb.en.u4cse17003@cb.students.amrita.edu','bharatr@gmail.com','9841984321','1111133333','M', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '10 RS Road, RS Puram, CBE 1','abc');
+insert into student values('CB.EN.U4CSE17001','Arun','S', 'cb.en.u4cse17001@cb.students.amrita.edu','aruns@gmail.com','9841984321','1111133331','M', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '5-310 KS Road, KS Puram, CBE 112','abd', 1);
+insert into student values('CB.EN.U4CSE17002','Anusha','J','cb.en.u4cse17002@cb.students.amrita.edu','anushaj@gmail.com','9841984321','1111133332','F', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '3 NK Road, NK Puram, CH 11','abd', 1);
+insert into student values('CB.EN.U4CSE17003','Bharat','R','cb.en.u4cse17003@cb.students.amrita.edu','bharatr@gmail.com','9841984321','1111133333','M', '2001-10-25', 'Indian', 'Tamil Nadu', 'Tamil', 'India', '123443212345', '10 RS Road, RS Puram, CBE 1','abc', 2);
 
 insert into enrollment values('CB.EN.U4CSE17001','1334512345', 'Coimbatore', 'B.Tech.','Computer Science', 2017,'A',4,7,'Mr. Kumar S','9999834567', '2017-06-01', 'Enrolled','AEEE','Tamil Nadu','Merit','AmritaVidhya 50%');
 insert into enrollment values('CB.EN.U4CSE17002','1334512346', 'Coimbatore', 'B.Tech.','Computer Science', 2017,'A',4,7,'Mr. Kumar S','9999834567', '2017-06-01', 'Enrolled','12 Boards','Tamil Nadu','Management',null);
@@ -268,8 +286,6 @@ VALUES
 ("Co-Curricular"),
 ("Sports");
 
-SELECT * FROM achievement_types;
-
 INSERT INTO achievement (student_id, achievement_type, title, proof_date, verified)
 VALUES
 ("CB.EN.U4CSE17001", 1, "Published Paper", "2021-12-01", 0),
@@ -290,3 +306,56 @@ CREATE TABLE `bonafide` (
    `action` varchar(45) DEFAULT NULL
 );
 
+-- Table: courses
+CREATE TABLE courses (
+    courses_id int NOT NULL AUTO_INCREMENT,
+    course_code varchar(10) NOT NULL,
+    semester int NOT NULL,
+    dept_fk int NULL,
+    course_name varchar(100) NOT NULL,
+    credits int NOT NULL,
+    CONSTRAINT courses_pk PRIMARY KEY (courses_id)
+);
+
+ALTER TABLE courses ADD CONSTRAINT dept_fk_constrain FOREIGN KEY dept_fk_constrain (dept_fk)
+    REFERENCES department (dept_id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL;
+
+
+INSERT INTO courses (semester, course_code, course_name, dept_fk, credits)
+VALUES
+(1, "15ENG111", "Communicative English", 3, 2),
+(1, "15MAT111", "Calculus and Matrix Algebra",2, 4),
+(2, "15CSE100", "Computational Thinking and Problem Solving", 1, 4),
+(3, "15CHY100", "Chemistry", 5, 3),
+(5, "15CHY181", "Chemistry Lab", 5, 1),
+(2, "15MEC180", "Workshop A", 3, 2),
+(6, "15MEC100", "Engineering Drawing - CAD", 4, 4),
+(1, "15CUL101", "Cultural Education I", 6, 1),
+
+(7, "15CSE201", "Data Structures and Algorithms", 1, 4),
+(5, "15CSE202", "Object Oriented Programming", 1, 4),
+(3, "15ECE202", "Digital Circuits and Systems", 6, 3),
+(2, "15MAT201", "Discrete Mathematics", 2, 3),
+(3, "15HUM240", "Psychology for Engineers", 3, 2),
+(6, "15CSE281", "Data Structures Lab.", 1, 2),
+(5, "15CSE282", "Object Oriented Programming Lab", 1, 1),
+(4, "15ECE281", "Digital Circuits and Systems Lab", 6, 1);
+
+CREATE TABLE courses_enroll (
+    enroll_id int NOT NULL AUTO_INCREMENT,
+    student_fk varchar(16) NULL,
+    courses_fk int NULL,
+    verified int DEFAULT 0,
+    CONSTRAINT enroll_pk PRIMARY KEY (enroll_id),
+    FOREIGN KEY (student_fk) REFERENCES student (roll_number),
+    FOREIGN KEY (courses_fk) REFERENCES courses (courses_id)
+);
+
+INSERT INTO courses_enroll (student_fk, courses_fk, verified)
+VALUES
+("CB.EN.U4CSE17001", 1, 0),
+("CB.EN.U4CSE17001", 6, -1),
+("CB.EN.U4CSE17001", 2, 1),
+("CB.EN.U4CSE17001", 3, 0);

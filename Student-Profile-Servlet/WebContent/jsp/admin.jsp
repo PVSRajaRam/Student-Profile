@@ -29,6 +29,9 @@
             <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
                 <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-3" onclick="changeAdminFrame(3)">ACHIEVEMENTS</button>
             </div>
+            <div class="btn-group-vertical" id="nav-buttons" style="height: 20%; margin-top:10%;overflow:auto;">
+                <button type="button" class="btn btn-warning custom" style="margin-top:20px;" id="nav-4" onclick="changeAdminFrame(4)">COURSES</button>
+            </div>
 
 
         </div>

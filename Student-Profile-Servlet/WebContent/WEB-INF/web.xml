@@ -59,6 +59,15 @@
 	<servlet-name>AchievementAdmin</servlet-name>
 	<url-pattern>/AchievementAdmin</url-pattern>
   </servlet-mapping>
+    <servlet>
+	  <servlet-name>CoursesController</servlet-name>
+	  <servlet-class>CoursesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>CoursesController</servlet-name>
+	<url-pattern>/CoursesController</url-pattern>
+  </servlet-mapping>
+
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
