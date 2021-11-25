@@ -23,7 +23,7 @@ public class CoursesController extends HttpServlet {
         RequestDispatcher dispatcher;
         dao = new Courses_DAO();
 
-       /* if (request.getParameter("course_to_del") != null) {
+        if (request.getParameter("course_to_del") != null) {
             try {
                 // deleteCourseReq(request, response);
 
@@ -78,70 +78,69 @@ public class CoursesController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 
-    // protected void doPost(HttpServletRequest request, HttpServletResponse
-    // response)
-    // throws ServletException, IOException {
-    // getCourseData(request, response);
-    // }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+//        getCourseData(request, response);
+    	doGet(request, response);
+    }
 
-    // protected void doDelete(HttpServletRequest request, HttpServletResponse
-    // response) throws ServletException, IOException {
-    // try {
-    // deleteCourseReq(request, response);
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            deleteCourseReq(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    // private void deleteCourseReq(HttpServletRequest request, HttpServletResponse
-    // response) throws Exception {
-    // int achievement_id = Integer.parseInt(request.getParameter("course_to_del"));
-    // Courses_DAO dao = new Courses_DAO();
-    // // RequestDispatcher dispatcher;
-    //
-    // dao.deleteCourse(achievement_id);
-    // response.sendRedirect(getServletName());
-    // }
+    private void deleteCourseReq(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(false);
+        String rollno = (String) session.getAttribute("rollno");
 
-    // private void getCourseData(HttpServletRequest request, HttpServletResponse
-    // response) {
-    // try {
-    // String title = request.getParameter("achievement_title");
-    // int achievement_type_id =
-    // Integer.parseInt(request.getParameter("achievement_type"));
-    //
-    // String proof_date_str = request.getParameter("achievement_date");
-    // SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy",
-    // Locale.ENGLISH);
-    // Date proof_date = formatter.parse(proof_date_str);
-    // Date proof_date_sql = new java.sql.Date(proof_date.getTime());
-    //
-    // // Part proof_file_part = getPart("file");
-    // HttpSession session = request.getSession(false);
-    // String rollno = (String) session.getAttribute("rollno");
-    // // System.out.println(rollno);
-    //
-    // Courses_DAO dao;
-    // RequestDispatcher dispatcher;
-    //
-    // Course achv = new Course(rollno, achievement_type_id, title, proof_date_sql);
-    // dao = new Course_DAO();
-    // dao.addCourse(achv);
-    //
-    // // dispatcher = request.getRequestDispatcher("./jsp/courses.jsp");
-    // // dispatcher.forward(request, response);
-    // doGet(request, response);
-    //
-    // } catch (NumberFormatException e) {
-    // e.printStackTrace();
-    // } catch (ParseException e) {
-    // e.printStackTrace();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    //
-    // }
+        int courses_id = Integer.parseInt(request.getParameter("course_to_del"));
+        Courses_DAO dao = new Courses_DAO();
+        // RequestDispatcher dispatcher;
+
+        dao.deleteCourse(rollno, courses_id);
+        response.sendRedirect(getServletName());
+    }
+
+//    private void getCourseData(HttpServletRequest request, HttpServletResponse response) {
+//        try {
+//            String title = request.getParameter("achievement_title");
+//            int achievement_type_id = Integer.parseInt(request.getParameter("achievement_type"));
+//
+//            String proof_date_str = request.getParameter("achievement_date");
+//            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+//            Date proof_date = formatter.parse(proof_date_str);
+//            Date proof_date_sql = new java.sql.Date(proof_date.getTime());
+//
+//            // Part proof_file_part = getPart("file");
+//            HttpSession session = request.getSession(false);
+//            String rollno = (String) session.getAttribute("rollno");
+//            // System.out.println(rollno);
+//
+//            Courses_DAO dao;
+//            RequestDispatcher dispatcher;
+//
+//            Course achv = new Course(rollno, achievement_type_id, title, proof_date_sql);
+//            dao = new Course_DAO();
+//            dao.addCourse(achv);
+//
+//            // dispatcher = request.getRequestDispatcher("./jsp/courses.jsp");
+//            // dispatcher.forward(request, response);
+//            doGet(request, response);
+//
+//        } catch (NumberFormatException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 }
