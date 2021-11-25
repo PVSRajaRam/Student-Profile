@@ -167,7 +167,7 @@ async function main(){
     await loginadminrecords();
     console.log("Achievement Test");
     await test_achievement_heading();
-    console.log("Courses Test");
-    await test_course_heading();
+    /*console.log("Courses Test");
+    await test_course_heading();*/
 }
 main();

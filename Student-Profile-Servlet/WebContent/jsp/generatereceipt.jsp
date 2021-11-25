@@ -25,8 +25,8 @@
         <div id="history-table" style="margin-left: 2%;">
             <div id="nav-fee-table">
                 <button style="border: 0px;background-color:transparent;float:left; margin-left:0%;" data-toggle="modal" data-target="#filterModal" ><img id="filter-icon" src="${pageContext.request.contextPath}/images/filter.png" style="margin-left:0%" width="30px" height="30px"/></button>
-                <button id="export-button" type="button" class="btn btn-outline-warning" style="margin-left: 13%;">Export as CSV</button>
-                <div id="search-bar" style="background-color: #fcaf03;width:30%;">
+                <!-- <button id="export-button" type="button" class="btn btn-outline-warning" style="margin-left: 13%;">Export as CSV</button>
+                 --><div id="search-bar" style="background-color: #fcaf03;width:30%;">
                     
                   <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
                     
@@ -83,7 +83,8 @@
                 
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success receiptbutton" id="gen-button" style="margin-left: 35%;"><a href="./ReceiptGen" style="color:white;text-decoration:none;">Generate</a></button>
+            <!--  <button type="button" class="btn btn-success receiptbutton" id="gen-button" style="margin-left: 35%;"><a href="./ReceiptGen" style="color:white;text-decoration:none;">Generate</a></button>
+        -->
         </div>
         <div class="genreceipts" style="margin-top:5%;">
             <c:forEach var="yr" items="${years}">

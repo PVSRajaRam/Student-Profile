@@ -3,6 +3,8 @@ import database_conn.Fee_Payment_History_DAO;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
@@ -35,11 +37,13 @@ public class GeneratePDF {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         
         try {
+        	Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        	
             PdfPTable table = new PdfPTable(3);
             table.setWidthPercentage(60);
             table.setWidths(new int[]{1, 3, 3});
 
-            Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+            
 
             PdfPCell hcell;
             hcell = new PdfPCell(new Phrase("Txn Id", headFont));
@@ -80,8 +84,19 @@ public class GeneratePDF {
 
             PdfWriter.getInstance(document, bout);
             document.open();
+            var  par = new Paragraph();
+        	par.add(new Chunk("FEE RECEIPT YEAR "+year,headFont)); 
+        	par.setAlignment(Element.ALIGN_CENTER);
+        	document.add(par);
+        	document.add( Chunk.NEWLINE );
+            document.add( Chunk.NEWLINE );
             document.add(table);
-            
+            par = new Paragraph();
+            document.add( Chunk.NEWLINE );
+            document.add( Chunk.NEWLINE );
+        	par.add(new Chunk("Online Generated Receipt.No signature required")); 
+        	par.setAlignment(Element.ALIGN_CENTER);
+        	document.add(par);
             document.close();
             
         } catch(Exception ex) {

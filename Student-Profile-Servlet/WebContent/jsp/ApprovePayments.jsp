@@ -24,7 +24,8 @@
 <body>
    <div id="nav-fee-table">
         <button style="border: 0px;background-color:transparent;float:left; margin-left:10%;" data-toggle="modal" data-target="#filterModal" ><img id="filter-icon" src="${pageContext.request.contextPath}/images/filter.png" style="margin-left:0%" width="30px" height="30px"/></button>
-        <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
+       <!--   <button id="export-button" type="button" class="btn btn-outline-warning">Export as CSV</button>
+        -->
         <div id="search-bar" style="background-color: #fcaf03;">
             
           <input type="text" class="form-control" id="enterTxnNo" placeholder="Enter transaction no" oninput="searchTable(this)">
