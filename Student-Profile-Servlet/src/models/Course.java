@@ -4,7 +4,15 @@ public class Course {
     protected int courses_id, semsester, credits, applied, verified;
     protected String course_code, course_name, dept_name, student_id;
 
-    public int getCourses_id() {
+    public String getStudent_id() {
+		return student_id;
+	}
+
+	public void setStudent_id(String student_id) {
+		this.student_id = student_id;
+	}
+
+	public int getCourses_id() {
         return courses_id;
     }
 

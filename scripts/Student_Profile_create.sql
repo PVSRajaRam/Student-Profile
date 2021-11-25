@@ -329,23 +329,23 @@ ALTER TABLE courses ADD CONSTRAINT dept_fk_constrain FOREIGN KEY dept_fk_constra
 
 INSERT INTO courses (semester, course_code, course_name, dept_fk, credits)
 VALUES
-(1, "15ENG111", "Communicative English", 3, 2),
-(1, "15MAT111", "Calculus and Matrix Algebra",2, 4),
-(2, "15CSE100", "Computational Thinking and Problem Solving", 1, 4),
-(3, "15CHY100", "Chemistry", 5, 3),
-(5, "15CHY181", "Chemistry Lab", 5, 1),
-(2, "15MEC180", "Workshop A", 3, 2),
-(6, "15MEC100", "Engineering Drawing - CAD", 4, 4),
-(1, "15CUL101", "Cultural Education I", 6, 1),
+(1, "15ENG111", "Communicative English", 1, 2),
+(1, "15MAT111", "Calculus and Matrix Algebra", 1, 2),
+(1, "15CSE100", "Computational Thinking and Problem Solving", 1, 1),
+(1, "15CHY100", "Chemistry", 1, 1),
+(1, "15CHY181", "Chemistry Lab", 1, 1),
+(1, "15MEC180", "Workshop A", 2, 1),
+(1, "15MEC100", "Engineering Drawing - CAD", 2, 1),
+(1, "15CUL101", "Cultural Education I", 2, 1),
 
-(7, "15CSE201", "Data Structures and Algorithms", 1, 4),
-(5, "15CSE202", "Object Oriented Programming", 1, 4),
-(3, "15ECE202", "Digital Circuits and Systems", 6, 3),
-(2, "15MAT201", "Discrete Mathematics", 2, 3),
-(3, "15HUM240", "Psychology for Engineers", 3, 2),
-(6, "15CSE281", "Data Structures Lab.", 1, 2),
-(5, "15CSE282", "Object Oriented Programming Lab", 1, 1),
-(4, "15ECE281", "Digital Circuits and Systems Lab", 6, 1);
+(2, "15CSE201", "Data Structures and Algorithms", 1, 3),
+(2, "15CSE202", "Object Oriented Programming", 1, 2),
+(2, "15ECE202", "Digital Circuits and Systems", 1, 3),
+(2, "15MAT201", "Discrete Mathematics", 1, 3),
+(2, "15HUM240", "Psychology for Engineers", 2, 2),
+(3, "15CSE281", "Data Structures Lab.", 1, 2),
+(3, "15CSE282", "Object Oriented Programming Lab", 1, 2),
+(3, "15ECE281", "Digital Circuits and Systems Lab", 1, 2);
 
 CREATE TABLE courses_enroll (
     enroll_id int NOT NULL AUTO_INCREMENT,

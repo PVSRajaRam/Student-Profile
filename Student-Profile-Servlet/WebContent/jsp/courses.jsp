@@ -28,25 +28,29 @@
 
 <body>
     <div class="btn btn-warning custom" id="section-bar">COURSES</div>
-    <div class="container d-flex justify-content-center" style="margin-top: 5%;">
+    <div class="container d-flex justify-content-center" style="margin-top: 3%;">
         <div class="row justify-content-around align-content-center">
             <form method="get" action="./CoursesController">
-                <div class="col-8">
-                    <select class="form-select" aria-label="Select Semester" name="semester">
-                        <option value="1" selected>Semester 1</option>
-                        <option value="2">Semester 2</option>
-                        <option value="3">Semester 3</option>
-                        <option value="4">Semester 4</option>
-                        <option value="5">Semester 5</option>
-                        <option value="6">Semester 6</option>
-                        <option value="7">Semester 7</option>
-                        <option value="8">Semester 8</option>
-                    </select>
+                <div class="row m-2">
+                    <div class="col-3 float-start"></div>
+                    <div class="col-5 d-inline float-start">
+                        <select class="form-select" aria-label="Select Semester" name="semester">
+                            <option value="1" selected>Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                    </div>
+
+                    <div class="col-3 d-inline float-start">
+                        <button type="submit" class="btn btn-success">Go <i class="bi bi-arrow-right"></i></button>
+                    </div>
                 </div>
 
-                <div class="col-2">
-                    <button type="submit" class="btn btn-success">Go <i class="bi bi-arrow-right"></i></button>
-                </div>
             </form>
 
             <div class="col-12">
@@ -81,7 +85,7 @@
                                                     <form method="get" action="./CoursesController">
                                                         <input type="hidden" name="courses_id"
                                                             value="${itr.courses_id}">
-                                                        <button type="submit" class="btn btn-success">Apply</button>
+                                                        <button type="submit" class="btn btn-info">Apply</button>
                                                     </form>
                                                 </td>
                                             </c:when>

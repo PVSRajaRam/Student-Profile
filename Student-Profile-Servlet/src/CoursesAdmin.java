@@ -49,9 +49,9 @@ public class CoursesAdmin extends HttpServlet {
             }
         } else {
             try {
-//                 HttpSession session=request.getSession(false);
-//                 String rollno=(String)session.getAttribute("rollno");
-//                 System.out.println(rollno);
+                // HttpSession session=request.getSession(false);
+                // String rollno=(String)session.getAttribute("rollno");
+                // System.out.println(rollno);
 
                 List<Course> courses = dao.getAllCourses();
                 request.setAttribute("courses", courses);
@@ -64,24 +64,24 @@ public class CoursesAdmin extends HttpServlet {
         }
     }
 
-    private void acceptCourse(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        int course_id = Integer.parseInt(request.getParameter("course_to_acc"));
+    private void acceptCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int courses_id = Integer.parseInt(request.getParameter("course_to_acc"));
         String rollno = request.getParameter("rollno");
         Courses_DAO dao = new Courses_DAO();
 
-        dao.changeVerifiedStatus(rollno, course_id, 1);
+        dao.deleteCourse(rollno, courses_id);
+        dao.changeVerifiedStatus(rollno, courses_id, 1);
         response.sendRedirect(getServletName());
 
     }
 
-    private void rejectCourse(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-    	String rollno = request.getParameter("rollno");
-        int course_id = Integer.parseInt(request.getParameter("course_to_rej"));
+    private void rejectCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String rollno = request.getParameter("rollno");
+        int courses_id = Integer.parseInt(request.getParameter("course_to_rej"));
         Courses_DAO dao = new Courses_DAO();
 
-        dao.changeVerifiedStatus(rollno, course_id, -1);
+        dao.deleteCourse(rollno, courses_id);
+        dao.changeVerifiedStatus(rollno, courses_id, -1);
         response.sendRedirect(getServletName());
 
     }
@@ -92,42 +92,45 @@ public class CoursesAdmin extends HttpServlet {
     }
 
     private void deleteCourseReq(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int course_id = Integer.parseInt(request.getParameter("course_to_del"));
+        String rollno = request.getParameter("rollno");
+        int courses_id = Integer.parseInt(request.getParameter("course_to_del"));
         Courses_DAO dao = new Courses_DAO();
 
-        dao.deleteCourse(course_id);
+        dao.deleteCourse(rollno, courses_id);
         response.sendRedirect(getServletName());
     }
 
-//    private void getCourseData(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-//            String title = request.getParameter("course_title");
-//            int course_type_id = Integer.parseInt(request.getParameter("course_type"));
-//
-//            String proof_date_str = request.getParameter("course_date");
-//            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
-//            Date proof_date = formatter.parse(proof_date_str);
-//            Date proof_date_sql = new java.sql.Date(proof_date.getTime());
-//
-//            HttpSession session = request.getSession(false);
-//            String rollno = (String) session.getAttribute("rollno");
-//
-//            Courses_DAO dao;
-//            RequestDispatcher dispatcher;
-//
-//            Course achv = new Course(rollno, course_type_id, title, proof_date_sql);
-//            dao = new Courses_DAO();
-//            dao.addCourse(achv);
-//
-//            doGet(request, response);
-//
-//        } catch (NumberFormatException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    // private void getCourseData(HttpServletRequest request, HttpServletResponse
+    // response) {
+    // try {
+    // String title = request.getParameter("course_title");
+    // int course_type_id = Integer.parseInt(request.getParameter("course_type"));
+    //
+    // String proof_date_str = request.getParameter("course_date");
+    // SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy",
+    // Locale.ENGLISH);
+    // Date proof_date = formatter.parse(proof_date_str);
+    // Date proof_date_sql = new java.sql.Date(proof_date.getTime());
+    //
+    // HttpSession session = request.getSession(false);
+    // String rollno = (String) session.getAttribute("rollno");
+    //
+    // Courses_DAO dao;
+    // RequestDispatcher dispatcher;
+    //
+    // Course achv = new Course(rollno, course_type_id, title, proof_date_sql);
+    // dao = new Courses_DAO();
+    // dao.addCourse(achv);
+    //
+    // doGet(request, response);
+    //
+    // } catch (NumberFormatException e) {
+    // e.printStackTrace();
+    // } catch (ParseException e) {
+    // e.printStackTrace();
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    //
+    // }
 }

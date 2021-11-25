@@ -32,7 +32,7 @@ pageEncoding="UTF-8"%>
                 <c:choose>
                     <c:when test="${empty courses}">
                         <div class="alert alert-info" role="alert">
-                            No Course Data
+                            No Application for Enrollment
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
                                                 </td>
                                             </c:when>
                                             <c:when test="${itr.verified==1}">
-                                                <td><span class="badge rounded-pill bg-success">Verified <i
+                                                <td><span class="badge rounded-pill bg-success">Approved <i
                                                             class="bi bi-patch-check"></i></span></td>
                                             </c:when>
                                             <c:otherwise>
@@ -76,28 +76,28 @@ pageEncoding="UTF-8"%>
 
                                         <td>
                                             <form method="get" action="./CoursesAdmin">
-                                                <input type="hidden" name="rollno" value="${itr.rollno}">
+                                                <input type="hidden" name="rollno" value="${itr.student_id}">
                                                 <button type="submit" class="btn btn-labeled btn-info btn-sm">
-                                                    <i class="bi bi-check"></i> Accept
+                                                    <i class="bi bi-check"></i> Allow
                                                 </button>
-                                                <input type="hidden" name="course_to_acc" value="${itr.id}">
+                                                <input type="hidden" name="course_to_acc" value="${itr.courses_id}">
                                             </form>
                                             <form method="get" action="./CoursesAdmin">
-                                                <input type="hidden" name="rollno" value="${itr.rollno}">
+                                                <input type="hidden" name="rollno" value="${itr.student_id}">
                                                 <button type="submit" class="btn btn-labeled btn-warning btn-sm">
-                                                    <i class="bi bi-x"></i> Reject
+                                                    <i class="bi bi-x"></i> Deny
                                                 </button>
-                                                <input type="hidden" name="course_to_rej" value="${itr.id}">
+                                                <input type="hidden" name="course_to_rej" value="${itr.courses_id}">
                                             </form>
                                         </td>
 
                                         <td>
                                             <form method="get" action="./CoursesAdmin">
-                                                <input type="hidden" name="rollno" value="${itr.rollno}">
+                                                <input type="hidden" name="rollno" value="${itr.student_id}">
                                                 <button type="submit" class="btn btn-labeled btn-danger btn-sm">
                                                     <i class="bi bi-trash"></i> Delete
                                                 </button>
-                                                <input type="hidden" name="course_to_del" value="${itr.id}">
+                                                <input type="hidden" name="course_to_del" value="${itr.courses_id}">
                                             </form>
                                         </td>
                                     </tr>

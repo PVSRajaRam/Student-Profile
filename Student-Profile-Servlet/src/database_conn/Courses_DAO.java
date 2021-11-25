@@ -97,7 +97,7 @@ public class Courses_DAO {
 
             String sql = "SELECT X.courses_id, X.course_code, X.course_name, X.credits, X.dept_name, Y.student_fk, Y.verified, Y.applied "
                     + "                    FROM (SELECT A.courses_id, A.course_code, A.course_name, A.credits, B.dept_name "
-                    + "                    	  FROM courses A, department B   "
+                    + "                    	  FROM courses A, department B  "
                     + "                          WHERE A.dept_fk = B.dept_id "
                     + "                    	  ORDER BY A.courses_id ASC) X JOIN courses_enroll Y "
                     + "                    ON X.courses_id = Y.courses_fk "
@@ -112,13 +112,13 @@ public class Courses_DAO {
                 int credits = myRs.getInt("credits");
                 String course_code = myRs.getString("course_code");
                 String course_name = myRs.getString("course_name");
-                String title = myRs.getString("title");
                 int verified = myRs.getInt("verified");
                 int applied = myRs.getInt("applied");
 
                 Course course = new Course(student_id, id, course_code, course_name, credits, applied, verified);
                 courses.add(course);
-                System.out.println(course);
+
+                System.out.println("COURSE: " + course);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,7 +136,7 @@ public class Courses_DAO {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-            String sql = "INSERT INTO courses " + "(student_fk, courses_fk, verified, applied) " + "VALUES "
+            String sql = "INSERT INTO courses_enroll " + "(student_fk, courses_fk, verified, applied) " + "VALUES "
                     + "(?, ?, ?, 1); ";
             myStmt = myConn.prepareStatement(sql);
 
@@ -179,17 +179,18 @@ public class Courses_DAO {
         }
     }
 
-    public void deleteCourse(int course_id) throws Exception {
+    public void deleteCourse(String rollno, int course_id) throws Exception {
         Connection myConn = null;
         PreparedStatement myStmt = null;
         try {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-            String sql = "DELETE FROM course WHERE course_id = ?";
+            String sql = "DELETE FROM courses_enroll WHERE courses_fk = ? AND student_fk = ?";
             myStmt = myConn.prepareStatement(sql);
 
             myStmt.setInt(1, course_id);
+            myStmt.setString(2, rollno);
             myStmt.execute();
             System.out.println("Course Deleted");
         } finally {

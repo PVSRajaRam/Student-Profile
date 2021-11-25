@@ -31,20 +31,20 @@ public class AchievementAdmin extends HttpServlet {
 
         if (request.getParameter("achievement_to_del") != null) {
             try {
-                // deleteAchievementReq(request, response);
+                deleteAchievementReq(request, response);
                 // deleteAllAchievementReq(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (request.getParameter("achievement_to_acc") != null) {
             try {
-                // acceptAchievement(request, response);
+                acceptAchievement(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (request.getParameter("achievement_to_rej") != null) {
             try {
-                // rejectAchievement(request, response);
+                rejectAchievement(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }

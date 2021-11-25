@@ -51,6 +51,8 @@ public class CoursesController extends HttpServlet {
                 String rollno = (String) session.getAttribute("rollno");
 
                 int courses_id = Integer.parseInt(request.getParameter("courses_id"));
+
+                dao.deleteCourse(rollno, courses_id);
                 dao.applyCourse(rollno, courses_id);
                 // request.setAttribute("courses", courses);
                 // request.setAttribute("semester", semester);
