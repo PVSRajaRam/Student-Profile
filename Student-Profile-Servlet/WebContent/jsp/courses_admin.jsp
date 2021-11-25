@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
                                     <th scope="col">Student</th>
                                     <th scope="col">Course Code</th>
                                     <th scope="col">Course Name</th>
+                                    <th scope="col">Semester</th>
                                     <th scope="col">Credits</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Acknowledge</th>
@@ -57,6 +58,7 @@ pageEncoding="UTF-8"%>
                                         <td> ${itr.student_id} </td>
                                         <td>${itr.course_code}</td>
                                         <td>${itr.course_name}</td>
+                                        <td>${itr.semsester}</td>
                                         <td><span class="badge rounded-pill bg-secondary">${itr.credits}</span></td>
 
                                         <c:choose>

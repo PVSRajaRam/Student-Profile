@@ -95,8 +95,8 @@ public class Courses_DAO {
             myConn = getConnection();
             System.out.println("Connection established......");
 
-            String sql = "SELECT X.courses_id, X.course_code, X.course_name, X.credits, X.dept_name, Y.student_fk, Y.verified, Y.applied "
-                    + "                    FROM (SELECT A.courses_id, A.course_code, A.course_name, A.credits, B.dept_name "
+            String sql = "SELECT X.courses_id, X.course_code, X.course_name, X.credits, X.dept_name, Y.student_fk, Y.verified, Y.applied, X.semester "
+                    + "                    FROM (SELECT A.courses_id, A.course_code, A.course_name, A.credits, B.dept_name, A.semester "
                     + "                    	  FROM courses A, department B  "
                     + "                          WHERE A.dept_fk = B.dept_id "
                     + "                    	  ORDER BY A.courses_id ASC) X JOIN courses_enroll Y "
@@ -114,8 +114,10 @@ public class Courses_DAO {
                 String course_name = myRs.getString("course_name");
                 int verified = myRs.getInt("verified");
                 int applied = myRs.getInt("applied");
+                int semester = myRs.getInt("semester");
 
-                Course course = new Course(student_id, id, course_code, course_name, credits, applied, verified);
+                Course course = new Course(student_id, id, course_code, course_name, credits, applied, verified,
+                        semester);
                 courses.add(course);
 
                 System.out.println("COURSE: " + course);

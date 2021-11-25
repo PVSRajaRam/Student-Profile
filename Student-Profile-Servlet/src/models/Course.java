@@ -5,14 +5,14 @@ public class Course {
     protected String course_code, course_name, dept_name, student_id;
 
     public String getStudent_id() {
-		return student_id;
-	}
+        return student_id;
+    }
 
-	public void setStudent_id(String student_id) {
-		this.student_id = student_id;
-	}
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
 
-	public int getCourses_id() {
+    public int getCourses_id() {
         return courses_id;
     }
 
@@ -89,7 +89,7 @@ public class Course {
     }
 
     public Course(String student_id, int courses_id, String course_code, String course_name, int credits, int applied,
-            int verified) {
+            int verified, int semsester) {
         super();
         this.courses_id = courses_id;
         this.student_id = student_id;
@@ -98,6 +98,7 @@ public class Course {
         this.verified = verified;
         this.course_code = course_code;
         this.course_name = course_name;
+        this.semsester = semsester;
         // this.dept_name = dept_name;
     }
 
