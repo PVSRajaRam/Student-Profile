@@ -54,7 +54,7 @@
             </form>
 
             <div class="col-12">
-                <h2>Semester ${semester}</h2>
+                <h2 id="semester_no">Semester ${semester}</h2>
                 <c:choose>
                     <c:when test="${empty courses}">
                         <div class="alert alert-info col-12" role="alert">

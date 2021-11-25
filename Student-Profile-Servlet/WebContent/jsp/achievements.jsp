@@ -140,7 +140,7 @@
             <div class="col-10 col-lg-3">
                 <form method="post" action="./AchievementController">
                     <legend>
-                        <h3>Add Achievements</h3>
+                        <h3 id="achv_form">Add Achievements</h3>
                     </legend>
                     <label for=" achievement_title" class="form-label required-field">Title</label>
                     <input type="text" class="form-control" id="achievement_title" minlength="2" maxlength="200"

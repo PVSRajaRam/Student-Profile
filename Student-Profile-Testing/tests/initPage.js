@@ -114,6 +114,50 @@ async function loginwrongecords(){
 
 }
 
+async function test_achievement_heading(){
+    let driver = await new Builder().forBrowser("firefox").build();
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/");
+     
+     var email="cb.en.u4cse17001@cb.students.amrita.edu";
+     var pwd="stud1";
+     var heading = "Add Achievements";
+
+     await driver.findElement(By.name("email")).sendKeys(email,Key.RETURN);
+     await driver.findElement(By.name("pwd")).sendKeys(pwd,Key.RETURN);
+     await driver.findElement(By.id("loginbtn")).click();
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/Login?email="+email+"&pwd="+pwd);
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/AchievementController");
+
+     page_heading = await driver.findElement(By.id("achv_form")).getText();
+     
+    if(page_heading.localeCompare(heading)==0)
+     console.log("Success");
+
+     await driver.quit();
+}
+
+async function test_course_heading(){
+    let driver = await new Builder().forBrowser("firefox").build();
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/");
+     
+     var email="cb.en.u4cse17001@cb.students.amrita.edu";
+     var pwd="stud1";
+     var heading = "Semester";
+
+     await driver.findElement(By.name("email")).sendKeys(email,Key.RETURN);
+     await driver.findElement(By.name("pwd")).sendKeys(pwd,Key.RETURN);
+     await driver.findElement(By.id("loginbtn")).click();
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/Login?email="+email+"&pwd="+pwd);
+     await driver.get("http://localhost:8080/Student-Profile-Servlet/CoursesController");
+
+     page_heading = await driver.findElement(By.id("semester_no")).getText();
+     
+    if(page_heading.localeCompare(heading)==0)
+     console.log("Success");
+
+     await driver.quit();
+}
+
 async function main(){
     console.log("Title of the page");
     await title();
@@ -121,7 +165,9 @@ async function main(){
     await loginrightrecords();
     console.log("Admin Record - right record");
     await loginadminrecords();
-    console.log("Wrong Records");
-    await loginwrongecords();
+    console.log("Achievement Test");
+    await test_achievement_heading();
+    console.log("Courses Test");
+    await test_course_heading();
 }
 main();
